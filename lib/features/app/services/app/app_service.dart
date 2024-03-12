@@ -4,13 +4,16 @@ import 'app_state.dart';
 
 part 'app_service.g.dart';
 
-const baseUrl = "http://www.masterunitlist.info/Unit/";
-
 @Riverpod(keepAlive: true)
 class AppService extends _$AppService {
   @override
   AppState build() {
     return const AppState();
+  }
+
+  void newGame(int average) {
+    print("AVERAGE: $average");
+    state = state.copyWith(average: average);
   }
 
   // void drive(RecordSheetState initialState) => state = state.copyWith(

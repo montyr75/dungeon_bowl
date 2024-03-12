@@ -1,27 +1,19 @@
 
 class AppState {
-  // final Team? initialTeamBuilderState;
+  final int average;
   // final RecordSheetState? initialRecordSheetState;
 
-  const AppState(/*{
-    this.initialTeamBuilderState,
-    this.initialRecordSheetState,
-  }*/);
+  const AppState({
+    this.average = 0,
+  });
 
-  // AppState copyWith({
-  //   Optional<Team>? initialTeamBuilderState,
-  //   Optional<RecordSheetState>? initialRecordSheetState,
-  // }) {
-  //   return AppState(
-  //     initialTeamBuilderState: initialTeamBuilderState == null ? this.initialTeamBuilderState : initialTeamBuilderState.orNull,
-  //     initialRecordSheetState: initialRecordSheetState == null ? this.initialRecordSheetState : initialRecordSheetState.orNull,
-  //   );
-  // }
-  //
-  // AppMode get appMode => initialTeamBuilderState != null ? AppMode.builder : AppMode.dashboard;
-}
+  AppState copyWith({
+    int? average,
+  }) {
+    return AppState(
+      average: average ?? this.average,
+    );
+  }
 
-enum AppMode {
-  builder,
-  dashboard,
+  bool get hasValidAverage => average > 0 && average <= 300;
 }

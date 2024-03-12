@@ -81,8 +81,8 @@ class ThemeService extends _$ThemeService {
   TextTheme _buildTextTheme(TextTheme base) {
     return base.copyWith(
       displayLarge: base.displayLarge!.copyWith(
-        fontSize: 24,
-        fontFamily: 'HardGrunge',
+        fontSize: 32,
+        fontFamily: 'MedievalSharp',
       ),
       displayMedium: base.displayMedium!.copyWith(
         fontSize: 22,

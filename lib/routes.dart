@@ -5,12 +5,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'features/app/presentation/home_page.dart';
 import 'features/app/presentation/not_found_page.dart';
+import 'features/characters/presentation/character_selection_page.dart';
 
 part 'routes.g.dart';
 
 enum AppRoute {
   home('/'),
-  characterSelector,
+  characterSelectionPage,
   characterDetails,
   corridor;
 
@@ -34,9 +35,9 @@ GoRouter goRouter(GoRouterRef ref) {
         builder: (context, state) => const HomePage(),
         routes: [
           GoRoute(
-            name: AppRoute.characterSelector.name,
-            path: AppRoute.characterSelector.path,
-            builder: (context, state) => const Placeholder(),
+            name: AppRoute.characterSelectionPage.name,
+            path: AppRoute.characterSelectionPage.path,
+            builder: (context, state) => const CharacterSelectionPage(),
             routes: [
               GoRoute(
                 name: AppRoute.characterDetails.name,
