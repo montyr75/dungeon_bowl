@@ -16,61 +16,68 @@ class HomePage extends ConsumerWidget {
     final styles = context.textStyles;
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Dungeon Bowl',
-              style: styles.displayLarge,
-            ),
-            boxXXL,
-            SizedBox(
-              width: 150,
-              child: TextFormField(
-                onChanged: (value) => _submitAverage(ref, value),
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-                textInputAction: TextInputAction.next,
-                maxLength: 3,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: const InputDecoration(
-                  labelText: 'Bowling Average',
-                  isDense: true,
-                  counter: noWidget,
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/home2.webp'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            children: [
+              boxXXL,
+              Text(
+                'Dungeon Bowl',
+                style: styles.displayLarge,
+              ),
+              boxXXL,
+              SizedBox(
+                width: 150,
+                child: TextFormField(
+                  style: styles.displayMedium,
+                  onChanged: (value) => _submitAverage(ref, value),
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  textInputAction: TextInputAction.next,
+                  maxLength: 3,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    hintText: 'Bowling Average',
+                    hintStyle: styles.displaySmall.copyWith(color: Colors.grey),
+                    counter: noWidget,
+                  ),
                 ),
               ),
-            ),
-            boxXXL,
-            Consumer(
-              builder: (context, ref, child) {
-                return ElevatedButton(
-                  onPressed: ref.watch(appServiceProvider).hasValidAverage
-                      ? () => context.goNamed(AppRoute.characterSelectionPage.name)
-                      : null,
-                  child: const Text('New Game'),
-                );
-              },
-            ),
-            // PageNavButton(
-            //   label: "TEAMS",
-            //   desc: "Build - Modify - Drive",
-            //   onPressed: () => context.goNamed(AppRoute.teams.name),
-            // ),
-            // boxXXL,
-            // PageNavButton(
-            //   label: "THE PIT",
-            //   desc: "Saved Game Snapshots",
-            //   onPressed: () => context.goNamed(AppRoute.thePit.name),
-            // ),
-            // const Spacer(),
-          ],
+              boxXXL,
+              Consumer(
+                builder: (context, ref, child) {
+                  return ElevatedButton(
+                    onPressed: ref.watch(appServiceProvider).hasValidAverage
+                        ? () => context.goNamed(AppRoute.characterSelectionPage.name)
+                        : null,
+                    child: const Text('New Game'),
+                  );
+                },
+              ),
+              // PageNavButton(
+              //   label: "TEAMS",
+              //   desc: "Build - Modify - Drive",
+              //   onPressed: () => context.goNamed(AppRoute.teams.name),
+              // ),
+              // boxXXL,
+              // PageNavButton(
+              //   label: "THE PIT",
+              //   desc: "Saved Game Snapshots",
+              //   onPressed: () => context.goNamed(AppRoute.thePit.name),
+              // ),
+              // const Spacer(),
+            ],
+          ),
         ),
       ),
     );

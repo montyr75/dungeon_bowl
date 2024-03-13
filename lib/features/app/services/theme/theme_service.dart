@@ -19,7 +19,7 @@ const maxPageWidth = 640.0;
 
 @riverpod
 class ThemeService extends _$ThemeService {
-  static const colorScheme = FlexScheme.dellGenoa;
+  static const colorScheme = FlexScheme.blueM3;
 
 // ignore: avoid_public_notifier_properties
   FlexSchemeData get schemeData => FlexColor.schemes[colorScheme]!;
@@ -56,7 +56,7 @@ class ThemeService extends _$ThemeService {
         titleTextStyle: const TextStyle(
           fontSize: 24,
           color: Colors.white,
-          fontFamily: 'Steiner',
+          fontFamily: 'MedievalSharp',
         ),
       ),
       inputDecorationTheme: data.inputDecorationTheme.copyWith(
@@ -86,11 +86,11 @@ class ThemeService extends _$ThemeService {
       ),
       displayMedium: base.displayMedium!.copyWith(
         fontSize: 22,
-        fontFamily: 'HardGrunge',
+        fontFamily: 'MedievalSharp',
       ),
       displaySmall: base.displaySmall!.copyWith(
-        fontSize: 20,
-        fontFamily: 'HardGrunge',
+        fontSize: 16,
+        fontFamily: 'MedievalSharp',
       ),
       headlineLarge: base.headlineLarge!.copyWith(
         fontSize: 20,
