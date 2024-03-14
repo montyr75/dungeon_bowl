@@ -12,8 +12,7 @@ part 'theme_service.g.dart';
 const darkTextColor = Color(0xFF100000);
 
 // image sizes
-const buttonImg = Point(433, 153);
-const screwImg = Point(57, 56);
+const buttonImg = Point(318, 122);
 
 const maxPageWidth = 640.0;
 

@@ -12,7 +12,6 @@ class AppService extends _$AppService {
   }
 
   void newGame(int average) {
-    print("AVERAGE: $average");
     state = state.copyWith(average: average);
   }
 
