@@ -24,22 +24,22 @@ class CharacterSelectionPage extends StatelessWidget {
         ),
         child: Padding(
           padding: paddingAllM,
-          child: LayoutGrid(
-            // set some flexible track sizes based on the crossAxisCount
-            columnSizes: [1.fr, 1.fr],
-            // set all the row sizes to auto (self-sizing height)
-            rowSizes: [1.fr, 1.fr],
-            rowGap: med,
-            // equivalent to mainAxisSpacing
-            columnGap: 40,
-            // equivalent to crossAxisSpacing
-            // note: there's no childAspectRatio
-            children: Character.values.map((value) => CharacterOption(character: value)).toList(),
-          ),
-          // child: GridView.count(
-          //   crossAxisCount: 2,
+          // child: LayoutGrid(
+          //   // set some flexible track sizes based on the crossAxisCount
+          //   columnSizes: [1.fr, 1.fr],
+          //   // set all the row sizes to auto (self-sizing height)
+          //   rowSizes: [1.fr, 1.fr],
+          //   rowGap: med,
+          //   // equivalent to mainAxisSpacing
+          //   columnGap: 40,
+          //   // equivalent to crossAxisSpacing
+          //   // note: there's no childAspectRatio
           //   children: Character.values.map((value) => CharacterOption(character: value)).toList(),
           // ),
+          child: GridView.count(
+            crossAxisCount: 2,
+            children: Character.values.map((value) => CharacterOption(character: value)).toList(),
+          ),
         ),
       ),
     );
@@ -74,7 +74,7 @@ class CharacterOption extends StatelessWidget {
           ],
         ),
       ),
-      padding: paddingAllM,
+      margin: paddingAllXL,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
