@@ -1,6 +1,7 @@
 import 'package:recase/recase.dart';
 
 const characterImagePath = 'assets/images/characters';
+const characterBgImagePath = 'assets/images/characters/backgrounds';
 
 enum Character {
   sirBowlregard(
@@ -47,5 +48,7 @@ enum Character {
   @override
   String toString() => ReCase(name).titleCase;
 
-  String get imagePath => "$characterImagePath/${ReCase(name).snakeCase}.webp";
+  String get imageFile => "${ReCase(name).snakeCase}.webp";
+  String get imagePath => "$characterImagePath/$imageFile";
+  String get bgImagePath => "$characterBgImagePath/$imageFile";
 }

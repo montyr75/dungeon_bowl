@@ -3,8 +3,10 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'data/characters.dart';
 import 'features/app/presentation/home_page.dart';
 import 'features/app/presentation/not_found_page.dart';
+import 'features/characters/presentation/character_details_page.dart';
 import 'features/characters/presentation/character_selection_page.dart';
 
 part 'routes.g.dart';
@@ -42,7 +44,8 @@ GoRouter goRouter(GoRouterRef ref) {
               GoRoute(
                 name: AppRoute.characterDetails.name,
                 path: AppRoute.characterDetails.path,
-                builder: (context, state) => const Placeholder(),
+                builder: (context, state) =>
+                    CharacterDetailsPage(character: state.extra as Character),
               ),
             ],
           ),
