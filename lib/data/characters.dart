@@ -32,7 +32,13 @@ enum Character {
   brieBrooklynshot(
     race: 'Tabaxi',
     profession: 'Rogue',
-    description: 'Hailing from a faraway continent, Brie Brooklynshot is on a mission of revenge, searching for the dark wizard who killed her parents for their valuable pelts and left her for dead.',
+    description:
+        'Hailing from a faraway continent, Brie Brooklynshot is on a mission of revenge, searching for the dark wizard who killed her parents for their valuable pelts and left her for dead.',
+  ),
+  amberArrowmark(
+    race: 'Half-Elf',
+    profession: 'Druid',
+    description: '',
   );
 
   final String race;
@@ -49,6 +55,8 @@ enum Character {
   String toString() => ReCase(name).titleCase;
 
   String get imageFile => "${ReCase(name).snakeCase}.webp";
+
   String get imagePath => "$characterImagePath/$imageFile";
+
   String get bgImagePath => "$characterBgImagePath/$imageFile";
 }

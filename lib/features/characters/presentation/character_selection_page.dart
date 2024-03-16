@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../data/characters.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
+import 'character_details_page.dart';
 import 'character_image.dart';
 
 class CharacterSelectionPage extends StatelessWidget {
@@ -27,28 +28,22 @@ class CharacterSelectionPage extends StatelessWidget {
         ),
         child: Padding(
           padding: paddingAllM,
-          // child: LayoutGrid(
-          //   // set some flexible track sizes based on the crossAxisCount
-          //   columnSizes: [1.fr, 1.fr],
-          //   // set all the row sizes to auto (self-sizing height)
-          //   rowSizes: [1.fr, 1.fr],
-          //   rowGap: med,
-          //   // equivalent to mainAxisSpacing
-          //   columnGap: 40,
-          //   // equivalent to crossAxisSpacing
-          //   // note: there's no childAspectRatio
-          //   children: Character.values.map((value) => CharacterOption(character: value)).toList(),
-          // ),
-          child: GridView.count(
-            crossAxisCount: 2,
-            children: Character.values
-                .map(
-                  (character) => CharacterOption(
-                    character: character,
-                    onPressed: () => context.goNamed(AppRoute.characterDetails.name, extra: character),
-                  ),
-                )
-                .toList(),
+          child: Row(
+            children: [
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  children: Character.values
+                      .map(
+                        (character) => CharacterOption(
+                          character: character,
+                          onPressed: () => context.goNamed(AppRoute.characterDetails.name, extra: character),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -57,7 +52,7 @@ class CharacterSelectionPage extends StatelessWidget {
 }
 
 class CharacterOption extends StatelessWidget {
-  static const imageSize = 200.0;
+  static const imageSize = 210.0;
 
   final Character character;
   final VoidCallback onPressed;
@@ -76,48 +71,37 @@ class CharacterOption extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onPressed,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.transparent,
-            ),
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black45,
-                Colors.black38,
-                Colors.black45,
-              ],
-            ),
-          ),
-          margin: paddingAllXL,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CharacterImage(character: character),
-              boxM,
-              Text(
-                character.toString(),
-                style: styles.displayMedium,
-              ),
-              boxS,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CharacterImage(character: character),
+            BgBubble(
+              maxWidth: imageSize,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "${character.race} ",
-                    style: styles.displaySmall,
+                    character.toString(),
+                    style: styles.displayMedium,
                   ),
-                  Text(
-                    character.profession,
-                    style: styles.displaySmall,
+                  boxS,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${character.race} ",
+                        style: styles.displaySmall,
+                      ),
+                      Text(
+                        character.profession,
+                        style: styles.displaySmall,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
