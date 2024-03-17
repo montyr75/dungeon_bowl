@@ -28,9 +28,9 @@ extension NumberX on num {
   }
 
   /// These reverse the meaning of min/max. [min] means "restrict to minimum value", and vice versa.
-  T min<T extends num>(T minimum) => math.max(this as T, minimum);
+  T minOf<T extends num>(T minimum) => math.max(this as T, minimum);
 
-  T max<T extends num>(T maximum) => math.min(this as T, maximum);
+  T maxOf<T extends num>(T maximum) => math.min(this as T, maximum);
 }
 
 extension StringX on String {
