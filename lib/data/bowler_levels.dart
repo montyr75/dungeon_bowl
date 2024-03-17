@@ -1,4 +1,6 @@
 import '../utils/roll_table.dart';
+import '../utils/roller.dart';
+import 'encounters.dart';
 
 enum BowlerLevel {
   beginner(
@@ -35,14 +37,13 @@ enum BowlerLevel {
     maxAvg: 199,
     challengeMod: 2,
     encounterLevelTable: RollTable<int>({
-      RollRange(1, 15): 1,
-      RollRange(16, 33): 2,
-      RollRange(34, 53): 3,
-      RollRange(54, 70): 4,
-      RollRange(71, 82): 5,
-      RollRange(83, 92): 6,
-      RollRange(93, 98): 7,
-      RollRange(99, 100): 8,
+      RollRange(1, 5): 2,
+      RollRange(6, 17): 3,
+      RollRange(18, 37): 4,
+      RollRange(38, 59): 5,
+      RollRange(60, 78): 6,
+      RollRange(79, 90): 7,
+      RollRange(91, 100): 8,
     }),
   ),
   pro(
@@ -50,14 +51,12 @@ enum BowlerLevel {
     maxAvg: 300,
     challengeMod: 3,
     encounterLevelTable: RollTable<int>({
-      RollRange(1, 15): 1,
-      RollRange(16, 33): 2,
-      RollRange(34, 53): 3,
-      RollRange(54, 70): 4,
-      RollRange(71, 82): 5,
-      RollRange(83, 92): 6,
-      RollRange(93, 98): 7,
-      RollRange(99, 100): 8,
+      RollRange(0, 5): 3,
+      RollRange(6, 23): 4,
+      RollRange(24, 43): 5,
+      RollRange(44, 65): 6,
+      RollRange(66, 84): 7,
+      RollRange(85, 100): 8,
     }),
   );
 
@@ -72,6 +71,16 @@ enum BowlerLevel {
     this.challengeMod = 0,
     required this.encounterLevelTable,
   });
+
+  String generateEncounter() {
+    final lvl = encounterLevelTable.lookup(roll(100))!;
+    final challenge = generateBowlingChallenge(lvl, this);
+
+    return '''
+Level: $lvl
+Challenge: ${challenge.description}
+''';
+  }
 }
 
 final bowlerLevelTable = RollTable<BowlerLevel>({

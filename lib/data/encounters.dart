@@ -49,15 +49,17 @@ enum Encounter {
     required this.level,
   });
 
-  BowlingChallenge generateChallenge(BowlerLevel bowlerLevel) {
-    final challenges = bowlingChallenges.take(level).toList();
-    final roll = rand(challenges.length) + bowlerLevel.challengeMod;
-
-    return challenges[roll.maxOf(challenges.length)];
-  }
+  BowlingChallenge getBowlingChallenge(BowlerLevel bowlerLevel) => generateBowlingChallenge(level, bowlerLevel);
 
   @override
   String toString() {
     return ReCase(name).titleCase;
   }
+}
+
+BowlingChallenge generateBowlingChallenge(int level, BowlerLevel bowlerLevel) {
+  final challenges = bowlingChallenges.take(level).toList();
+  final roll = rand(challenges.length) + bowlerLevel.challengeMod;
+
+  return challenges[roll.maxOf(challenges.length - 1)];
 }

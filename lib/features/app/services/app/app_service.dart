@@ -19,6 +19,10 @@ class AppService extends _$AppService {
     );
   }
 
+  void enterRoom() {
+    print(state.bowlerLevel.generateEncounter());
+  }
+
 // void drive(RecordSheetState initialState) => state = state.copyWith(
 //   initialTeamBuilderState: const Optional<Team>.absent(),
 //   initialRecordSheetState: Optional<RecordSheetState>.of(initialState),
