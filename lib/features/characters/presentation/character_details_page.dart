@@ -11,7 +11,7 @@ import '../../app/services/app/app_service.dart';
 import 'character_image.dart';
 
 class CharacterDetailsPage extends ConsumerWidget {
-  static const imageSize = 400.0;
+  static const imageSize = 300.0;
 
   final Character character;
 

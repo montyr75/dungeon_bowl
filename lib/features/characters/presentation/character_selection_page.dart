@@ -50,7 +50,7 @@ class CharacterSelectionPage extends StatelessWidget {
 }
 
 class CharacterOption extends StatelessWidget {
-  static const imageSize = 210.0;
+  static const imageSize = 150.0;
 
   final Character character;
   final VoidCallback onPressed;
@@ -72,7 +72,7 @@ class CharacterOption extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CharacterImage(character: character),
+            CharacterImage(character: character, size: imageSize),
             BgBubble(
               maxWidth: imageSize,
               child: Column(
