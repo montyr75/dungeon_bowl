@@ -6,8 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/character_bar.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
-import '../../characters/presentation/character_details_page.dart';
 import '../services/game_service.dart';
 
 class CorridorPage extends ConsumerWidget {
@@ -26,40 +26,47 @@ class CorridorPage extends ConsumerWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (state.frame > 0) BgBubble(
-                  child: Text(
-                "Frame: ${state.frame}",
-                    style: styles.displayMedium,
-              )),
-              boxXXL,
-              PageNavButton(
-                onPressed: () {
-                  ref.read(gameServiceProvider.notifier).nextRoom();
-                  context.goNamed(AppRoute.room.name);
-                },
-                label: 'Next Room',
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: paddingAllXXL,
+                child: CharacterBar(
+                  state: state,
+                ),
               ),
-              boxL,
-              PageNavButton(
-                onPressed: () => null,
-                label: 'Find a Lair',
+            ),
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  PageNavButton(
+                    onPressed: () {
+                      ref.read(gameServiceProvider.notifier).nextRoom();
+                      context.goNamed(AppRoute.room.name);
+                    },
+                    label: 'Next Room',
+                  ),
+                  boxL,
+                  PageNavButton(
+                    onPressed: () => null,
+                    label: 'Find a Lair',
+                  ),
+                  boxXXL,
+                  PageNavButton(
+                    onPressed: () {
+                      showConfirmDialog(
+                        message: "Are you sure you want to quit the game?",
+                        onConfirm: () => context.goNamed(AppRoute.home.name),
+                      );
+                    },
+                    label: 'Exit Game',
+                  ),
+                ],
               ),
-              boxXXL,
-              PageNavButton(
-                onPressed: () {
-                  showConfirmDialog(
-                    message: "Are you sure you want to quit the game?",
-                    onConfirm: () => context.goNamed(AppRoute.home.name),
-                  );
-                },
-                label: 'Exit Game',
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -81,9 +81,8 @@ const bowlingChallenges = [
   ),
   BowlingChallenge(
     level: 6,
-    firstThrow: BowlingHit.strike,
     secondThrow: BowlingHit.spare,
-    description: "Strike or spare.",
+    description: "Spare.",
   ),
   BowlingChallenge(
     level: 7,

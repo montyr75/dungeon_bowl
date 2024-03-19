@@ -23,7 +23,7 @@ class RoomCtrl extends _$RoomCtrl {
     if (challenge.isVariable) {
       strength = (rollDice(1, lvl, 2) + appState.bowlerLevel.challengeMod).maxOf(10);
 
-      // a strength of 10 usually requires the player to strike
+      // a strength of 10 (or 9 and 1) requires the player to strike or spare
       if (strength == 10) {
         if (challenge.firstThrow == BowlingHit.min) {
           challenge = bowlingChallenges.last;

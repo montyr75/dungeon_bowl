@@ -4,8 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/challenge_display.dart';
+import '../../../widgets/character_bar.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../characters/presentation/character_details_page.dart';
+import '../../corridor/services/game_service.dart';
 import '../controllers/room_ctrl.dart';
 
 class RoomPage extends ConsumerWidget {
@@ -26,28 +29,51 @@ class RoomPage extends ConsumerWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              BgBubble(
-                child: Text(
-                  "${state.encounter}\n${state.challenge.toDisplay(state.strength)}",
-                  style: styles.displayMedium,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: paddingAllXXL,
+                child: CharacterBar(
+                  state: ref.watch(gameServiceProvider),
                 ),
               ),
-              boxXXL,
-              PageNavButton(
-                onPressed: () => context.pop(),
-                label: 'Success',
+            ),
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  BgBubble(
+                    child: Text(
+                      state.encounter.toString(),
+                      style: styles.displayLarge,
+                    ),
+                  ),
+                  boxXXL,
+                  BgBubble(
+                    child: ChallengeDisplay(
+                      challenge: state.challenge,
+                      strength: state.strength,
+                    ),
+                  ),
+                  boxXXL,
+                  PageNavButton(
+                    onPressed: () {
+                      ref.read(gameServiceProvider.notifier).success(state.encounter);
+                      context.pop();
+                    },
+                    label: 'Success',
+                  ),
+                  boxL,
+                  PageNavButton(
+                    onPressed: () => context.pop(),
+                    label: 'Fail',
+                  ),
+                ],
               ),
-              boxL,
-              PageNavButton(
-                onPressed: () => context.pop(),
-                label: 'Fail',
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
