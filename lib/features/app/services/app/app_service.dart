@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../data/bowler_levels.dart';
+import '../../../../data/characters.dart';
 import 'app_state.dart';
 
 part 'app_service.g.dart';
@@ -19,28 +20,9 @@ class AppService extends _$AppService {
     );
   }
 
-  void enterRoom() {
-    print(state.bowlerLevel.generateEncounter());
+  void selectCharacter(Character value) {
+    state = state.copyWith(
+      character: value,
+    );
   }
-
-// void drive(RecordSheetState initialState) => state = state.copyWith(
-//   initialTeamBuilderState: const Optional<Team>.absent(),
-//   initialRecordSheetState: Optional<RecordSheetState>.of(initialState),
-// );
-//
-// void buildNewTeam() {
-//   final team = Team(id: uuid.v4(), name: generateRandomName());
-//
-//   state = state.copyWith(
-//     initialTeamBuilderState: Optional<Team>.of(team),
-//     initialRecordSheetState: const Optional<RecordSheetState>.absent(),
-//   );
-//
-//   ref.read(teamsCtrlProvider.notifier).newTeam(team);
-// }
-//
-// void buildTeam(Team team) => state = state.copyWith(
-//   initialTeamBuilderState: Optional<Team>.of(team),
-//   initialRecordSheetState: const Optional<RecordSheetState>.absent(),
-// );
 }

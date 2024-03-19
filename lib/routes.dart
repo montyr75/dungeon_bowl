@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,6 +7,8 @@ import 'features/app/presentation/home_page.dart';
 import 'features/app/presentation/not_found_page.dart';
 import 'features/characters/presentation/character_details_page.dart';
 import 'features/characters/presentation/character_selection_page.dart';
+import 'features/corridor/presentation/corridor_page.dart';
+import 'features/room/presentation/room_page.dart';
 
 part 'routes.g.dart';
 
@@ -15,7 +16,8 @@ enum AppRoute {
   home('/'),
   characterSelectionPage,
   characterDetails,
-  corridor;
+  corridor,
+  room;
 
   final String? _path;
 
@@ -49,11 +51,18 @@ GoRouter goRouter(GoRouterRef ref) {
               ),
             ],
           ),
-          // GoRoute(
-          //   name: AppRoute.thePit.name,
-          //   path: AppRoute.thePit.path,
-          //   builder: (context, state) => const PitPage(),
-          // ),
+          GoRoute(
+            name: AppRoute.corridor.name,
+            path: AppRoute.corridor.path,
+            builder: (context, state) => const CorridorPage(),
+            routes: [
+              GoRoute(
+                name: AppRoute.room.name,
+                path: AppRoute.room.path,
+                builder: (context, state) => const RoomPage(),
+              ),
+            ],
+          ),
           // GoRoute(
           //   name: AppRoute.recordSheet.name,
           //   path: AppRoute.recordSheet.path,

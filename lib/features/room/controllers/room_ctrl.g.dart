@@ -1,24 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_service.dart';
+part of 'room_ctrl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appServiceHash() => r'3b2f04754b6d3a7d9fb0816f76398ce30e4e8c04';
+String _$roomCtrlHash() => r'544a9168d1669aab369cd45f75ccc6cf3d527435';
 
-/// See also [AppService].
-@ProviderFor(AppService)
-final appServiceProvider = NotifierProvider<AppService, AppState>.internal(
-  AppService.new,
-  name: r'appServiceProvider',
+/// See also [RoomCtrl].
+@ProviderFor(RoomCtrl)
+final roomCtrlProvider =
+    AutoDisposeNotifierProvider<RoomCtrl, RoomState>.internal(
+  RoomCtrl.new,
+  name: r'roomCtrlProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appServiceHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$roomCtrlHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AppService = Notifier<AppState>;
+typedef _$RoomCtrl = AutoDisposeNotifier<RoomState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

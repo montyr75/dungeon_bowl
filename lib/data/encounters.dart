@@ -1,9 +1,5 @@
 import 'package:recase/recase.dart';
 
-import '../utils/roller.dart';
-import '../utils/utils.dart';
-import 'bowler_levels.dart';
-import 'bowling_challenges.dart';
 
 enum Encounter {
   bat(
@@ -30,17 +26,53 @@ enum Encounter {
   skeleton(
     level: 2,
   ),
-  goblin(
+  goblins(
     level: 3,
   ),
   wolf(
     level: 3,
   ),
-  kobold(
+  kobolds(
+    level: 4,
+  ),
+  orc(
     level: 4,
   ),
   zombie(
     level: 4,
+  ),
+  harpy(
+    level: 5,
+  ),
+  ogre(
+    level: 5,
+  ),
+  wererat(
+    level: 5,
+  ),
+  basilisk(
+    level: 6,
+  ),
+  minotaur(
+    level: 6,
+  ),
+  owlbear(
+    level: 6,
+  ),
+  ghost(
+    level: 7,
+  ),
+  succubusDemon(
+    level: 7,
+  ),
+  troll(
+    level: 7,
+  ),
+  frostGiant(
+    level: 8,
+  ),
+  wraith(
+    level: 8,
   );
 
   final int level;
@@ -49,17 +81,13 @@ enum Encounter {
     required this.level,
   });
 
-  BowlingChallenge getBowlingChallenge(BowlerLevel bowlerLevel) => generateBowlingChallenge(level, bowlerLevel);
+  static Encounter randomEncounterByLevel(int lvl) {
+    final list = Encounter.values.where((value) => value.level == lvl).toList()..shuffle();
+    return list.first;
+  }
 
   @override
   String toString() {
     return ReCase(name).titleCase;
   }
-}
-
-BowlingChallenge generateBowlingChallenge(int level, BowlerLevel bowlerLevel) {
-  final challenges = bowlingChallenges.take(level).toList();
-  final roll = rand(challenges.length) + bowlerLevel.challengeMod;
-
-  return challenges[roll.maxOf(challenges.length - 1)];
 }

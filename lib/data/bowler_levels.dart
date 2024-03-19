@@ -1,6 +1,4 @@
 import '../utils/roll_table.dart';
-import '../utils/roller.dart';
-import 'encounters.dart';
 
 enum BowlerLevel {
   beginner(
@@ -71,16 +69,6 @@ enum BowlerLevel {
     this.challengeMod = 0,
     required this.encounterLevelTable,
   });
-
-  String generateEncounter() {
-    final lvl = encounterLevelTable.lookup(roll(100))!;
-    final challenge = generateBowlingChallenge(lvl, this);
-
-    return '''
-Level: $lvl
-Challenge: ${challenge.description}
-''';
-  }
 }
 
 final bowlerLevelTable = RollTable<BowlerLevel>({

@@ -4,25 +4,21 @@ import '../utils/utils.dart' show IterableIntX;
 
 final math.Random _random = math.Random(DateTime.now().millisecondsSinceEpoch);
 
-/// These return only the total of the roll.
-
 int rand(int max) => _random.nextInt(max);
 
 int roll(int sides) => rand(sides) + 1;
 
 int rollDice(int qty, int sides, [int mod = 0]) {
   assert(qty >= 1 && sides >= 1);
-  return List.generate(qty, (_) => roll(sides)).sum();
+  return List.generate(qty, (_) => roll(sides)).sum() + mod;
 }
-
-/// These return full roll results.
 
 RollResult rollVerbose(int qty, int sides, [int mod = 0]) => DiceExpression(qty, sides, mod).rollVerbose();
 
 bool rollPercent(int percentChance) => roll(100) <= percentChance;
 
 class DiceExpression {
-  static const String ERROR = "*Roll Formula Error*";
+  static const String error = "*Roll Formula Error*";
 
   final int qty;
   final int sides;
@@ -52,8 +48,8 @@ class DiceExpression {
 
     // if there are no matches, the string is an invalid expression
     if (matches == null) {
-      print(ERROR);
-      throw Exception(ERROR);
+      print(error);
+      throw Exception(error);
     }
 
     // DEBUG

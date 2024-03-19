@@ -7,6 +7,7 @@ import '../../../data/characters.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
+import '../../app/services/app/app_service.dart';
 import 'character_image.dart';
 
 class CharacterDetailsPage extends ConsumerWidget {
@@ -56,10 +57,12 @@ class CharacterDetailsPage extends ConsumerWidget {
                     ),
                     const Spacer(),
                     PageNavButton(
-                      onPressed: () => null,
-                      // onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
+                      onPressed: () {
+                        ref.read(appServiceProvider.notifier).selectCharacter(character);
+                        context.goNamed(AppRoute.corridor.name);
+                      },
                       label: 'Select',
-                    )
+                    ),
                   ],
                 ),
               ),

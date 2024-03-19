@@ -1,4 +1,3 @@
-import '../utils/roll_table.dart';
 
 enum BowlingHit {
   strike,
