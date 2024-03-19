@@ -17,11 +17,24 @@ class RoomCtrl extends _$RoomCtrl {
     final appState = ref.read(appServiceProvider);
 
     final lvl = appState.bowlerLevel.encounterLevelTable.lookup(roll(100))!;
-    final challenge = _generateBowlingChallenge(lvl, appState.bowlerLevel);
+    BowlingChallenge challenge = _generateBowlingChallenge(lvl, appState.bowlerLevel);
 
     int? strength;
     if (challenge.isVariable) {
       strength = (rollDice(1, lvl, 2) + appState.bowlerLevel.challengeMod).maxOf(10);
+
+      // a strength of 10 usually requires the player to strike
+      if (strength == 10) {
+        if (challenge.firstThrow == BowlingHit.min) {
+          challenge = bowlingChallenges.last;
+        }
+        else if (challenge.frameTotal == BowlingHit.min) {
+          challenge = bowlingChallenges.getByLevel(6)!;
+        }
+      }
+      else if (strength == 9 && challenge.secondThrow == BowlingHit.min1) {
+        challenge = bowlingChallenges.getByLevel(6)!;
+      }
     }
 
     return RoomState(
