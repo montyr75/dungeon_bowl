@@ -1,7 +1,5 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../features/characters/presentation/character_image.dart';
 import '../features/corridor/services/game_state.dart';

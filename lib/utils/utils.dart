@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show Widget, EdgeInsets, Padding, Color, Colors;
+import 'package:flutter/material.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 import 'package:uuid/uuid.dart';
 
