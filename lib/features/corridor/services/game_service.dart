@@ -18,14 +18,19 @@ class GameService extends _$GameService {
     );
   }
 
-  void nextRoom() {
+  void nextFrame() {
     state = state.copyWith(
       frame: state.frame + 1,
     );
   }
 
   void success(Encounter encounter) {
+    nextFrame();
     _updateGP(1);
+  }
+
+  void failure() {
+    nextFrame();
   }
 
   void _updateGP(int value) {

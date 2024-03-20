@@ -51,11 +51,9 @@ class RoomPage extends ConsumerWidget {
                     ),
                   ),
                   boxXXL,
-                  BgBubble(
-                    child: ChallengeDisplay(
-                      challenge: state.challenge,
-                      strength: state.strength,
-                    ),
+                  ChallengeDisplay(
+                    challenge: state.challenge,
+                    strength: state.strength,
                   ),
                   boxXXL,
                   PageNavButton(
@@ -68,7 +66,7 @@ class RoomPage extends ConsumerWidget {
                   boxL,
                   PageNavButton(
                     onPressed: () => context.pop(),
-                    label: 'Fail',
+                    label: 'Failure',
                   ),
                 ],
               ),

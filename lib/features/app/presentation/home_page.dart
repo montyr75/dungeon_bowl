@@ -80,7 +80,7 @@ class _AverageTextField extends StatelessWidget {
     final styles = context.textStyles;
 
     return SizedBox(
-      width: 170,
+      width: 175,
       height: 90,
       child: Stack(
         children: [
@@ -151,8 +151,8 @@ class _AverageTextField extends StatelessWidget {
                 enabledBorder: InputBorder.none,
                 errorBorder: InputBorder.none,
                 disabledBorder: InputBorder.none,
-                hintText: 'Bowling Average',
-                hintStyle: styles.displaySmall.copyWith(color: Colors.grey),
+                hintText: 'Enter Bowling Average',
+                hintStyle: styles.displaySmall,
                 counter: noWidget,
               ),
             ),

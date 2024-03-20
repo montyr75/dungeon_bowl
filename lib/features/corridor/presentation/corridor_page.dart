@@ -1,4 +1,3 @@
-import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +15,6 @@ class CorridorPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameServiceProvider);
-    final styles = context.textStyles;
 
     return Scaffold(
       body: DecoratedBox(
@@ -43,7 +41,6 @@ class CorridorPage extends ConsumerWidget {
                 children: [
                   PageNavButton(
                     onPressed: () {
-                      ref.read(gameServiceProvider.notifier).nextRoom();
                       context.goNamed(AppRoute.room.name);
                     },
                     label: 'Next Room',

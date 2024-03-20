@@ -1,5 +1,6 @@
 import 'package:recase/recase.dart';
 
+const encounterImagePath = 'assets/images/encounters';
 
 enum Encounter {
   bat(
@@ -90,4 +91,7 @@ enum Encounter {
   String toString() {
     return ReCase(name).titleCase;
   }
+
+  String get imageFile => "${ReCase(name).snakeCase}.webp";
+  String get imagePath => "$encounterImagePath/$imageFile";
 }

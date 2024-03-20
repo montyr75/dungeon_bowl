@@ -11,7 +11,7 @@ import '../../app/services/app/app_service.dart';
 import 'character_image.dart';
 
 class CharacterDetailsPage extends ConsumerWidget {
-  static const imageSize = 300.0;
+  static const imageSize = 250.0;
 
   final Character character;
 
@@ -45,14 +45,19 @@ class CharacterDetailsPage extends ConsumerWidget {
                         style: styles.displayLarge,
                       ),
                     ),
+                    boxM,
                     CharacterImage(
                       character: character,
                       size: imageSize,
                     ),
-                    BgBubble(
-                      child: Text(
-                        character.description,
-                        style: styles.displaySmall,
+                    boxM,
+                    SizedBox(
+                      width: imageSize,
+                      child: BgBubble(
+                        child: Text(
+                          character.description,
+                          style: styles.displaySmall,
+                        ),
                       ),
                     ),
                     const Spacer(),

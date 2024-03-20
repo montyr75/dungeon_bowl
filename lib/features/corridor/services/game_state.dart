@@ -6,7 +6,7 @@ class GameState {
 
   const GameState({
     required this.character,
-    this.frame = 0,
+    this.frame = 1,
   });
 
   GameState copyWith({

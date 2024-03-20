@@ -26,23 +26,33 @@ class CharacterSelectionPage extends StatelessWidget {
         ),
         child: Padding(
           padding: paddingAllM,
-          child: Row(
-            children: [
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  children: Character.values
-                      .map(
-                        (character) => CharacterOption(
-                          character: character,
-                          onPressed: () => context.goNamed(AppRoute.characterDetails.name, extra: character),
-                        ),
-                      )
-                      .toList(),
-                ),
+          child: ListView(
+            children: Character.values
+                .map(
+                  (character) => CharacterOption2(
+                character: character,
+                onPressed: () => context.goNamed(AppRoute.characterDetails.name, extra: character),
               ),
-            ],
+            )
+                .toList(),
           ),
+          // child: Row(
+          //   children: [
+          //     Expanded(
+          //       child: GridView.count(
+          //         crossAxisCount: 2,
+          //         children: Character.values
+          //             .map(
+          //               (character) => CharacterOption(
+          //                 character: character,
+          //                 onPressed: () => context.goNamed(AppRoute.characterDetails.name, extra: character),
+          //               ),
+          //             )
+          //             .toList(),
+          //       ),
+          //     ),
+          //   ],
+          // ),
         ),
       ),
     );
@@ -50,7 +60,7 @@ class CharacterSelectionPage extends StatelessWidget {
 }
 
 class CharacterOption extends StatelessWidget {
-  static const imageSize = 150.0;
+  static const imageSize = 135.0;
 
   final Character character;
   final VoidCallback onPressed;
@@ -100,6 +110,68 @@ class CharacterOption extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CharacterOption2 extends StatelessWidget {
+  static const imageSize = 135.0;
+
+  final Character character;
+  final VoidCallback onPressed;
+
+  const CharacterOption2({
+    super.key,
+    required this.character,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final styles = context.textStyles;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onPressed,
+        child: Card(
+          color: Colors.black54,
+          child: Padding(
+            padding: paddingAllM,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CharacterImage(
+                  character: character,
+                  size: imageSize,
+                ),
+                boxM,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        character.toString(),
+                        style: styles.displayMedium,
+                      ),
+                      boxS,
+                      Text(
+                        "${character.race} ${character.profession}",
+                        style: styles.displaySmall,
+                      ),
+                      const Divider(color: Colors.white54),
+                      Text(
+                        character.description,
+                        style: styles.displaySmall,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

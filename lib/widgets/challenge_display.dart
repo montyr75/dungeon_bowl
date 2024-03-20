@@ -42,89 +42,92 @@ class ChallengeDisplay extends StatelessWidget {
 
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: maxWidth),
-      child: Row(
-        children: [
-          Container(
-            width: frameSize,
-            height: frameSize,
-            decoration: BoxDecoration(
-              border: Border.all(
-                width: 2,
-                color: Colors.grey,
-              ),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      if (firstThrow != null)
-                        Container(
-                          width: frameSize * .4,
-                          height: double.infinity,
-                          padding: paddingAllS,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: Text(firstThrow),
-                          ),
-                        ),
-                      Container(
-                        width: frameSize * .5,
-                        height: double.infinity,
-                        padding: paddingAllS,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        child: secondThrow != null
-                            ? FittedBox(
-                                fit: BoxFit.fill,
-                                child: Text(secondThrow),
-                              )
-                            : noWidget,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (challenge.frameTotal != null)
-                        SizedBox(
-                          width: frameSize * .5,
-                          child: FittedBox(
-                            fit: BoxFit.fill,
-                            child: Text(
-                              challenge.frameTotal!.toDisplay(strength),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
+      child: Card(
+        color: Colors.black54,
+        child: Row(
+          children: [
+            Container(
+              width: frameSize,
               height: frameSize,
-              padding: paddingAllM,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
                   color: Colors.grey,
                 ),
               ),
-              child: Text(
-                challenge.toDisplay(strength),
-                style: styles.displaySmall,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (firstThrow != null)
+                          Container(
+                            width: frameSize * .4,
+                            height: double.infinity,
+                            padding: paddingAllS,
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: Text(firstThrow),
+                            ),
+                          ),
+                        Container(
+                          width: frameSize * .5,
+                          height: double.infinity,
+                          padding: paddingAllS,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          child: secondThrow != null
+                              ? FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Text(secondThrow),
+                                )
+                              : noWidget,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (challenge.frameTotal != null)
+                          SizedBox(
+                            width: frameSize * .5,
+                            child: FittedBox(
+                              fit: BoxFit.fill,
+                              child: Text(
+                                challenge.frameTotal!.toDisplay(strength),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                height: frameSize,
+                padding: paddingAllM,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 2,
+                    color: Colors.grey,
+                  ),
+                ),
+                child: Text(
+                  challenge.toDisplay(strength),
+                  style: styles.displaySmall,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

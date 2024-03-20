@@ -8,7 +8,7 @@ import '../features/corridor/services/game_state.dart';
 import '../utils/screen_utils.dart';
 
 class CharacterBar extends StatelessWidget {
-  static const maxWidth = 200.0;
+  static const maxWidth = 175.0;
   static const size = 75.0;
 
   final GameState state;
@@ -19,8 +19,7 @@ class CharacterBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final styles = context.textStyles;
 
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: maxWidth),
+    return IntrinsicHeight(
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -29,51 +28,64 @@ class CharacterBar extends StatelessWidget {
             size: size,
           ),
           boxM,
-          Expanded(
-            child: Container(
-              height: size,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 2,
-                  color: Colors.grey,
+          SizedBox(
+            width: size * 1.2,
+            height: size,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Image.asset(
+                    'assets/images/gold_coin.png',
+                    width: 15,
+                  ),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Text("Frame", style: styles.displaySmall),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Image.asset('assets/images/left_ornate_border.png'),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    state.character.gp.toString(),
+                    style: styles.displayMedium.copyWith(color: Colors.yellow),
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(state.frame.toString(), style: styles.displayMedium),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Transform.flip(
+                    flipX: true,
+                    child: Image.asset(
+                      'assets/images/left_ornate_border.png',
+                    ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          boxM,
-          Expanded(
-            child: Container(
-              height: size,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 2,
-                  color: Colors.grey,
+          const Spacer(),
+          SizedBox(
+            width: size * 1.2,
+            child: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Transform.flip(
+                    flipX: true,
+                    child: Image.asset(
+                      'assets/images/left_rounded_border.png',
+                      width: size,
+                    ),
+                  ),
                 ),
-              ),
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Text("GP", style: styles.displaySmall),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Frame ${state.frame.toString()}",
+                    style: styles.displayMedium,
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(state.character.gp.toString(), style: styles.displayMedium),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
