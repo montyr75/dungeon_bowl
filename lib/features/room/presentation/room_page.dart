@@ -12,6 +12,8 @@ import '../../corridor/services/game_service.dart';
 import '../controllers/room_ctrl.dart';
 
 class RoomPage extends ConsumerWidget {
+  static const imageSize = 250.0;
+
   const RoomPage({super.key});
 
   @override
@@ -48,6 +50,25 @@ class RoomPage extends ConsumerWidget {
                     child: Text(
                       state.encounter.toString(),
                       style: styles.displayLarge,
+                    ),
+                  ),
+                  boxM,
+                  SizedBox(
+                    width: imageSize * 1.1,
+                    height: imageSize * 1.1,
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Image.asset(
+                            state.encounter.imagePath,
+                            width: imageSize,
+                          ),
+                        ),
+                        Image.asset(
+                          'assets/images/square_frame.png',
+                          width: imageSize * 1.1,
+                        ),
+                      ],
                     ),
                   ),
                   boxXXL,

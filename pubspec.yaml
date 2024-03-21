@@ -51,6 +51,7 @@ flutter:
     - assets/images/
     - assets/images/characters/
     - assets/images/characters/backgrounds/
+    - assets/images/encounters/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
