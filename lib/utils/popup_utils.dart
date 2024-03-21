@@ -1,32 +1,40 @@
 import 'dart:async';
 
+import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
+import 'screen_utils.dart';
 import 'utils.dart';
 
 const dialogMaxWidth = 400.0;
 
-Future<void> showConfirmDialog({required String message, required VoidCallback onConfirm}) {
+Future<void> showConfirmDialog({
+  required BuildContext context,
+  String? title,
+  required String message,
+  String? yesMsg,
+  String? noMsg,
+  required VoidCallback onConfirm,
+}) {
+  final styles = context.textStyles;
+
   return SmartDialog.show(
     builder: (_) {
-      return AlertDialog(
-        title: const Text("Are you sure?"),
-        content: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: dialogMaxWidth),
-          child: Text(message),
-        ),
+      return FantasyDialog(
+        title: Text(title ?? "Are you sure?", style: styles.displayMedium),
+        content: Text(message, style: styles.displaySmall),
         actions: [
-          const TextButton(
+          TextButton(
             onPressed: SmartDialog.dismiss,
-            child: Text("No"),
+            child: Text(noMsg ?? "No"),
           ),
           TextButton(
             onPressed: () {
               onConfirm();
               SmartDialog.dismiss();
             },
-            child: const Text("Yes"),
+            child: Text(yesMsg ?? "Yes"),
           ),
         ],
       );
@@ -158,5 +166,55 @@ class _StringInputDialogState extends State<StringInputDialog> {
   void dispose() {
     ctrl.dispose();
     super.dispose();
+  }
+}
+
+class FantasyDialog extends StatelessWidget {
+  static const maxWidth = 350.0;
+
+  final Widget title;
+  final Widget content;
+  final List<Widget> actions;
+
+  const FantasyDialog({
+    super.key,
+    required this.title,
+    required this.content,
+    required this.actions,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: paddingAllXXL,
+      constraints: const BoxConstraints(maxWidth: maxWidth),
+      decoration: BoxDecoration(
+        image: const DecorationImage(
+          image: AssetImage('assets/images/bg.png'),
+          fit: BoxFit.cover,
+        ),
+        border: Border.all(
+          color: Colors.grey,
+          width: 2,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15.0),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          title,
+          boxXXL,
+          content,
+          boxXXL,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: actions,
+          ),
+        ],
+      ),
+    );
   }
 }

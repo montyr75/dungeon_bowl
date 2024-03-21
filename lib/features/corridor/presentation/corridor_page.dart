@@ -54,6 +54,7 @@ class CorridorPage extends ConsumerWidget {
                   PageNavButton(
                     onPressed: () {
                       showConfirmDialog(
+                        context: context,
                         message: "Are you sure you want to quit the game?",
                         onConfirm: () => context.goNamed(AppRoute.home.name),
                       );

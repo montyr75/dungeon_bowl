@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/challenge_display.dart';
 import '../../../widgets/character_bar.dart';
@@ -71,6 +72,13 @@ class RoomPage extends ConsumerWidget {
                       ],
                     ),
                   ),
+                  boxM,
+                  BgBubble(
+                    child: Text(
+                      state.encounter.description,
+                      style: styles.displaySmall,
+                    ),
+                  ),
                   boxXXL,
                   ChallengeDisplay(
                     challenge: state.challenge,
@@ -79,14 +87,34 @@ class RoomPage extends ConsumerWidget {
                   boxXXL,
                   PageNavButton(
                     onPressed: () {
-                      ref.read(gameServiceProvider.notifier).success(state.encounter);
-                      context.pop();
+                      showConfirmDialog(
+                        context: context,
+                        title: "Success!",
+                        message: "You've bested the challenge!\n\nRewards:\n1 Gold Coin",
+                        yesMsg: "Confirm Success",
+                        noMsg: "Cancel",
+                        onConfirm: () {
+                          ref.read(gameServiceProvider.notifier).success(state.encounter);
+                          context.pop();
+                        },
+                      );
                     },
                     label: 'Success',
                   ),
                   boxL,
                   PageNavButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () {
+                      showConfirmDialog(
+                        context: context,
+                        title: "Failure!",
+                        message: "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                        yesMsg: "Confirm Failure",
+                        noMsg: "Cancel",
+                        onConfirm: () {
+                          context.pop();
+                        },
+                      );
+                    },
                     label: 'Failure',
                   ),
                 ],

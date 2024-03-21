@@ -51,13 +51,10 @@ class CharacterDetailsPage extends ConsumerWidget {
                       size: imageSize,
                     ),
                     boxM,
-                    SizedBox(
-                      width: imageSize,
-                      child: BgBubble(
-                        child: Text(
-                          character.description,
-                          style: styles.displaySmall,
-                        ),
+                    BgBubble(
+                      child: Text(
+                        character.description,
+                        style: styles.displaySmall,
                       ),
                     ),
                     const Spacer(),
@@ -86,7 +83,7 @@ class BgBubble extends StatelessWidget {
   const BgBubble({
     super.key,
     required this.child,
-    this.maxWidth = 400.0,
+    this.maxWidth = 350.0,
   });
 
   @override

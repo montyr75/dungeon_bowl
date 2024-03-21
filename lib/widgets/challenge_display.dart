@@ -6,7 +6,7 @@ import '../utils/screen_utils.dart';
 
 class ChallengeDisplay extends StatelessWidget {
   static const frameSize = 100.0;
-  static const maxWidth = 400.0;
+  static const maxWidth = 350.0;
 
   final BowlingChallenge challenge;
   final int? strength;
@@ -114,10 +114,11 @@ class ChallengeDisplay extends StatelessWidget {
               child: Container(
                 height: frameSize,
                 padding: paddingAllM,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: Colors.grey,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(width: 2, color: Colors.grey),
+                    bottom: BorderSide(width: 2, color: Colors.grey),
+                    right: BorderSide(width: 2, color: Colors.grey),
                   ),
                 ),
                 child: Text(
