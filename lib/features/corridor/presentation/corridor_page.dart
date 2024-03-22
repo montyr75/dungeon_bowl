@@ -50,7 +50,7 @@ class CorridorPage extends ConsumerWidget {
                     onPressed: () => null,
                     label: 'Find a Lair',
                   ),
-                  boxXXL,
+                  boxXXL,boxXXL,boxXXL,
                   PageNavButton(
                     onPressed: () {
                       showConfirmDialog(
