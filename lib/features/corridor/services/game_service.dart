@@ -19,8 +19,11 @@ class GameService extends _$GameService {
   }
 
   void nextFrame() {
+    final isNewGame = state.frame == 10;
+
     state = state.copyWith(
-      frame: state.frame + 1,
+      game: isNewGame ? state.game + 1 : null,
+      frame: !isNewGame ? state.frame + 1 : 1,
     );
   }
 

@@ -37,12 +37,16 @@ class RoomCtrl extends _$RoomCtrl {
       }
     }
 
-    return RoomState(
+    final initialState = RoomState(
       enounterLevel: lvl,
       encounter: Encounter.randomEncounterByLevel(lvl),
       challenge: challenge,
       strength: strength,
     );
+
+    print(initialState);
+
+    return initialState;
   }
 
   BowlingChallenge _generateBowlingChallenge(int level, BowlerLevel bowlerLevel) {

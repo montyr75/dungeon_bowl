@@ -7,7 +7,7 @@ import '../utils/screen_utils.dart';
 
 class CharacterBar extends StatelessWidget {
   static const maxWidth = 175.0;
-  static const size = 75.0;
+  static const size = 65.0;
 
   final GameState state;
 
@@ -77,9 +77,9 @@ class CharacterBar extends StatelessWidget {
                   ),
                 ),
                 Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   child: Text(
-                    "Frame ${state.frame.toString()}",
+                    "${state.game} : ${state.frame}",
                     style: styles.displayMedium,
                   ),
                 ),

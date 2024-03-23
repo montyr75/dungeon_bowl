@@ -22,8 +22,6 @@ class RoomPage extends ConsumerWidget {
     final state = ref.watch(roomCtrlProvider);
     final styles = context.textStyles;
 
-    print(state);
-
     return Scaffold(
       body: DecoratedBox(
         decoration: const BoxDecoration(

@@ -1,6 +1,6 @@
 {
-    "name": "dungeon_bowl",
-    "short_name": "dungeon_bowl",
+    "name": "Dungeon Bowl",
+    "short_name": "DB",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

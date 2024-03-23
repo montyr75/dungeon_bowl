@@ -1,47 +1,72 @@
 import '../utils/roll_table.dart';
 
 enum BowlerLevel {
-  beginner(
+  novice(
     minAvg: 0,
     maxAvg: 99,
     encounterLevelTable: RollTable<int>({
-      RollRange(0, 5): 1,
-      RollRange(6, 15): 2,
-      RollRange(16, 30): 3,
-      RollRange(31, 50): 4,
-      RollRange(51, 70): 5,
+      RollRange(1, 10): 1,
+      RollRange(11, 25): 2,
+      RollRange(26, 47): 3,
+      RollRange(48, 69): 4,
+      RollRange(70, 84): 5,
+      RollRange(85, 94): 6,
+      RollRange(95, 99): 7,
+      RollRange(100, 100): 8,
+    }),
+  ),
+  beginner(
+    minAvg: 100,
+    maxAvg: 124,
+    challengeMod: 1,
+    encounterLevelTable: RollTable<int>({
+      RollRange(1, 2): 1,
+      RollRange(3, 11): 2,
+      RollRange(12, 26): 3,
+      RollRange(27, 48): 4,
+      RollRange(49, 70): 5,
       RollRange(71, 85): 6,
       RollRange(86, 95): 7,
       RollRange(96, 100): 8,
     }),
   ),
   intermediate(
-    minAvg: 100,
+    minAvg: 125,
     maxAvg: 149,
     challengeMod: 1,
     encounterLevelTable: RollTable<int>({
-      RollRange(0, 2): 1,
-      RollRange(3, 7): 2,
-      RollRange(8, 17): 3,
-      RollRange(18, 32): 4,
-      RollRange(33, 54): 5,
-      RollRange(55, 76): 6,
-      RollRange(77, 91): 7,
-      RollRange(92, 100): 8,
+      RollRange(1, 6): 2,
+      RollRange(7, 16): 3,
+      RollRange(17, 31): 4,
+      RollRange(32, 53): 5,
+      RollRange(54, 75): 6,
+      RollRange(76, 90): 7,
+      RollRange(91, 100): 8,
+    }),
+  ),
+  proficient(
+    minAvg: 150,
+    maxAvg: 174,
+    challengeMod: 2,
+    encounterLevelTable: RollTable<int>({
+      RollRange(1, 11): 3,
+      RollRange(12, 26): 4,
+      RollRange(27, 41): 5,
+      RollRange(42, 63): 6,
+      RollRange(64, 85): 7,
+      RollRange(86, 100): 8,
     }),
   ),
   advanced(
-    minAvg: 150,
+    minAvg: 175,
     maxAvg: 199,
     challengeMod: 2,
     encounterLevelTable: RollTable<int>({
-      RollRange(0, 3): 2,
-      RollRange(4, 9): 3,
-      RollRange(10, 19): 4,
-      RollRange(20, 35): 5,
-      RollRange(36, 60): 6,
-      RollRange(61, 85): 7,
-      RollRange(86, 100): 8,
+      RollRange(1, 12): 4,
+      RollRange(13, 27): 5,
+      RollRange(28, 52): 6,
+      RollRange(53, 77): 7,
+      RollRange(78, 100): 8,
     }),
   ),
   pro(
@@ -49,12 +74,10 @@ enum BowlerLevel {
     maxAvg: 300,
     challengeMod: 3,
     encounterLevelTable: RollTable<int>({
-      RollRange(0, 3): 3,
-      RollRange(4, 10): 4,
-      RollRange(11, 25): 5,
-      RollRange(26, 50): 6,
-      RollRange(51, 75): 7,
-      RollRange(76, 100): 8,
+      RollRange(1, 17): 5,
+      RollRange(18, 42): 6,
+      RollRange(43, 70): 7,
+      RollRange(71, 100): 8,
     }),
   );
 
@@ -72,8 +95,10 @@ enum BowlerLevel {
 }
 
 final bowlerLevelTable = RollTable<BowlerLevel>({
+  RollRange(BowlerLevel.novice.minAvg, BowlerLevel.novice.maxAvg): BowlerLevel.novice,
   RollRange(BowlerLevel.beginner.minAvg, BowlerLevel.beginner.maxAvg): BowlerLevel.beginner,
   RollRange(BowlerLevel.intermediate.minAvg, BowlerLevel.intermediate.maxAvg): BowlerLevel.intermediate,
+  RollRange(BowlerLevel.proficient.minAvg, BowlerLevel.proficient.maxAvg): BowlerLevel.proficient,
   RollRange(BowlerLevel.advanced.minAvg, BowlerLevel.advanced.maxAvg): BowlerLevel.advanced,
   RollRange(BowlerLevel.pro.minAvg, BowlerLevel.pro.maxAvg): BowlerLevel.pro,
 });
