@@ -55,6 +55,10 @@ enum Encounter {
     level: 4,
     description: "The zombie shambles toward you with the terrible determination of the undead the moment you enter the room, oozing flesh and viscera dripping from its bones. The stench alone may defeat you.",
   ),
+  gelatinousCube(
+    level: 5,
+    description: "A nearly transparent cube of ooze, the gelatinous cube scoots through dungeons, digesting the flesh of its victims, then expelling bones and steel undissolved.",
+  ),
   harpy(
     level: 5,
     description: "Born in an unholy magical ritual gone awry, the harpy is angry and jealous. She can't wait to tear out your throat with her sharp talons.",
@@ -79,9 +83,17 @@ enum Encounter {
     level: 6,
     description: "Created by sinister magic thousands of years ago, owlbears have managed to proliferate in the wild. This one appears ready to defend its nest at all costs.",
   ),
+  earthElemental(
+    level: 7,
+    description: "Native to the earth plane, earth elementals are creatures of dirt and stone. Fighting one is like fighting a small mountain.",
+  ),
   ghost(
     level: 7,
     description: "A soul bound to haunt this area, never at rest, always bent on destruction in a vain attempt to alleviate its desperate longing, this ghost is not to be trifled with.",
+  ),
+  strikers(
+    level: 7,
+    description: "Mysterious dragon-kin crackling with the essence of lightning, strikers hunt in packs of three. Their claws and jaws deliver powerful electric shocks, simultaneously cooking and killing their prey.",
   ),
   succubusDemon(
     level: 7,
@@ -90,6 +102,10 @@ enum Encounter {
   troll(
     level: 7,
     description: "Tall, gangly, and uncannily powerful, trolls move with frightening speed to rend flesh, delighting in the screams of agony from their victims.",
+  ),
+  fleshGolem(
+    level: 8,
+    description: "A disgusting magical construct built from the flesh, bones, and sinew of various humanoids, this flesh golem only has one goal: kill.",
   ),
   frostGiant(
     level: 8,

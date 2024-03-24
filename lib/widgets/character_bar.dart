@@ -6,8 +6,7 @@ import '../features/corridor/services/game_state.dart';
 import '../utils/screen_utils.dart';
 
 class CharacterBar extends StatelessWidget {
-  static const maxWidth = 175.0;
-  static const size = 65.0;
+  static const size = 50.0;
 
   final GameState state;
 
@@ -25,41 +24,15 @@ class CharacterBar extends StatelessWidget {
             character: state.character.character,
             size: size,
           ),
-          boxM,
-          SizedBox(
-            width: size * 1.2,
-            height: size,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Image.asset(
-                    'assets/images/gold_coin.png',
-                    width: 15,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset('assets/images/left_ornate_border.png'),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    state.character.gp.toString(),
-                    style: styles.displayMedium.copyWith(color: Colors.yellow),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Transform.flip(
-                    flipX: true,
-                    child: Image.asset(
-                      'assets/images/left_ornate_border.png',
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          boxL,
+          Text(
+            state.character.gp.toString(),
+            style: styles.displayLarge.copyWith(color: Colors.yellow),
+          ),
+          boxS,
+          Image.asset(
+            'assets/images/gold_coins.png',
+            width: 32,
           ),
           const Spacer(),
           SizedBox(
