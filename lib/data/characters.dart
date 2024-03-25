@@ -45,7 +45,7 @@ enum Character {
     profession: 'Fighter',
     description: "Trained from birth as a soldier, Weston is sworn to protect his elven nation. If that means a sojourn to dangerous lands to eliminate evil's source, so be it.",
   ),
-  tortyce_turkee(
+  tortyceTurkee(
     race: 'Tortle',
     profession: 'Cleric',
     description: "A devout disciple of the god of light, dawn, and new beginnings, Tortyce quests for justice. If he happens to come upon some treasure, the church could always use a donation.",

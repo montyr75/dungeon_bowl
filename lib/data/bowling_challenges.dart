@@ -1,4 +1,3 @@
-
 import 'package:collection/collection.dart';
 
 enum BowlingHit {
@@ -45,6 +44,20 @@ class BowlingChallenge {
 
     return description.replaceAll("#", strength.toString());
   }
+}
+
+class TenthFrameBowlingChallenge extends BowlingChallenge {
+  final BowlingHit? thirdThrow;
+
+  const TenthFrameBowlingChallenge({
+    required super.level,
+    super.isVariable = false,
+    super.firstThrow,
+    super.secondThrow,
+    this.thirdThrow,
+    super.frameTotal,
+    required super.description,
+  });
 }
 
 /// There are 8 bowling challenges, corresponding to monster levels. A level 2 monster uses 1 or 2.
@@ -101,3 +114,51 @@ const bowlingChallenges = [
 extension ListBowlingChallegeX on List<BowlingChallenge> {
   BowlingChallenge? getByLevel(int lvl) => bowlingChallenges.firstWhereOrNull((value) => value.level == lvl);
 }
+
+const tenthFrameBowlingChallenges = [
+  TenthFrameBowlingChallenge(
+    level: 1,
+    firstThrow: BowlingHit.min1,
+    secondThrow: BowlingHit.min1,
+    thirdThrow: BowlingHit.min1,
+    description: "Hit at least 1 pin with every throw (including the third throw, if there is one).)",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 2,
+    isVariable: true,
+    firstThrow: BowlingHit.min,
+    secondThrow: BowlingHit.min1,
+    thirdThrow: BowlingHit.min,
+    description: "Hit at least # pins on the first throw, at least 1 pin on the second throw, and at least # pins on the third throw (if there is a third throw).",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 3,
+    secondThrow: BowlingHit.spare,
+    description: "Get a spare on either the second or third throw.",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 4,
+    isVariable: true,
+    firstThrow: BowlingHit.min,
+    secondThrow: BowlingHit.spare,
+    description: "Hit at least # pins on the first throw and spare with the second or third throw.",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 5,
+    firstThrow: BowlingHit.strike,
+    description: "Get a strike with at least one throw.",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 6,
+    firstThrow: BowlingHit.strike,
+    secondThrow: BowlingHit.strike,
+    description: "Get a strike with at least two throws.",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 7,
+    firstThrow: BowlingHit.strike,
+    secondThrow: BowlingHit.strike,
+    thirdThrow: BowlingHit.strike,
+    description: "Get a turkey (3 strikes).",
+  ),
+];

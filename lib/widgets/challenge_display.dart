@@ -28,16 +28,18 @@ class ChallengeDisplay extends StatelessWidget {
 
     String? firstThrow;
 
-    switch (challenge.firstThrow) {
-      case BowlingHit.min1:
-      case BowlingHit.min:
-        firstThrow = challenge.firstThrow!.toDisplay(strength);
-        break;
-      case BowlingHit.strike:
-        secondThrow = challenge.firstThrow!.toDisplay();
-        break;
-      default:
-        break;
+    if (challenge.firstThrow != null) {
+      switch (challenge.firstThrow!) {
+        case BowlingHit.min1:
+        case BowlingHit.min:
+          firstThrow = challenge.firstThrow!.toDisplay(strength);
+          break;
+        case BowlingHit.strike:
+          secondThrow = challenge.firstThrow!.toDisplay();
+          break;
+        default:
+          break;
+      }
     }
 
     return ConstrainedBox(
