@@ -162,3 +162,8 @@ const tenthFrameBowlingChallenges = [
     description: "Get a turkey (3 strikes).",
   ),
 ];
+
+extension ListTenthFrameBowlingChallegeX on List<TenthFrameBowlingChallenge> {
+  TenthFrameBowlingChallenge? getByLevel(int lvl) =>
+      tenthFrameBowlingChallenges.firstWhereOrNull((value) => value.level == lvl);
+}
