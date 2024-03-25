@@ -6,8 +6,6 @@ enum BowlingHit {
   min1,
   min;
 
-  const BowlingHit();
-
   String toDisplay([int? strength]) {
     return switch (this) {
       BowlingHit.strike => "X",
