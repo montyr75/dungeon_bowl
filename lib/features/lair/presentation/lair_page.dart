@@ -5,11 +5,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/challenge_display.dart';
 import '../../../widgets/character_bar.dart';
 import '../../../widgets/encounter_image.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
-import '../../characters/presentation/character_details_page.dart';
 import '../../corridor/services/game_service.dart';
 import '../controllers/lair_ctrl.dart';
 

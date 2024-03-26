@@ -20,11 +20,12 @@ class ChallengeDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTenthFrame = challenge is TenthFrameBowlingChallenge;
     final styles = context.textStyles;
 
     String? thirdThrow;
 
-    if (challenge is TenthFrameBowlingChallenge) {
+    if (isTenthFrame) {
       final tenthChallenge = challenge as TenthFrameBowlingChallenge;
 
       thirdThrow = switch (tenthChallenge.thirdThrow) {
@@ -47,10 +48,14 @@ class ChallengeDisplay extends StatelessWidget {
           firstThrow = challenge.firstThrow!.toDisplay(strength);
           break;
         case BowlingHit.strike:
-          secondThrow = challenge.firstThrow!.toDisplay();
+          if (!isTenthFrame) {
+            secondThrow = challenge.firstThrow!.toDisplay();
+          }
+          else {
+            firstThrow = challenge.firstThrow!.toDisplay(strength);
+          }
           break;
-        default:
-          break;
+        default: break;
       }
     }
 
@@ -101,7 +106,7 @@ class ChallengeDisplay extends StatelessWidget {
                                 )
                               : noWidget,
                         ),
-                        if (challenge is TenthFrameBowlingChallenge) Container(
+                        if (isTenthFrame) Container(
                           width: frameWidth * .33,
                           height: double.infinity,
                           padding: paddingAllS,

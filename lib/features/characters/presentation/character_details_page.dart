@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../data/characters.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/bg_bubble.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../app/services/app/app_service.dart';
 import 'character_image.dart';
@@ -72,32 +73,6 @@ class CharacterDetailsPage extends ConsumerWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class BgBubble extends StatelessWidget {
-  final double maxWidth;
-  final Widget child;
-
-  const BgBubble({
-    super.key,
-    required this.child,
-    this.maxWidth = 350.0,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: paddingAllM,
-      constraints: BoxConstraints(
-        maxWidth: maxWidth,
-      ),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(24)),
-        color: Colors.black54,
-      ),
-      child: child,
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../data/bowler_levels.dart';
+import '../../../../data/bowling_tips.dart';
 import '../../../../data/characters.dart';
+import '../../../../utils/roller.dart';
 import 'app_state.dart';
 
 part 'app_service.g.dart';
@@ -25,4 +27,6 @@ class AppService extends _$AppService {
       character: value,
     );
   }
+
+  String getBowlingTip() => bowlingTips[rand(bowlingTips.length)];
 }

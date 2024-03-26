@@ -30,6 +30,6 @@ class LairState {
 
   @override
   String toString() {
-    return 'LairState{enounterLevel: $enounterLevel, encounter: $encounter, challenge: $challenge, strength: $strength}';
+    return 'LairState{enounterLevel: $enounterLevel, encounter: $encounter, strength: $strength, challenge: ${challenge.toDisplay(strength)}}';
   }
 }
