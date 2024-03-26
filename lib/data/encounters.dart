@@ -19,6 +19,10 @@ enum Encounter {
     level: 1,
     description: "This snake looks like it's going to enjoy snacking on you. Aim for the head!",
   ),
+  theLog(
+    level: 1,
+    description: "This room features a giant log with sharp blades protruding from it, but it's unclear what it's for. Can you get through the room without getting poked?",
+  ),
   bandit(
     level: 2,
     description: "You can't trust anyone these days! This bandit wants all the treasure she can carry, and all that you're carrying.",
@@ -30,6 +34,10 @@ enum Encounter {
   giantRat(
     level: 2,
     description: "Don't be fooled by this rat's calm demeanor. It will defend its refuse pile with deadly intent.",
+  ),
+  giantSpider(
+    level: 2,
+    description: "A spider! This creature would be scary even at regular size. Sensing your presence, the spider immediately skitters toward you.",
   ),
   skeleton(
     level: 2,
@@ -67,6 +75,10 @@ enum Encounter {
     level: 4,
     description: "This fire-breathing canine stands guard in this room, watching you warily. Just when you think it might let you pass, it leaps!",
   ),
+  hobgoblin(
+    level: 4,
+    description: "Hobgoblins spend their lives training for battle. This one seems ready to fight.",
+  ),
   orc(
     level: 4,
     description: "Orcs are ugly, brutish, and savage creatures who will kill you for sport. This one has its eye on you.",
@@ -79,13 +91,17 @@ enum Encounter {
     level: 5,
     description: "A nearly transparent cube of ooze, the gelatinous cube scoots through dungeons, digesting the flesh of its victims, then expelling bones and steel undissolved.",
   ),
+  gargoyle(
+    level: 5,
+    description: "You're too experienced an adventurer to be fooled by this stone statue. Sure enough, as you draw near, it begins to move, gives a roar, and swipes at you.",
+  ),
   harpy(
     level: 5,
     description: "Born in an unholy magical ritual gone awry, the harpy is angry and jealous. She can't wait to tear out your throat with her sharp talons.",
   ),
   ogre(
     level: 5,
-    description: "As you enter, this giant, muscle-bound beast looks up, and its eyes immediately fill with rage. With a snarl, it grabs the nearest chair to throw at you, temporarily forgetting its weapons in its furious tantrum.",
+    description: "As you enter the room, this giant, muscle-bound beast looks up, and its eyes fill with rage. With a snarl, it grabs the nearest chair to throw at you, temporarily forgetting its weapons in its furious tantrum.",
   ),
   pitDoor(
     level: 5,
@@ -94,6 +110,10 @@ enum Encounter {
   wererat(
     level: 5,
     description: "Stricken with lycanthropy through the bite of another wererat, this creature is forever cursed to live part of its life as human, part as giant rat, and part as a horrifying hybrid.",
+  ),
+  undeadKnight(
+    level: 5,
+    description: "Your first instinct is to fight when you see this undead knight, but to your surprise, he speaks. Solve his riddle to move past this room.",
   ),
   airElemental(
     level: 6,
@@ -106,6 +126,10 @@ enum Encounter {
   caged(
     level: 6,
     description: "Trapped! You walked right into that one. Can you talk the goblin into releasing you from the cage trap?",
+  ),
+  giantCrocodile(
+    level: 6,
+    description: "When this giant crocodile comes into view, your first thought is, \"How the hell did that thing get in here?\" Now you have to figure out how to kill it.",
   ),
   minotaur(
     level: 6,
@@ -143,6 +167,10 @@ enum Encounter {
     level: 7,
     description: "Horned devils are the flying infantry of hell's terrible armies. Arrogant, yet fiercely envious of any creature perceived to be stronger, many are the size of ogres and are deadly foes when cornered.",
   ),
+  darkElfMage(
+    level: 8,
+    description: "\"You dare interrupt my summoning? No matter...you will serve to feed the demon!\"",
+  ),
   fleshGolem(
     level: 8,
     description: "A disgusting magical construct built from the flesh, bones, and sinew of various humanoids, this flesh golem only has one goal: kill.",
@@ -150,6 +178,10 @@ enum Encounter {
   frostGiant(
     level: 8,
     description: "The frost giant is a huge creature of ice and snow, its flesh a glacial blue-white. It has made a wintry home here in the dungeon. Its eyes narrow and its mouth arcs into an angry frown, then it attacks!",
+  ),
+  roomOfBlades(
+    level: 8,
+    description: "Getting through this deathtrap won't be easy. As you enter the room, blades start whirring, spinning, and swinging. It will take a heroic feat of dexterity to survive.",
   ),
   wraith(
     level: 8,
@@ -171,7 +203,10 @@ enum Encounter {
 
   @override
   String toString() {
-    return ReCase(name).titleCase;
+    return switch (this) {
+      Encounter.roomOfBlades => "Room of Blades",
+      _ => ReCase(name).titleCase,
+    };
   }
 
   String get imageFile => "${ReCase(name).snakeCase}.webp";

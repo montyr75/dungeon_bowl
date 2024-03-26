@@ -181,8 +181,14 @@ class ChallengeDisplay extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 isTenthFrame
-                    ? const Text("* For any throw with a requirement, a strike succeeds.")
-                    : const Text("* A strike always succeeds."),
+                    ? const Text(
+                        "* For any throw with a requirement, a strike succeeds.",
+                        style: TextStyle(fontSize: 10),
+                      )
+                    : const Text(
+                        "* A strike always succeeds.",
+                        style: TextStyle(fontSize: 10),
+                      ),
               ],
             ),
           ),
