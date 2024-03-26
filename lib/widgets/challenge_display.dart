@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../data/bowling_challenges.dart';
 import '../utils/screen_utils.dart';
+import 'bg_bubble.dart';
 
 class ChallengeDisplay extends StatelessWidget {
   static const frameWidth = 125.0;
@@ -50,120 +51,142 @@ class ChallengeDisplay extends StatelessWidget {
         case BowlingHit.strike:
           if (!isTenthFrame) {
             secondThrow = challenge.firstThrow!.toDisplay();
-          }
-          else {
+          } else {
             firstThrow = challenge.firstThrow!.toDisplay(strength);
           }
           break;
-        default: break;
+        default:
+          break;
       }
     }
 
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: maxWidth),
-      child: Card(
-        color: Colors.black54,
-        child: Row(
-          children: [
-            Container(
-              width: frameWidth,
-              height: frameHeight,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 2,
-                  color: Colors.grey,
-                ),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        if (firstThrow != null)
-                          Container(
-                            width: frameWidth * .3,
-                            height: double.infinity,
-                            padding: paddingAllS,
-                            child: FittedBox(
-                              fit: BoxFit.fill,
-                              child: Text(firstThrow),
-                            ),
-                          ),
-                        Container(
-                          width: frameWidth * .33,
-                          height: double.infinity,
-                          padding: paddingAllS,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          child: secondThrow != null
-                              ? FittedBox(
-                                  fit: BoxFit.fill,
-                                  child: Text(secondThrow),
-                                )
-                              : noWidget,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Card(
+            color: Colors.black54,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: frameWidth,
+                      height: frameHeight,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 2,
+                          color: Colors.grey,
                         ),
-                        if (isTenthFrame) Container(
-                          width: frameWidth * .33,
-                          height: double.infinity,
-                          padding: paddingAllS,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey,
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                if (firstThrow != null)
+                                  Container(
+                                    width: frameWidth * .3,
+                                    height: double.infinity,
+                                    padding: paddingAllS,
+                                    child: FittedBox(
+                                      fit: BoxFit.fill,
+                                      child: Text(firstThrow),
+                                    ),
+                                  ),
+                                Container(
+                                  width: frameWidth * .33,
+                                  height: double.infinity,
+                                  padding: paddingAllS,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  child: secondThrow != null
+                                      ? FittedBox(
+                                          fit: BoxFit.fill,
+                                          child: Text(secondThrow),
+                                        )
+                                      : noWidget,
+                                ),
+                                if (isTenthFrame)
+                                  Container(
+                                    width: frameWidth * .33,
+                                    height: double.infinity,
+                                    padding: paddingAllS,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    child: thirdThrow != null
+                                        ? FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: Text(thirdThrow),
+                                          )
+                                        : noWidget,
+                                  ),
+                              ],
                             ),
                           ),
-                          child: thirdThrow != null
-                              ? FittedBox(
-                                  fit: BoxFit.fill,
-                                  child: Text(thirdThrow),
-                                )
-                              : noWidget,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                if (challenge.frameTotal != null)
+                                  SizedBox(
+                                    width: frameWidth * .33,
+                                    child: FittedBox(
+                                      fit: BoxFit.fill,
+                                      child: Text(
+                                        challenge.frameTotal!.toDisplay(strength),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: frameHeight,
+                        padding: paddingAllM,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            top: BorderSide(width: 2, color: Colors.grey),
+                            bottom: BorderSide(width: 2, color: Colors.grey),
+                            right: BorderSide(width: 2, color: Colors.grey),
+                          ),
                         ),
-                      ],
+                        child: Text(
+                          challenge.toDisplay(strength),
+                          style: styles.displaySmall,
+                        ),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (challenge.frameTotal != null)
-                          SizedBox(
-                            width: frameWidth * .33,
-                            child: FittedBox(
-                              fit: BoxFit.fill,
-                              child: Text(
-                                challenge.frameTotal!.toDisplay(strength),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                height: frameHeight,
-                padding: paddingAllM,
-                decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(width: 2, color: Colors.grey),
-                    bottom: BorderSide(width: 2, color: Colors.grey),
-                    right: BorderSide(width: 2, color: Colors.grey),
-                  ),
+                  ],
                 ),
-                child: Text(
-                  challenge.toDisplay(strength),
-                  style: styles.displaySmall,
-                ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+          BgBubble(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                isTenthFrame
+                    ? const Text("* For any throw with a requirement, a strike succeeds.")
+                    : const Text("* A strike always succeeds."),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

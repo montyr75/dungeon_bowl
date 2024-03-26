@@ -39,5 +39,5 @@ const bowlingTips = [
   "Remember to keep your arm straight when swinging the ball. Bending your elbow will decrease both accuracy and power.",
   "After release, be sure to watch your ball's path and observe where it strikes the pins. This will help you make any necessary adjustments on your next throw.",
   "Bowling etiquette dictates that if someone is approaching the lane to bowl to your immediate left or right, to avoid distracting them, you should wait until they're finished to begin your turn.",
-  "Remember, if you're not having fun bowling, you're donig it wrong!",
+  "Remember, if you're not having fun bowling, you're doing it wrong!",
 ];
