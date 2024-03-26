@@ -36,7 +36,6 @@ class RoomPage extends ConsumerWidget {
               CharacterBar(
                 state: ref.watch(gameServiceProvider),
               ),
-              boxXXL,
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

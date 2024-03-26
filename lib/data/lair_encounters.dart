@@ -3,21 +3,21 @@ import 'package:recase/recase.dart';
 const lairEncounterImagePath = 'assets/images/lair_encounters';
 
 enum LairEncounter {
-  orcs(
-    level: 4,
-    description: "This group of orcs has carved out a home here in the dungeon, and they are ready to attack any who threaten their reign.",
-  ),
   chimera(
     level: 4,
     description: "The chimera is a horrid combination of goat, lion, and dragon, and it delights in swooping out of the sky to burn alive its prey with its fiery breath.",
   ),
-  unicorn(
-    level: 5,
-    description: "You must convince this majestic, magical creature that your cause is good. If you succeed, it will let you pass.",
+  orcs(
+    level: 4,
+    description: "This group of orcs has carved out a home here in the dungeon, and they are ready to attack any who threaten their reign.",
   ),
   mage(
     level: 5,
     description: "Dominating this area of the dungeon with fearsome magic, this mage is furious at you for interrupting his studies.",
+  ),
+  unicorn(
+    level: 5,
+    description: "You must convince this majestic, magical creature that your cause is good. If you succeed, it will let you pass.",
   ),
   hydra(
     level: 6,
@@ -35,13 +35,17 @@ enum LairEncounter {
     level: 7,
     description: "Evil wizards who can't bear the thought of dying use malign magic to thwart death, continuing on this plane in the form of an undead lich. This lich will not let you stand in its way.",
   ),
-  strikeDragon(
-    level: 8,
-    description: "Though not technically a dragon, this towering beast wields the elemental might of lightning, using it to strike entire groups of foes, and leaving nothing but charred and stinking devastation in its wake.",
-  ),
   killerBunny(
     level: 8,
     description: "Don't be fooled! This rabbit is dynamite. It will do more than nibble your bum. It can leap great distances to decapitate an enemy with a single mighty chomp, and it has a very foul temper.",
+  ),
+  purpleWorm(
+    level: 8,
+    description: "Able to chew through solid rock as it burrows through the stony depths, this massive, mindless worm will eat anything in its path.",
+  ),
+  strikeDragon(
+    level: 8,
+    description: "Though not technically a dragon, this towering beast wields the elemental might of lightning, using it to strike entire groups of foes, and leaving nothing but charred and stinking devastation in its wake.",
   );
 
   final int level;
