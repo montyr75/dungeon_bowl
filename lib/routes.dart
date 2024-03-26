@@ -8,6 +8,7 @@ import 'features/app/presentation/not_found_page.dart';
 import 'features/characters/presentation/character_details_page.dart';
 import 'features/characters/presentation/character_selection_page.dart';
 import 'features/corridor/presentation/corridor_page.dart';
+import 'features/lair/presentation/lair_page.dart';
 import 'features/room/presentation/room_page.dart';
 
 part 'routes.g.dart';
@@ -17,7 +18,8 @@ enum AppRoute {
   characterSelectionPage,
   characterDetails,
   corridor,
-  room;
+  room,
+  lair;
 
   final String? _path;
 
@@ -60,6 +62,11 @@ GoRouter goRouter(GoRouterRef ref) {
                 name: AppRoute.room.name,
                 path: AppRoute.room.path,
                 builder: (context, state) => const RoomPage(),
+              ),
+              GoRoute(
+                name: AppRoute.lair.name,
+                path: AppRoute.lair.path,
+                builder: (context, state) => const LairPage(),
               ),
             ],
           ),

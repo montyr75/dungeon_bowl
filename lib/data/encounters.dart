@@ -103,6 +103,10 @@ enum Encounter {
     level: 7,
     description: "Tall, gangly, and uncannily powerful, trolls move with frightening speed to rend flesh, delighting in the screams of agony from their victims.",
   ),
+  hornedDevils(
+    level: 7,
+    description: "Horned devils are the flying infantry of hell's terrible armies. Arrogant, yet fiercely envious of any creature perceived to be stronger, many are the size of ogres and are deadly foes when cornered.",
+  ),
   fleshGolem(
     level: 8,
     description: "A disgusting magical construct built from the flesh, bones, and sinew of various humanoids, this flesh golem only has one goal: kill.",

@@ -11,21 +11,21 @@ import '../../../widgets/encounter_image.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../characters/presentation/character_details_page.dart';
 import '../../corridor/services/game_service.dart';
-import '../controllers/room_ctrl.dart';
+import '../controllers/lair_ctrl.dart';
 
-class RoomPage extends ConsumerWidget {
-  const RoomPage({super.key});
+class LairPage extends ConsumerWidget {
+  const LairPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(roomCtrlProvider);
+    final state = ref.watch(lairCtrlProvider);
     final styles = context.textStyles;
 
     return Scaffold(
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/room_bg.webp'),
+            image: AssetImage('assets/images/lair_bg.webp'),
             fit: BoxFit.cover,
           ),
         ),
@@ -76,7 +76,7 @@ class RoomPage extends ConsumerWidget {
                         yesMsg: "Confirm Failure",
                         noMsg: "Cancel",
                         onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).roomFailure();
+                          ref.read(gameServiceProvider.notifier).lairFailure();
                           context.pop();
                         },
                       );
@@ -89,11 +89,11 @@ class RoomPage extends ConsumerWidget {
                       showConfirmDialog(
                         context: context,
                         title: "Success!",
-                        message: "You've bested the challenge!\n\nRewards:\n1 Gold Coin",
+                        message: "You've bested the challenge!\n\nRewards:\n3 Gold Coins",
                         yesMsg: "Confirm Success",
                         noMsg: "Cancel",
                         onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).roomSuccess();
+                          ref.read(gameServiceProvider.notifier).lairSuccess();
                           context.pop();
                         },
                       );

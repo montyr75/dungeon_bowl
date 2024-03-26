@@ -39,16 +39,15 @@ class CorridorPage extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  PageNavButton(
+                  if (state.frame != 10) PageNavButton(
                     onPressed: () {
                       context.goNamed(AppRoute.room.name);
                     },
                     label: 'Next Room',
-                  ),
-                  boxL,
-                  PageNavButton(
-                    onPressed: () => null,
-                    label: 'Find a Lair',
+                  )
+                  else PageNavButton(
+                    onPressed: () => context.goNamed(AppRoute.lair.name),
+                    label: 'Enter Lair',
                   ),
                   boxXXL,boxXXL,boxXXL,
                   PageNavButton(
@@ -59,7 +58,7 @@ class CorridorPage extends ConsumerWidget {
                         onConfirm: () => context.goNamed(AppRoute.home.name),
                       );
                     },
-                    label: 'Exit Game',
+                    label: 'End Game',
                   ),
                 ],
               ),

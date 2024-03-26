@@ -5,7 +5,8 @@ import '../data/bowling_challenges.dart';
 import '../utils/screen_utils.dart';
 
 class ChallengeDisplay extends StatelessWidget {
-  static const frameSize = 100.0;
+  static const frameWidth = 125.0;
+  static const frameHeight = 105.0;
   static const maxWidth = 350.0;
 
   final BowlingChallenge challenge;
@@ -20,6 +21,17 @@ class ChallengeDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styles = context.textStyles;
+
+    String? thirdThrow;
+
+    if (challenge is TenthFrameBowlingChallenge) {
+      final tenthChallenge = challenge as TenthFrameBowlingChallenge;
+
+      thirdThrow = switch (tenthChallenge.thirdThrow) {
+        null => null,
+        _ => tenthChallenge.thirdThrow!.toDisplay(strength),
+      };
+    }
 
     String? secondThrow = switch (challenge.secondThrow) {
       null => null,
@@ -49,8 +61,8 @@ class ChallengeDisplay extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: frameSize,
-              height: frameSize,
+              width: frameWidth,
+              height: frameHeight,
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
@@ -65,7 +77,7 @@ class ChallengeDisplay extends StatelessWidget {
                       children: [
                         if (firstThrow != null)
                           Container(
-                            width: frameSize * .4,
+                            width: frameWidth * .3,
                             height: double.infinity,
                             padding: paddingAllS,
                             child: FittedBox(
@@ -74,7 +86,7 @@ class ChallengeDisplay extends StatelessWidget {
                             ),
                           ),
                         Container(
-                          width: frameSize * .5,
+                          width: frameWidth * .33,
                           height: double.infinity,
                           padding: paddingAllS,
                           decoration: BoxDecoration(
@@ -89,6 +101,22 @@ class ChallengeDisplay extends StatelessWidget {
                                 )
                               : noWidget,
                         ),
+                        if (challenge is TenthFrameBowlingChallenge) Container(
+                          width: frameWidth * .33,
+                          height: double.infinity,
+                          padding: paddingAllS,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          child: thirdThrow != null
+                              ? FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Text(thirdThrow),
+                                )
+                              : noWidget,
+                        ),
                       ],
                     ),
                   ),
@@ -98,7 +126,7 @@ class ChallengeDisplay extends StatelessWidget {
                       children: [
                         if (challenge.frameTotal != null)
                           SizedBox(
-                            width: frameSize * .5,
+                            width: frameWidth * .33,
                             child: FittedBox(
                               fit: BoxFit.fill,
                               child: Text(
@@ -114,7 +142,7 @@ class ChallengeDisplay extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                height: frameSize,
+                height: frameHeight,
                 padding: paddingAllM,
                 decoration: const BoxDecoration(
                   border: Border(

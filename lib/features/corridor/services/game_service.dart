@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../data/encounters.dart';
 import '../../../models/active_character.dart';
 import '../../app/services/app/app_service.dart';
 import 'game_state.dart';
@@ -27,12 +26,21 @@ class GameService extends _$GameService {
     );
   }
 
-  void success(Encounter encounter) {
+  void roomSuccess() {
     nextFrame();
     _updateGP(1);
   }
 
-  void failure() {
+  void roomFailure() {
+    nextFrame();
+  }
+
+  void lairSuccess() {
+    nextFrame();
+    _updateGP(3);
+  }
+
+  void lairFailure() {
     nextFrame();
   }
 
