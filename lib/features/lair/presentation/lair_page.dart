@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
@@ -76,7 +77,7 @@ class LairPage extends ConsumerWidget {
                         noMsg: "Cancel",
                         onConfirm: () {
                           ref.read(gameServiceProvider.notifier).lairFailure();
-                          context.pop();
+                          context.goNamed(AppRoute.tavern.name);
                         },
                       );
                     },
@@ -93,7 +94,7 @@ class LairPage extends ConsumerWidget {
                         noMsg: "Cancel",
                         onConfirm: () {
                           ref.read(gameServiceProvider.notifier).lairSuccess();
-                          context.pop();
+                          context.goNamed(AppRoute.tavern.name);
                         },
                       );
                     },

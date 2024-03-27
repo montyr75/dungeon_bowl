@@ -45,7 +45,7 @@ enum LairEncounter {
   ),
   strikeDragon(
     level: 8,
-    description: "Though not technically a dragon, this towering beast wields the elemental might of lightning, using it to strike entire groups of foes, and leaving nothing but charred and stinking devastation in its wake.",
+    description: "Though not technically a dragon, this towering beast wields the elemental might of lightning, using it to strike entire groups of foes, leaving nothing but charred and stinking devastation in its wake.",
   );
 
   final int level;

@@ -116,36 +116,36 @@ extension ListBowlingChallegeX on List<BowlingChallenge> {
 const tenthFrameBowlingChallenges = [
   TenthFrameBowlingChallenge(
     level: 1,
-    isVariable: true,
-    firstThrow: BowlingHit.min,
-    description: "Hit at least # pins on the first throw.",
-  ),
-  TenthFrameBowlingChallenge(
-    level: 2,
     firstThrow: BowlingHit.min1,
     secondThrow: BowlingHit.min1,
     thirdThrow: BowlingHit.min1,
     description: "Hit at least 1 pin with every throw (including the third throw, if there is one).",
   ),
   TenthFrameBowlingChallenge(
-    level: 3,
+    level: 2,
     isVariable: true,
     firstThrow: BowlingHit.min,
-    secondThrow: BowlingHit.min1,
-    thirdThrow: BowlingHit.min,
-    description: "Hit at least # pins on the first throw, at least 1 pin on the second throw, and at least # pins on the third throw (if there is a third throw).",
+    description: "Hit at least # pins on the first throw.",
+  ),
+  TenthFrameBowlingChallenge(
+    level: 3,
+    secondThrow: BowlingHit.spare,
+    description: "Get a spare on either the second or third throw.",
   ),
   TenthFrameBowlingChallenge(
     level: 4,
+    isVariable: true,
+    firstThrow: BowlingHit.min,
     secondThrow: BowlingHit.spare,
-    description: "Get a spare on either the second or third throw.",
+    description: "Hit at least # pins on the first throw and spare with the second or third throw.",
   ),
   TenthFrameBowlingChallenge(
     level: 5,
     isVariable: true,
     firstThrow: BowlingHit.min,
     secondThrow: BowlingHit.spare,
-    description: "Hit at least # pins on the first throw and spare with the second or third throw.",
+    thirdThrow: BowlingHit.min,
+    description: "Hit at least # pins on the first throw, spare on the second throw, and hit at least # pins on the third throw.",
   ),
   TenthFrameBowlingChallenge(
     level: 6,

@@ -9,8 +9,9 @@ class CharacterBar extends StatelessWidget {
   static const size = 50.0;
 
   final GameState state;
+  final bool hideFrameDisplay;
 
-  const CharacterBar({super.key, required this.state});
+  const CharacterBar({super.key, required this.state, this.hideFrameDisplay = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class CharacterBar extends StatelessWidget {
             character: state.character.character,
             size: size,
           ),
-          boxL,
+          if (hideFrameDisplay) const Spacer()
+          else boxL,
           Text(
             state.character.gp.toString(),
             style: styles.displayLarge.copyWith(color: Colors.yellow),
@@ -34,31 +36,33 @@ class CharacterBar extends StatelessWidget {
             'assets/images/gold_coins.png',
             width: 32,
           ),
-          const Spacer(),
-          SizedBox(
-            width: size * 1.2,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Transform.flip(
-                    flipX: true,
-                    child: Image.asset(
-                      'assets/images/left_rounded_border.png',
-                      width: size,
+          if (!hideFrameDisplay) ...[
+            const Spacer(),
+            SizedBox(
+              width: size * 1.2,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Transform.flip(
+                      flipX: true,
+                      child: Image.asset(
+                        'assets/images/left_rounded_border.png',
+                        width: size,
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "${state.game} : ${state.frame}",
-                    style: styles.displayMedium,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "${state.game} : ${state.frame}",
+                      style: styles.displayMedium,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ],
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../data/bowler_levels.dart';
 import '../../../data/bowling_challenges.dart';
 import '../../../data/encounters.dart';
 import '../../../utils/roller.dart';
@@ -17,7 +16,7 @@ class RoomCtrl extends _$RoomCtrl {
     final appState = ref.read(appServiceProvider);
 
     final lvl = appState.bowlerLevel.encounterLevelTable.lookup(roll(100))!;
-    BowlingChallenge challenge = _generateBowlingChallenge(lvl, appState.bowlerLevel);
+    BowlingChallenge challenge = _generateBowlingChallenge(lvl, appState.bowlerLevel.challengeMod);
 
     int? strength;
     if (challenge.isVariable) {
@@ -49,9 +48,9 @@ class RoomCtrl extends _$RoomCtrl {
     return initialState;
   }
 
-  BowlingChallenge _generateBowlingChallenge(int level, BowlerLevel bowlerLevel) {
+  BowlingChallenge _generateBowlingChallenge(int level, int mod) {
     final challenges = bowlingChallenges.take(level).toList();
-    final roll = rand(challenges.length) + bowlerLevel.challengeMod;
+    final roll = rand(challenges.length) + mod;
 
     return challenges[roll.maxOf(challenges.length - 1)];
   }

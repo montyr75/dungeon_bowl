@@ -10,6 +10,7 @@ import 'features/characters/presentation/character_selection_page.dart';
 import 'features/corridor/presentation/corridor_page.dart';
 import 'features/lair/presentation/lair_page.dart';
 import 'features/room/presentation/room_page.dart';
+import 'features/tavern/presentation/tavern_page.dart';
 
 part 'routes.g.dart';
 
@@ -18,6 +19,7 @@ enum AppRoute {
   characterSelectionPage,
   characterDetails,
   corridor,
+  tavern,
   room,
   lair;
 
@@ -67,6 +69,11 @@ GoRouter goRouter(GoRouterRef ref) {
                 name: AppRoute.lair.name,
                 path: AppRoute.lair.path,
                 builder: (context, state) => const LairPage(),
+              ),
+               GoRoute(
+                name: AppRoute.tavern.name,
+                path: AppRoute.tavern.path,
+                builder: (context, state) => const TavernPage(),
               ),
             ],
           ),

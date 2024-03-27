@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../data/bowler_levels.dart';
 import '../../../data/bowling_challenges.dart';
 import '../../../data/lair_encounters.dart';
 import '../../../utils/roller.dart';
@@ -17,11 +16,11 @@ class LairCtrl extends _$LairCtrl {
     final appState = ref.read(appServiceProvider);
 
     final lvl = appState.bowlerLevel.encounterLevelTable.lookup(roll(100))!.minOf(4);
-    TenthFrameBowlingChallenge challenge = _generateBowlingChallenge(lvl, appState.bowlerLevel);
+    TenthFrameBowlingChallenge challenge = _generateBowlingChallenge(lvl, appState.bowlerLevel.challengeMod);
 
     int? strength;
     if (challenge.isVariable) {
-      strength = (rollDice(1, lvl, 2) + appState.bowlerLevel.challengeMod).maxOf(10);
+      strength = (rollDice(1, lvl, 3) + appState.bowlerLevel.challengeMod).maxOf(10);
 
       // a strength of 10 (or 9 and 1) requires the player to strike or spare
       if (strength == 10) {
@@ -30,7 +29,7 @@ class LairCtrl extends _$LairCtrl {
         }
       }
       else if (strength == 9 && challenge.secondThrow == BowlingHit.min1) {
-        challenge = tenthFrameBowlingChallenges.getByLevel(5)!;
+        challenge = tenthFrameBowlingChallenges.getByLevel(4)!;
       }
     }
 
@@ -46,9 +45,9 @@ class LairCtrl extends _$LairCtrl {
     return initialState;
   }
 
-  TenthFrameBowlingChallenge _generateBowlingChallenge(int level, BowlerLevel bowlerLevel) {
+  TenthFrameBowlingChallenge _generateBowlingChallenge(int level, int mod) {
     final challenges = tenthFrameBowlingChallenges.take(level).toList();
-    final roll = rand(challenges.length) + bowlerLevel.challengeMod;
+    final roll = rand(challenges.length) + mod;
 
     return challenges[roll.maxOf(challenges.length - 1)];
   }
