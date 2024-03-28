@@ -75,7 +75,7 @@ class RoomPage extends ConsumerWidget {
                         yesMsg: "Confirm Failure",
                         noMsg: "Cancel",
                         onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).roomFailure();
+                          ref.read(gameServiceProvider.notifier).roomFailure(state);
                           context.pop();
                         },
                       );
@@ -92,7 +92,7 @@ class RoomPage extends ConsumerWidget {
                         yesMsg: "Confirm Success",
                         noMsg: "Cancel",
                         onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).roomSuccess();
+                          ref.read(gameServiceProvider.notifier).roomSuccess(state);
                           context.pop();
                         },
                       );

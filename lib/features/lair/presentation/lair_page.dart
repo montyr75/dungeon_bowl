@@ -76,7 +76,7 @@ class LairPage extends ConsumerWidget {
                         yesMsg: "Confirm Failure",
                         noMsg: "Cancel",
                         onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).lairFailure();
+                          ref.read(gameServiceProvider.notifier).lairFailure(state);
                           context.goNamed(AppRoute.tavern.name);
                         },
                       );
@@ -93,7 +93,7 @@ class LairPage extends ConsumerWidget {
                         yesMsg: "Confirm Success",
                         noMsg: "Cancel",
                         onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).lairSuccess();
+                          ref.read(gameServiceProvider.notifier).lairSuccess(state);
                           context.goNamed(AppRoute.tavern.name);
                         },
                       );
