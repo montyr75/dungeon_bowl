@@ -39,11 +39,11 @@ class TavernPage extends ConsumerWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(
-                    height: 200,
-                    child: Placeholder(),
-                  ),
-                  boxXXL,
+                  // const SizedBox(
+                  //   height: 200,
+                  //   child: Placeholder(),
+                  // ),
+                  // boxXXL,
                   PageNavButton(
                     onPressed: () {
                       context.pop();

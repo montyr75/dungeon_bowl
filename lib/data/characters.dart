@@ -35,6 +35,26 @@ enum Character {
     description:
         'Hailing from a faraway continent, Brie is on a mission of revenge, searching for the dark wizard who killed her parents for their valuable pelts and left her for dead.',
   ),
+  elianaAnchorwell(
+    race: 'Princess',
+    profession: 'of Unicorns',
+    description: 'When her older sister was bitten by a werefox and took up a life of exploration, Eliana became the elder princess of the unicorn kingdom.',
+  ),
+  adalindAnchorwell(
+    race: 'Werefox',
+    profession: 'Wanderer',
+    description: 'One day, while meandering through the enchanted forest of the unicorn kingdom, Princess Adalind befriended a girl who turned out to be a werefox and was bitten.',
+  ),
+  inesLoftin(
+    race: 'Fire',
+    profession: 'Genasi',
+    description: '',
+  ),
+  enriqueLoftin(
+    race: 'Water',
+    profession: 'Genasi',
+    description: '',
+  ),
   amberArrowmark(
     race: 'Half-Elf',
     profession: 'Druid',

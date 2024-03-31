@@ -52,7 +52,7 @@ class CharacterDetailsPage extends ConsumerWidget {
                       size: imageSize,
                     ),
                     boxM,
-                    BgBubble(
+                    if (character.description.isNotEmpty) BgBubble(
                       child: Text(
                         character.description,
                         style: styles.displaySmall,
