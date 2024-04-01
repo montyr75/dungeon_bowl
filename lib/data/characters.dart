@@ -43,7 +43,7 @@ enum Character {
   adalindAnchorwell(
     race: 'Werefox',
     profession: 'Wanderer',
-    description: 'One day, while meandering through the enchanted forest of the unicorn kingdom, Princess Adalind befriended a girl who turned out to be a werefox and was bitten.',
+    description: 'Bitten by a werefox she tried to befriend, Adalind gave up her life as elder princess of the unicorn kingdom for a life of adventure communing with nature.',
   ),
   inesLoftin(
     race: 'Fire',

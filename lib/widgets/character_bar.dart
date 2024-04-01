@@ -9,9 +9,15 @@ class CharacterBar extends StatelessWidget {
   static const size = 50.0;
 
   final GameState state;
+  final bool showNext;
   final bool hideFrameDisplay;
 
-  const CharacterBar({super.key, required this.state, this.hideFrameDisplay = false});
+  const CharacterBar({
+    super.key,
+    required this.state,
+    this.showNext = false,
+    this.hideFrameDisplay = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +31,7 @@ class CharacterBar extends StatelessWidget {
             character: state.character.character,
             size: size,
           ),
-          if (hideFrameDisplay) const Spacer()
-          else boxL,
+          if (hideFrameDisplay) const Spacer() else boxL,
           Text(
             state.character.gp.toString(),
             style: styles.displayLarge.copyWith(color: Colors.yellow),
@@ -38,29 +43,25 @@ class CharacterBar extends StatelessWidget {
           ),
           if (!hideFrameDisplay) ...[
             const Spacer(),
-            SizedBox(
-              width: size * 1.2,
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Transform.flip(
-                      flipX: true,
-                      child: Image.asset(
-                        'assets/images/left_rounded_border.png',
-                        width: size,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "${state.game} : ${state.frame}",
-                      style: styles.displayMedium,
-                    ),
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("Game", style: styles.bodySmall),
+                    Text(state.game.toString(), style: styles.displayMedium),
+                  ],
+                ),
+                boxM,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("${showNext ? 'Next ' : ''}Frame", style: styles.bodySmall),
+                    Text(state.frame.toString(), style: styles.displayMedium),
+                  ],
+                ),
+              ],
             ),
           ],
         ],

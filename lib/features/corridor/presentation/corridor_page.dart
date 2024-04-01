@@ -33,6 +33,7 @@ class CorridorPage extends ConsumerWidget {
             children: [
               CharacterBar(
                 state: state,
+                showNext: true,
               ),
               boxXXL,
               Column(
@@ -59,7 +60,7 @@ class CorridorPage extends ConsumerWidget {
                         onConfirm: () => context.goNamed(AppRoute.home.name),
                       );
                     },
-                    label: 'End Game',
+                    label: 'Quit',
                   ),
                 ],
               ),
