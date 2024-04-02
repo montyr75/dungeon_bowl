@@ -1,5 +1,7 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,70 +39,73 @@ class LairPage extends ConsumerWidget {
               CharacterBar(
                 state: ref.watch(gameServiceProvider),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  BgBubble(
-                    child: Text(
-                      state.encounter.toString(),
-                      style: styles.displayLarge,
-                    ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      BgBubble(
+                        child: Text(
+                          state.encounter.toString(),
+                          style: styles.displayLarge,
+                        ),
+                      ),
+                      boxM,
+                      EncounterImage(imagePath: state.encounter.imagePath),
+                      boxM,
+                      BgBubble(
+                        child: Text(
+                          state.encounter.description,
+                          style: styles.displaySmall,
+                        ),
+                      ),
+                      boxM,
+                      ChallengeDisplay(
+                        challenge: state.challenge,
+                        strength: state.strength,
+                      ),
+                      boxM,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          PageNavButton(
+                            onPressed: () {
+                              showConfirmDialog(
+                                context: context,
+                                title: "Failure!",
+                                message:
+                                "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                                yesMsg: "Confirm Failure",
+                                noMsg: "Cancel",
+                                onConfirm: () {
+                                  ref.read(gameServiceProvider.notifier).lairFailure(state);
+                                  context.goNamed(AppRoute.tavern.name);
+                                },
+                              );
+                            },
+                            label: 'Failure',
+                          ),
+                          boxXXL,
+                          PageNavButton(
+                            onPressed: () {
+                              showConfirmDialog(
+                                context: context,
+                                title: "Success!",
+                                message: "You've bested the challenge!\n\nRewards:\n3 Gold Coins",
+                                yesMsg: "Confirm Success",
+                                noMsg: "Cancel",
+                                onConfirm: () {
+                                  ref.read(gameServiceProvider.notifier).lairSuccess(state);
+                                  context.goNamed(AppRoute.tavern.name);
+                                },
+                              );
+                            },
+                            label: 'Success',
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              boxM,
-              EncounterImage(imagePath: state.encounter.imagePath),
-              boxM,
-              BgBubble(
-                child: Text(
-                  state.encounter.description,
-                  style: styles.displaySmall,
                 ),
-              ),
-              boxM,
-              ChallengeDisplay(
-                challenge: state.challenge,
-                strength: state.strength,
-              ),
-              boxM,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PageNavButton(
-                    onPressed: () {
-                      showConfirmDialog(
-                        context: context,
-                        title: "Failure!",
-                        message:
-                            "You have failed! Quickly, you turn and run, determined to live to fight another day.",
-                        yesMsg: "Confirm Failure",
-                        noMsg: "Cancel",
-                        onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).lairFailure(state);
-                          context.goNamed(AppRoute.tavern.name);
-                        },
-                      );
-                    },
-                    label: 'Failure',
-                  ),
-                  boxXXL,
-                  PageNavButton(
-                    onPressed: () {
-                      showConfirmDialog(
-                        context: context,
-                        title: "Success!",
-                        message: "You've bested the challenge!\n\nRewards:\n3 Gold Coins",
-                        yesMsg: "Confirm Success",
-                        noMsg: "Cancel",
-                        onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).lairSuccess(state);
-                          context.goNamed(AppRoute.tavern.name);
-                        },
-                      );
-                    },
-                    label: 'Success',
-                  ),
-                ],
               ),
             ],
           ),

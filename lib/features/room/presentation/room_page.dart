@@ -36,70 +36,73 @@ class RoomPage extends ConsumerWidget {
               CharacterBar(
                 state: ref.watch(gameServiceProvider),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  BgBubble(
-                    child: Text(
-                      state.encounter.toString(),
-                      style: styles.displayLarge,
-                    ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      BgBubble(
+                        child: Text(
+                          state.encounter.toString(),
+                          style: styles.displayLarge,
+                        ),
+                      ),
+                      boxM,
+                      EncounterImage(imagePath: state.encounter.imagePath),
+                      boxM,
+                      BgBubble(
+                        child: Text(
+                          state.encounter.description,
+                          style: styles.displaySmall,
+                        ),
+                      ),
+                      boxM,
+                      ChallengeDisplay(
+                        challenge: state.challenge,
+                        strength: state.strength,
+                      ),
+                      boxM,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          PageNavButton(
+                            onPressed: () {
+                              showConfirmDialog(
+                                context: context,
+                                title: "Failure!",
+                                message:
+                                "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                                yesMsg: "Confirm Failure",
+                                noMsg: "Cancel",
+                                onConfirm: () {
+                                  ref.read(gameServiceProvider.notifier).roomFailure(state);
+                                  context.pop();
+                                },
+                              );
+                            },
+                            label: 'Failure',
+                          ),
+                          boxXXL,
+                          PageNavButton(
+                            onPressed: () {
+                              showConfirmDialog(
+                                context: context,
+                                title: "Success!",
+                                message: "You've bested the challenge!\n\nRewards:\n1 Gold Coin",
+                                yesMsg: "Confirm Success",
+                                noMsg: "Cancel",
+                                onConfirm: () {
+                                  ref.read(gameServiceProvider.notifier).roomSuccess(state);
+                                  context.pop();
+                                },
+                              );
+                            },
+                            label: 'Success',
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              boxM,
-              EncounterImage(imagePath: state.encounter.imagePath),
-              boxM,
-              BgBubble(
-                child: Text(
-                  state.encounter.description,
-                  style: styles.displaySmall,
                 ),
-              ),
-              boxM,
-              ChallengeDisplay(
-                challenge: state.challenge,
-                strength: state.strength,
-              ),
-              boxM,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PageNavButton(
-                    onPressed: () {
-                      showConfirmDialog(
-                        context: context,
-                        title: "Failure!",
-                        message:
-                            "You have failed! Quickly, you turn and run, determined to live to fight another day.",
-                        yesMsg: "Confirm Failure",
-                        noMsg: "Cancel",
-                        onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).roomFailure(state);
-                          context.pop();
-                        },
-                      );
-                    },
-                    label: 'Failure',
-                  ),
-                  boxXXL,
-                  PageNavButton(
-                    onPressed: () {
-                      showConfirmDialog(
-                        context: context,
-                        title: "Success!",
-                        message: "You've bested the challenge!\n\nRewards:\n1 Gold Coin",
-                        yesMsg: "Confirm Success",
-                        noMsg: "Cancel",
-                        onConfirm: () {
-                          ref.read(gameServiceProvider.notifier).roomSuccess(state);
-                          context.pop();
-                        },
-                      );
-                    },
-                    label: 'Success',
-                  ),
-                ],
               ),
             ],
           ),

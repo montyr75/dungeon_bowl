@@ -52,3 +52,22 @@ class LairEncounterResult extends EncounterResultBase {
   @override
   bool get isLair => true;
 }
+
+class FoundLairEncounterResult extends EncounterResultBase {
+  final LairEncounter encounter;
+  final BowlingChallenge challenge1;
+  final BowlingChallenge challenge2;
+
+  const FoundLairEncounterResult({
+    required super.game,
+    required super.enounterLevel,
+    super.strength,
+    required this.encounter,
+    required this.challenge1,
+    required this.challenge2,
+    super.isSuccess = false,
+  });
+
+  @override
+  bool get isLair => true;
+}
