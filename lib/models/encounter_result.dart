@@ -16,6 +16,7 @@ abstract class EncounterResultBase {
   });
 
   bool get isLair;
+  bool get isFailure => !isSuccess;
 }
 
 class EncounterResult extends EncounterResultBase {

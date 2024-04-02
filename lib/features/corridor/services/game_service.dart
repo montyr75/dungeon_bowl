@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../models/active_character.dart';
@@ -80,4 +81,26 @@ class GameService extends _$GameService {
       ),
     );
   }
+
+  GameReport generateReport() {
+    return GameReport(
+      encounterResults: List.unmodifiable(state.encounterHistory.encounterResults),
+      lairEncounterResults: List.unmodifiable(state.encounterHistory.lairEncounterResults),
+    );
+  }
+}
+
+class GameReport {
+  final List<EncounterResult> encounterResults;
+  final List<LairEncounterResult> lairEncounterResults;
+
+  const GameReport({
+    required this.encounterResults,
+    required this.lairEncounterResults,
+  });
+
+  int get encountersWon => encounterResults.count((value) => value.isSuccess);
+  int get totalEncounters => encounterResults.length;
+  int get lairsWon => lairEncounterResults.count((value) => value.isSuccess);
+  int get totalLairs => lairEncounterResults.length;
 }

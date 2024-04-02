@@ -28,3 +28,8 @@ class GameState {
     );
   }
 }
+
+extension ListEncounterResultX on List<EncounterResultBase> {
+  List<EncounterResult> get encounterResults => whereType<EncounterResult>().toList();
+  List<LairEncounterResult> get lairEncounterResults => whereType<LairEncounterResult>().toList();
+}
