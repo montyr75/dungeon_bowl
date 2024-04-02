@@ -113,7 +113,7 @@ enum Encounter {
   ),
   undeadKnight(
     level: 5,
-    description: "Your first instinct is to fight when you see this undead knight, but to your surprise, he speaks. Solve his riddle to move past this room.",
+    description: "Your first instinct is to fight when you see this undead knight, but to your surprise, he speaks. Solve his riddle to find the gold.",
   ),
   airElemental(
     level: 6,

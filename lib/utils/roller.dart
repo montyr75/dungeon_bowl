@@ -1,5 +1,6 @@
 import "dart:math" as math;
 
+import '../app_config.dart';
 import '../utils/utils.dart' show IterableIntX;
 
 final math.Random _random = math.Random(DateTime.now().millisecondsSinceEpoch);
@@ -48,7 +49,7 @@ class DiceExpression {
 
     // if there are no matches, the string is an invalid expression
     if (matches == null) {
-      print(error);
+      log.error(error);
       throw Exception(error);
     }
 

@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../models/active_character.dart';
 import '../../../models/encounter_result.dart';
 import '../../app/services/app/app_service.dart';
+import '../../lair/controllers/found_lair_state.dart';
 import '../../lair/controllers/lair_state.dart';
 import '../../room/controllers/room_state.dart';
 import 'game_state.dart';
@@ -59,6 +60,31 @@ class GameService extends _$GameService {
     );
   }
 
+  void foundLairSuccess(FoundLairState foundLairState, {required bool isChallenge1}) {
+    GameState newState = _nextFrame(state);
+
+    if (isChallenge1) {
+      state = newState;
+      return;
+    }
+
+    newState = _updateGP(newState, 3);
+
+    state = _updateEncounterHistory(
+      newState,
+      foundLairState.toEncounterResult(game: state.game, isSuccess: true),
+    );
+  }
+
+  void foundLairFailure(FoundLairState foundLairState) {
+    GameState newState = _nextFrame(state);
+
+    state = _updateEncounterHistory(
+      newState,
+      foundLairState.toEncounterResult(game: state.game, isSuccess: false),
+    );
+  }
+
   GameState _nextFrame(GameState state) {
     final isNewGame = state.frame == 10;
 
@@ -92,7 +118,7 @@ class GameService extends _$GameService {
 
 class GameReport {
   final List<EncounterResult> encounterResults;
-  final List<LairEncounterResult> lairEncounterResults;
+  final List<EncounterResultBase> lairEncounterResults;
 
   const GameReport({
     required this.encounterResults,

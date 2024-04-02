@@ -27,9 +27,12 @@ class GameState {
       encounterHistory: encounterHistory ?? this.encounterHistory,
     );
   }
+
+  bool get canFindLair => frame < 9;
 }
 
 extension ListEncounterResultX on List<EncounterResultBase> {
   List<EncounterResult> get encounterResults => whereType<EncounterResult>().toList();
-  List<LairEncounterResult> get lairEncounterResults => whereType<LairEncounterResult>().toList();
+  List<EncounterResultBase> get lairEncounterResults =>
+      where((value) => value is LairEncounterResult || value is FoundLairEncounterResult).toList();
 }

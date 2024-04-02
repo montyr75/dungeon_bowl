@@ -6,7 +6,7 @@ part of 'room_ctrl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$roomCtrlHash() => r'b3abbe608fc0293c432deb82c3a8e0ab5b865973';
+String _$roomCtrlHash() => r'c32617a8da2d897f99ba8445e664ffb0977ccdf8';
 
 /// See also [RoomCtrl].
 @ProviderFor(RoomCtrl)

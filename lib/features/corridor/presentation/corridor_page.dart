@@ -41,9 +41,7 @@ class CorridorPage extends ConsumerWidget {
                 children: [
                   if (state.frame != 10)
                     PageNavButton(
-                      onPressed: () {
-                        context.goNamed(AppRoute.room.name);
-                      },
+                      onPressed: () => context.goNamed(AppRoute.room.name),
                       label: 'Next Room',
                     )
                   else
@@ -51,6 +49,13 @@ class CorridorPage extends ConsumerWidget {
                       onPressed: () => context.goNamed(AppRoute.lair.name),
                       label: 'Enter Lair',
                     ),
+                  if (state.canFindLair) ...[
+                    boxL,
+                    PageNavButton(
+                      onPressed: () => context.goNamed(AppRoute.foundLair.name),
+                      label: 'Find a Lair',
+                    ),
+                  ],
                   boxXXL,
                   PageNavButton(
                     onPressed: () {

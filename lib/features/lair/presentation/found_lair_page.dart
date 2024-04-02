@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
@@ -12,21 +11,21 @@ import '../../../widgets/character_bar.dart';
 import '../../../widgets/encounter_image.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../corridor/services/game_service.dart';
-import '../controllers/lair_ctrl.dart';
+import '../controllers/found_lair_ctrl.dart';
 
-class LairPage extends ConsumerWidget {
-  const LairPage({super.key});
+class FoundLairPage extends ConsumerWidget {
+  const FoundLairPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(lairCtrlProvider);
+    final state = ref.watch(foundLairCtrlProvider);
     final styles = context.textStyles;
 
     return Scaffold(
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/lair_bg.webp'),
+            image: AssetImage('assets/images/room_bg.webp'),
             fit: BoxFit.cover,
           ),
         ),
@@ -58,7 +57,11 @@ class LairPage extends ConsumerWidget {
                       ),
                       boxM,
                       ChallengeDisplay(
-                        challenge: state.challenge,
+                        challenge: state.challenge1,
+                        strength: state.strength,
+                      ),
+                      if (state.isChallenge1Success) ChallengeDisplay(
+                        challenge: state.challenge2,
                         strength: state.strength,
                       ),
                       boxM,
@@ -71,29 +74,45 @@ class LairPage extends ConsumerWidget {
                                 context: context,
                                 title: "Failure!",
                                 message:
-                                "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                                    "You have failed! Quickly, you turn and run, determined to live to fight another day.",
                                 yesMsg: "Confirm Failure",
                                 noMsg: "Cancel",
                                 onConfirm: () {
-                                  ref.read(gameServiceProvider.notifier).lairFailure(state);
-                                  context.goNamed(AppRoute.tavern.name);
+                                  ref.read(gameServiceProvider.notifier).foundLairFailure(state);
+                                  context.pop();
                                 },
                               );
                             },
                             label: 'Failure',
                           ),
                           boxXXL,
-                          PageNavButton(
+                          if (!state.isChallenge1Success) PageNavButton(
+                            onPressed: () {
+                              showConfirmDialog(
+                                context: context,
+                                title: "First Success!",
+                                message: "You've bested the first challenge, but there's one more to go!",
+                                yesMsg: "Confirm Success",
+                                noMsg: "Cancel",
+                                onConfirm: () {
+                                  ref.read(foundLairCtrlProvider.notifier).challenge1Success();
+                                  ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: true);
+                                },
+                              );
+                            },
+                            label: 'Success',
+                          )
+                          else PageNavButton(
                             onPressed: () {
                               showConfirmDialog(
                                 context: context,
                                 title: "Success!",
-                                message: "You've bested the challenge!\n\nRewards:\n3 Gold Coins",
+                                message: "You've bested both challenges!\n\nRewards:\n3 Gold Coins",
                                 yesMsg: "Confirm Success",
                                 noMsg: "Cancel",
                                 onConfirm: () {
-                                  ref.read(gameServiceProvider.notifier).lairSuccess(state);
-                                  context.goNamed(AppRoute.tavern.name);
+                                  ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: false);
+                                  context.pop();
                                 },
                               );
                             },

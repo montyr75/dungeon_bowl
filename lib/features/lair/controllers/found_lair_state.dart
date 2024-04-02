@@ -8,6 +8,7 @@ class FoundLairState {
   final BowlingChallenge challenge1;
   final BowlingChallenge challenge2;
   final int? strength;
+  final bool isChallenge1Success;
 
   const FoundLairState({
     required this.enounterLevel,
@@ -15,6 +16,7 @@ class FoundLairState {
     required this.challenge1,
     required this.challenge2,
     this.strength,
+    this.isChallenge1Success = false,
   });
 
   FoundLairState copyWith({
@@ -23,6 +25,7 @@ class FoundLairState {
     BowlingChallenge? challenge1,
     BowlingChallenge? challenge2,
     int? strength,
+    bool? isChallenge1Success,
   }) {
     return FoundLairState(
       enounterLevel: enounterLevel ?? this.enounterLevel,
@@ -30,6 +33,7 @@ class FoundLairState {
       challenge1: challenge1 ?? this.challenge1,
       challenge2: challenge2 ?? this.challenge2,
       strength: strength ?? this.strength,
+      isChallenge1Success: isChallenge1Success ?? this.isChallenge1Success,
     );
   }
 

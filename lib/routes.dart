@@ -8,6 +8,7 @@ import 'features/app/presentation/not_found_page.dart';
 import 'features/characters/presentation/character_details_page.dart';
 import 'features/characters/presentation/character_selection_page.dart';
 import 'features/corridor/presentation/corridor_page.dart';
+import 'features/lair/presentation/found_lair_page.dart';
 import 'features/lair/presentation/lair_page.dart';
 import 'features/room/presentation/room_page.dart';
 import 'features/tavern/presentation/tavern_page.dart';
@@ -21,6 +22,7 @@ enum AppRoute {
   corridor,
   tavern,
   room,
+  foundLair,
   lair;
 
   final String? _path;
@@ -64,6 +66,11 @@ GoRouter goRouter(GoRouterRef ref) {
                 name: AppRoute.room.name,
                 path: AppRoute.room.path,
                 builder: (context, state) => const RoomPage(),
+              ),
+              GoRoute(
+                name: AppRoute.foundLair.name,
+                path: AppRoute.foundLair.path,
+                builder: (context, state) => const FoundLairPage(),
               ),
               GoRoute(
                 name: AppRoute.lair.name,

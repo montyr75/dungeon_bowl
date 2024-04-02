@@ -1,5 +1,8 @@
 import 'package:collection/collection.dart';
 
+import '../utils/roller.dart';
+import '../utils/utils.dart';
+
 enum BowlingHit {
   strike,
   spare,
@@ -42,6 +45,28 @@ class BowlingChallenge {
 
     return description.replaceAll("#", strength.toString());
   }
+
+  static BowlingChallenge generateBowlingChallenge({required int level, int strength = 0, int mod = 0}) {
+    final challenges = bowlingChallenges.take(level).toList();
+    final roll = rand(challenges.length) + mod;
+
+    BowlingChallenge challenge = challenges[roll.maxOf(challenges.length - 1)];
+
+    if (challenge.isVariable) {
+      // a strength of 10 (or 9 and 1) requires the player to strike or spare
+      if (strength == 10) {
+        if (challenge.firstThrow == BowlingHit.min) {
+          challenge = bowlingChallenges.last;
+        } else if (challenge.frameTotal == BowlingHit.min) {
+          challenge = bowlingChallenges.getByLevel(6)!;
+        }
+      } else if (strength == 9 && challenge.secondThrow == BowlingHit.min1) {
+        challenge = bowlingChallenges.getByLevel(6)!;
+      }
+    }
+
+    return challenge;
+  }
 }
 
 class TenthFrameBowlingChallenge extends BowlingChallenge {
@@ -56,6 +81,26 @@ class TenthFrameBowlingChallenge extends BowlingChallenge {
     super.frameTotal,
     required super.description,
   });
+
+  static TenthFrameBowlingChallenge generateBowlingChallenge({required int level, int mod = 0, int strength = 0}) {
+    final challenges = tenthFrameBowlingChallenges.take(level).toList();
+    final roll = rand(challenges.length) + mod;
+
+    TenthFrameBowlingChallenge challenge = challenges[roll.maxOf(challenges.length - 1)];
+
+    if (challenge.isVariable) {
+      // a strength of 10 (or 9 and 1) requires the player to strike or spare
+      if (strength == 10) {
+        if (challenge.firstThrow == BowlingHit.min) {
+          challenge = tenthFrameBowlingChallenges.getByLevel(6)!;
+        }
+      } else if (strength == 9 && challenge.secondThrow == BowlingHit.min1) {
+        challenge = tenthFrameBowlingChallenges.getByLevel(4)!;
+      }
+    }
+
+    return challenge;
+  }
 }
 
 /// There are 8 bowling challenges, corresponding to monster levels. A level 2 monster uses 1 or 2.
