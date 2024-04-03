@@ -1,3 +1,4 @@
+import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,8 +7,11 @@ import 'package:go_router/go_router.dart';
 import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/banner_title.dart';
+import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/character_bar.dart';
-import '../../app/presentation/widgets/page_nav_button.dart';
+import '../../../widgets/gold_display.dart';
+import '../../../widgets/image_option_button.dart';
 import '../../app/services/app/app_service.dart';
 import '../services/game_service.dart';
 
@@ -18,6 +22,8 @@ class CorridorPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameServiceProvider);
     final bowlingTip = ref.read(appServiceProvider.notifier).getBowlingTip();
+
+    final styles = context.textStyles;
 
     return Scaffold(
       body: DecoratedBox(
@@ -36,28 +42,43 @@ class CorridorPage extends ConsumerWidget {
                 showNext: true,
               ),
               boxXXL,
+              const BannerTitle(
+                title: "The Corridor",
+              ),
+              boxXXL,
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (state.frame != 10)
-                    PageNavButton(
+                    ImageOptionButton(
+                      title: 'Next Room',
+                      description: "For a basic challenge.",
+                      imagePath: 'assets/images/room_door.webp',
+                      icon: const GoldDisplay(qty: 1, isCompact: true),
                       onPressed: () => context.goNamed(AppRoute.room.name),
-                      label: 'Next Room',
                     )
                   else
-                    PageNavButton(
+                    ImageOptionButton(
+                      title: 'Enter Lair',
+                      description: "A greater challenge awaits.",
+                      imagePath: 'assets/images/lair_door.webp',
                       onPressed: () => context.goNamed(AppRoute.lair.name),
-                      label: 'Enter Lair',
                     ),
                   if (state.canFindLair) ...[
                     boxL,
-                    PageNavButton(
+                    ImageOptionButton(
+                      title: 'Find a Lair',
+                      description: "More risk, more reward.",
+                      imagePath: 'assets/images/lair_door.webp',
+                      icon: const GoldDisplay(qty: 3, isCompact: true),
                       onPressed: () => context.goNamed(AppRoute.foundLair.name),
-                      label: 'Find a Lair',
                     ),
                   ],
-                  boxXXL,
-                  PageNavButton(
+                  boxL,
+                  ImageOptionButton(
+                    title: 'Quit',
+                    description: "Admit defeat and flee.",
+                    imagePath: 'assets/images/quit.webp',
                     onPressed: () {
                       showConfirmDialog(
                         context: context,
@@ -65,7 +86,6 @@ class CorridorPage extends ConsumerWidget {
                         onConfirm: () => context.goNamed(AppRoute.home.name),
                       );
                     },
-                    label: 'Quit',
                   ),
                 ],
               ),
@@ -96,3 +116,4 @@ class CorridorPage extends ConsumerWidget {
     );
   }
 }
+

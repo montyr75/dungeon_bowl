@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/banner_title.dart';
 import '../services/app/app_service.dart';
 import 'widgets/page_nav_button.dart';
 
@@ -16,8 +17,6 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final styles = context.textStyles;
-
     return Scaffold(
       body: DecoratedBox(
         decoration: const BoxDecoration(
@@ -30,21 +29,7 @@ class HomePage extends ConsumerWidget {
           child: Column(
             children: [
               boxXXL,
-              DecoratedBox(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/banner_bg.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Padding(
-                  padding: paddingAllXXL,
-                  child: Text(
-                    'Dungeon Bowl',
-                    style: styles.displayLarge,
-                  ),
-                ),
-              ),
+              const BannerTitle(title: 'Dungeon Bowl'),
               boxXXL,
               _AverageTextField(
                 onChanged: (value) => ref.read(appServiceProvider.notifier).newGame(value),

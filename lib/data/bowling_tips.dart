@@ -40,7 +40,7 @@ const bowlingTips = [
   "After release, be sure to watch your ball's path and observe where it strikes the pins. This will help you make any necessary adjustments on your next throw.",
   "Bowling etiquette dictates that if someone is approaching their lane to your immediate left or right, to avoid distracting them, you should wait until they're finished to begin your turn.",
   "Remember, if you're not having fun bowling, you're probably sober.",
-  "Bowling is all physics and energy distribution. It's F = ma.",
+  "Bowling is all physics and energy distribution. It's just F = ma.",
   "\"I like bowling. I suck at it, but I like it. You know what's so funny? I have days when I'm absolutely great at doing it, and then I have days when I just don't understand it.\" --Lil' Kim",
   "Bowling is the most popular competitive sport in the United States, and the fifth most popular recreational sport.",
   "More than 67 million people in the United States bowl during a year.",

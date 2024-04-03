@@ -7,8 +7,10 @@ import 'package:go_router/go_router.dart';
 import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
+import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/character_bar.dart';
+import '../../../widgets/image_option_button.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../app/services/app/app_service.dart';
 import '../../corridor/services/game_service.dart';
@@ -41,6 +43,10 @@ class TavernPage extends ConsumerWidget {
                 hideFrameDisplay: true,
               ),
               boxXXL,
+              const BannerTitle(
+                title: "The Tavern",
+              ),
+              boxXXL,
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -61,14 +67,17 @@ class TavernPage extends ConsumerWidget {
                     ),
                   ),
                   boxXXL,
-                  PageNavButton(
-                    onPressed: () {
-                      context.pop();
-                    },
-                    label: 'Next Dungeon',
+                  ImageOptionButton(
+                    title: 'Next Dungeon',
+                    description: "Brave another dungeon for your next bowling game.",
+                    imagePath: 'assets/images/dungeon_door.webp',
+                    onPressed: () => context.pop(),
                   ),
-                  boxXXL,
-                  PageNavButton(
+                  boxL,
+                  ImageOptionButton(
+                    title: 'Quit',
+                    description: "Admit defeat and flee.",
+                    imagePath: 'assets/images/quit.webp',
                     onPressed: () {
                       showConfirmDialog(
                         context: context,
@@ -76,7 +85,6 @@ class TavernPage extends ConsumerWidget {
                         onConfirm: () => context.goNamed(AppRoute.home.name),
                       );
                     },
-                    label: 'Quit',
                   ),
                 ],
               ),
