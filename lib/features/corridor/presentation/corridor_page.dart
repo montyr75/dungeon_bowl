@@ -1,4 +1,3 @@
-import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,7 +7,6 @@ import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
-import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/character_bar.dart';
 import '../../../widgets/gold_display.dart';
 import '../../../widgets/image_option_button.dart';
@@ -23,7 +21,6 @@ class CorridorPage extends ConsumerWidget {
     final state = ref.watch(gameServiceProvider);
     final bowlingTip = ref.read(appServiceProvider.notifier).getBowlingTip();
 
-    final styles = context.textStyles;
 
     return Scaffold(
       body: DecoratedBox(
@@ -41,7 +38,6 @@ class CorridorPage extends ConsumerWidget {
                 state: state,
                 showNext: true,
               ),
-              boxXXL,
               const BannerTitle(
                 title: "The Corridor",
               ),

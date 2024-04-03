@@ -18,9 +18,18 @@ class BgBubble extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 350.0),
       child: Card(
         color: Colors.black54,
-        child: Padding(
-          padding: paddingAllM,
-          child: child,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: const Border(
+              top: BorderSide(color: Colors.grey),
+              bottom: BorderSide(color: Colors.grey),
+            ),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Padding(
+            padding: paddingAllM,
+            child: child,
+          ),
         ),
       ),
     );

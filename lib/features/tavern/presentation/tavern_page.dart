@@ -11,7 +11,6 @@ import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/character_bar.dart';
 import '../../../widgets/image_option_button.dart';
-import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../app/services/app/app_service.dart';
 import '../../corridor/services/game_service.dart';
 
@@ -42,7 +41,6 @@ class TavernPage extends ConsumerWidget {
                 state: state,
                 hideFrameDisplay: true,
               ),
-              boxXXL,
               const BannerTitle(
                 title: "The Tavern",
               ),

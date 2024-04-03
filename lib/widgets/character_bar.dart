@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../features/characters/presentation/character_image.dart';
 import '../features/corridor/services/game_state.dart';
 import '../utils/screen_utils.dart';
-import 'bg_bubble.dart';
 import 'gold_display.dart';
 
 class CharacterBar extends StatelessWidget {
