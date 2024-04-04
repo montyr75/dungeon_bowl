@@ -24,7 +24,7 @@ class GoldDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          "${isAdd ? '+' : ''}${qty}",
+          "${isAdd ? '+' : ''}$qty",
           style: style.copyWith(color: Colors.yellow),
         ),
         boxS,
