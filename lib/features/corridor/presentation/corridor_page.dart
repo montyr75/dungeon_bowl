@@ -50,7 +50,7 @@ class CorridorPage extends ConsumerWidget {
                       title: 'Next Room',
                       description: "For a basic challenge.",
                       imagePath: 'assets/images/room_door.webp',
-                      icon: const GoldDisplay(qty: 1, isCompact: true),
+                      icon: const GoldDisplay(qty: 1, isCompact: true, isAdd: true),
                       onPressed: () => context.goNamed(AppRoute.room.name),
                     )
                   else
@@ -66,7 +66,7 @@ class CorridorPage extends ConsumerWidget {
                       title: 'Find a Lair',
                       description: "More risk, more reward.",
                       imagePath: 'assets/images/lair_door.webp',
-                      icon: const GoldDisplay(qty: 3, isCompact: true),
+                      icon: const GoldDisplay(qty: 3, isCompact: true, isAdd: true),
                       onPressed: () => context.goNamed(AppRoute.foundLair.name),
                     ),
                   ],

@@ -74,7 +74,7 @@ class TavernPage extends ConsumerWidget {
                   boxL,
                   ImageOptionButton(
                     title: 'Quit',
-                    description: "Admit defeat and flee.",
+                    description: "Return home alive.",
                     imagePath: 'assets/images/quit.webp',
                     onPressed: () {
                       showConfirmDialog(

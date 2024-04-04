@@ -6,8 +6,14 @@ import '../utils/screen_utils.dart';
 class GoldDisplay extends StatelessWidget {
   final int qty;
   final bool isCompact;
+  final bool isAdd;
 
-  const GoldDisplay({super.key, required this.qty, this.isCompact = false});
+  const GoldDisplay({
+    super.key,
+    required this.qty,
+    this.isCompact = false,
+    this.isAdd = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class GoldDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          qty.toString(),
+          "${isAdd ? '+' : ''}${qty}",
           style: style.copyWith(color: Colors.yellow),
         ),
         boxS,
