@@ -26,7 +26,7 @@ class ImageOptionButton extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(24),
       child: Material(
-        color: Colors.black54,
+        color: Colors.black.withOpacity(0.7),
         child: InkWell(
           onTap: onPressed,
           child: Container(

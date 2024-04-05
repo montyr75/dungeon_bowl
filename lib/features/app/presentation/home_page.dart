@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
+import '../../../widgets/bg_bubble.dart';
 import '../services/app/app_service.dart';
 import 'widgets/page_nav_button.dart';
 
@@ -64,85 +65,87 @@ class _AverageTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final styles = context.textStyles;
 
-    return SizedBox(
-      width: 175,
-      height: 90,
-      child: Stack(
-        children: [
-          TopLeft(
-            child: Image.asset(
-              'assets/images/top_corner_border.png',
-              height: cornerHeight,
-            ),
-          ),
-          TopRight(
-            child: Transform.flip(
-              flipX: true,
+    return BgBubble(
+      child: SizedBox(
+        width: 175,
+        height: 90,
+        child: Stack(
+          children: [
+            TopLeft(
               child: Image.asset(
                 'assets/images/top_corner_border.png',
                 height: cornerHeight,
               ),
             ),
-          ),
-          BottomLeft(
-            child: RotatedBox(
-              quarterTurns: 2,
+            TopRight(
+              child: Transform.flip(
+                flipX: true,
+                child: Image.asset(
+                  'assets/images/top_corner_border.png',
+                  height: cornerHeight,
+                ),
+              ),
+            ),
+            BottomLeft(
+              child: RotatedBox(
+                quarterTurns: 2,
+                child: Image.asset(
+                  'assets/images/bottom_corner_border.png',
+                  height: cornerHeight,
+                ),
+              ),
+            ),
+            BottomRight(
+              child: RotatedBox(
+                quarterTurns: 1,
+                child: Image.asset(
+                  'assets/images/bottom_corner_border.png',
+                  height: cornerHeight,
+                ),
+              ),
+            ),
+            TopCenter(
               child: Image.asset(
-                'assets/images/bottom_corner_border.png',
-                height: cornerHeight,
+                'assets/images/top_border.png',
+                height: 13,
               ),
             ),
-          ),
-          BottomRight(
-            child: RotatedBox(
-              quarterTurns: 1,
+            BottomCenter(
               child: Image.asset(
-                'assets/images/bottom_corner_border.png',
-                height: cornerHeight,
+                'assets/images/top_border.png',
+                height: 12,
               ),
             ),
-          ),
-          TopCenter(
-            child: Image.asset(
-              'assets/images/top_border.png',
-              height: 13,
-            ),
-          ),
-          BottomCenter(
-            child: Image.asset(
-              'assets/images/top_border.png',
-              height: 12,
-            ),
-          ),
-          Align(
-            alignment: const Alignment(0.5, -0.7),
-            child: TextFormField(
-              style: styles.displayMedium,
-              onChanged: (value) => onChanged(int.tryParse(value) ?? 0),
-              textAlign: TextAlign.center,
-              textAlignVertical: TextAlignVertical.center,
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              textInputAction: TextInputAction.next,
-              maxLength: 3,
-              enableSuggestions: false,
-              autocorrect: false,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.zero,
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                hintText: 'Enter Bowling Average',
-                hintStyle: styles.displaySmall,
-                counter: noWidget,
+            Align(
+              alignment: const Alignment(0.5, -0.7),
+              child: TextFormField(
+                style: styles.displayLarge,
+                onChanged: (value) => onChanged(int.tryParse(value) ?? 0),
+                textAlign: TextAlign.center,
+                textAlignVertical: TextAlignVertical.center,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                textInputAction: TextInputAction.next,
+                maxLength: 3,
+                enableSuggestions: false,
+                autocorrect: false,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.zero,
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  hintText: 'Enter Bowling Average',
+                  hintStyle: styles.displaySmall,
+                  counter: noWidget,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

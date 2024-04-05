@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../data/bowling_challenges.dart';
 import '../utils/screen_utils.dart';
-import 'bg_bubble.dart';
 
 class ChallengeDisplay extends StatelessWidget {
   static const frameWidth = 125.0;
@@ -173,22 +172,25 @@ class ChallengeDisplay extends StatelessWidget {
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          BgBubble(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                isTenthFrame
-                    ? const Text(
-                        "* For any throw with a requirement, a strike succeeds.",
-                        style: TextStyle(fontSize: 10),
-                      )
-                    : const Text(
-                        "* A strike always succeeds.",
-                        style: TextStyle(fontSize: 10),
-                      ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(vertical: sm),
+                  decoration: const BoxDecoration(
+                    color: Colors.black54,
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey),
+                    ),
+                  ),
+                  child: isTenthFrame
+                      ? const Text(
+                          "* For any throw with a requirement, a strike succeeds.",
+                          style: TextStyle(fontSize: 10),
+                        )
+                      : const Text(
+                          "* A strike always succeeds.",
+                          style: TextStyle(fontSize: 10),
+                        ),
+                ),
               ],
             ),
           ),

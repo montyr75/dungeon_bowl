@@ -31,18 +31,22 @@ class CharacterBar extends StatelessWidget {
         child: Stack(
           children: [
             CenterLeft(
-              child: CharacterImage(
-                character: state.character.character,
-                size: size,
-              ),
-            ),
-            CenterRight(
-              child: GoldDisplay(
-                qty: state.character.gp,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CharacterImage(
+                    character: state.character.character,
+                    size: size,
+                  ),
+                  boxL,
+                  GoldDisplay(
+                    qty: state.character.gp,
+                  ),
+                ],
               ),
             ),
             if (!hideFrameDisplay) ...[
-              Center(
+              CenterRight(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
