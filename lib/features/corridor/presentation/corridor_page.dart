@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
-import '../../../widgets/bg_bubble.dart';
+import '../../../widgets/banner_title.dart';
 import '../../../widgets/character_bar.dart';
 import '../../../widgets/gold_display.dart';
 import '../../../widgets/image_option_button.dart';
@@ -40,8 +40,8 @@ class CorridorPage extends ConsumerWidget {
                 state: state,
                 showNext: true,
               ),
-              BgBubble(
-                child: Text("The Corridor", style: styles.displayLarge),
+              const PageBannerTitle(
+                title: "The Corridor",
               ),
               boxXXL,
               Column(

@@ -30,7 +30,7 @@ class HomePage extends ConsumerWidget {
           child: Column(
             children: [
               boxXXL,
-              const BannerTitle(title: 'Dungeon Bowl'),
+              const MainBannerTitle(title: 'Dungeon Bowl'),
               boxXXL,
               _AverageTextField(
                 onChanged: (value) => ref.read(appServiceProvider.notifier).newGame(value),

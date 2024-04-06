@@ -60,15 +60,18 @@ class FoundLairPage extends ConsumerWidget {
                         challenge: state.challenge1,
                         strength: state.strength,
                       ),
-                      if (state.isChallenge1Success) ChallengeDisplay(
-                        challenge: state.challenge2,
-                        strength: state.strength,
-                      ),
+                      if (state.isChallenge1Success)
+                        ChallengeDisplay(
+                          challenge: state.challenge2,
+                          strength: state.strength,
+                        ),
                       boxM,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           PageNavButton(
+                            label: 'Failure',
+                            color: ButtonColor.red,
                             onPressed: () {
                               showConfirmDialog(
                                 context: context,
@@ -83,41 +86,43 @@ class FoundLairPage extends ConsumerWidget {
                                 },
                               );
                             },
-                            label: 'Failure',
                           ),
                           boxXXL,
-                          if (!state.isChallenge1Success) PageNavButton(
-                            onPressed: () {
-                              showConfirmDialog(
-                                context: context,
-                                title: "First Success!",
-                                message: "You've bested the first challenge, but there's one more to go!",
-                                yesMsg: "Confirm Success",
-                                noMsg: "Cancel",
-                                onConfirm: () {
-                                  ref.read(foundLairCtrlProvider.notifier).challenge1Success();
-                                  ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: true);
-                                },
-                              );
-                            },
-                            label: 'Success',
-                          )
-                          else PageNavButton(
-                            onPressed: () {
-                              showConfirmDialog(
-                                context: context,
-                                title: "Success!",
-                                message: "You've bested both challenges!\n\nRewards:\n3 Gold Coins",
-                                yesMsg: "Confirm Success",
-                                noMsg: "Cancel",
-                                onConfirm: () {
-                                  ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: false);
-                                  context.pop();
-                                },
-                              );
-                            },
-                            label: 'Success',
-                          ),
+                          if (!state.isChallenge1Success)
+                            PageNavButton(
+                              label: 'Success',
+                              color: ButtonColor.green,
+                              onPressed: () {
+                                showConfirmDialog(
+                                  context: context,
+                                  title: "First Success!",
+                                  message: "You've bested the first challenge, but there's one more to go!",
+                                  yesMsg: "Confirm Success",
+                                  noMsg: "Cancel",
+                                  onConfirm: () {
+                                    ref.read(foundLairCtrlProvider.notifier).challenge1Success();
+                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: true);
+                                  },
+                                );
+                              },
+                            )
+                          else
+                            PageNavButton(
+                              onPressed: () {
+                                showConfirmDialog(
+                                  context: context,
+                                  title: "Success!",
+                                  message: "You've bested both challenges!\n\nRewards:\n3 Gold Coins",
+                                  yesMsg: "Confirm Success",
+                                  noMsg: "Cancel",
+                                  onConfirm: () {
+                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: false);
+                                    context.pop();
+                                  },
+                                );
+                              },
+                              label: 'Success',
+                            ),
                         ],
                       ),
                     ],

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -12,8 +10,6 @@ part 'theme_service.g.dart';
 const darkTextColor = Color(0xFF100000);
 
 // image sizes
-const buttonImg = Point(318, 122);
-
 const maxPageWidth = 640.0;
 
 @riverpod

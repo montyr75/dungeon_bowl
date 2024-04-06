@@ -65,6 +65,8 @@ class RoomPage extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           PageNavButton(
+                            label: 'Failure',
+                            color: ButtonColor.red,
                             onPressed: () {
                               showConfirmDialog(
                                 context: context,
@@ -79,10 +81,11 @@ class RoomPage extends ConsumerWidget {
                                 },
                               );
                             },
-                            label: 'Failure',
                           ),
                           boxXXL,
                           PageNavButton(
+                            label: 'Success',
+                            color: ButtonColor.green,
                             onPressed: () {
                               showConfirmDialog(
                                 context: context,
@@ -96,7 +99,6 @@ class RoomPage extends ConsumerWidget {
                                 },
                               );
                             },
-                            label: 'Success',
                           ),
                         ],
                       ),
