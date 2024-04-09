@@ -55,6 +55,10 @@ enum Encounter {
     level: 3,
     description: "Despite being bipeds, make no mistake that goblins are vermin. Evil to the core, they love taking prisoners and torturing them to death for their own amusement.",
   ),
+  greenSlime(
+    level: 3,
+    description: "Running purely on instinct, green slime creeps along ceilings to drop upon hapless prey, devouring flesh with agonizing acid.",
+  ),
   grungs(
     level: 3,
     description: "This pair of grungs, frog-like folk with a tendency to poison their weapons, stands guard over a chest.",
@@ -94,6 +98,10 @@ enum Encounter {
   zombie(
     level: 4,
     description: "The zombie shambles toward you with the terrible determination of the undead the moment you enter the room, oozing flesh and viscera dripping from its bones. The stench alone may defeat you.",
+  ),
+  creepingDeath(
+    level: 5,
+    description: "These magical, carnivorous vines spring to life as you enter the room, green tendrils lashing out to entangle and consume you.",
   ),
   gelatinousCube(
     level: 5,
