@@ -6,7 +6,7 @@ part of 'lair_ctrl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$lairCtrlHash() => r'7e6a4d0969659a3e054d88e532bedb61e2e35d8d';
+String _$lairCtrlHash() => r'55f00fa2efc620a54ad239e5e00fa9efb5e5abfe';
 
 /// See also [LairCtrl].
 @ProviderFor(LairCtrl)

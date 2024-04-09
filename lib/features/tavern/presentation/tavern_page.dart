@@ -53,12 +53,12 @@ class TavernPage extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          "Rooms Defeated: ${report.encountersWon} / ${report.totalEncounters}",
+                          "Rooms Defeated: ${report.encountersWon} / ${report.totalEncounters} (${report.percentEncountersWon}%)",
                           style: styles.displayMedium,
                         ),
                         boxM,
                         Text(
-                          "Lairs Defeated: ${report.lairsWon} / ${report.totalLairs}",
+                          "Lairs Defeated: ${report.lairsWon} / ${report.totalLairs} (${report.percentLairEncountersWon}%)",
                           style: styles.displayMedium,
                         ),
                       ],

@@ -3,6 +3,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../models/active_character.dart';
 import '../../../models/encounter_result.dart';
+import '../../../routes.dart';
+import '../../../utils/roller.dart';
+import '../../../utils/utils.dart';
 import '../../app/services/app/app_service.dart';
 import '../../lair/controllers/found_lair_state.dart';
 import '../../lair/controllers/lair_state.dart';
@@ -20,6 +23,17 @@ class GameService extends _$GameService {
     return GameState(
       character: ActiveCharacter(character: appState.character),
     );
+  }
+
+  AppRoute nextRoom() {
+    final report = generateReport();
+    final chanceOfSpecial = report.percentFailure.maxOf(50);
+
+    if (rollPercent(chanceOfSpecial)) {
+      return AppRoute.fork;
+    }
+
+    return AppRoute.room;
   }
 
   void roomSuccess(RoomState roomState) {
@@ -85,6 +99,10 @@ class GameService extends _$GameService {
     );
   }
 
+  void awardGP(int value) {
+    state = _updateGP(state, value);
+  }
+
   GameState _nextFrame(GameState state) {
     final isNewGame = state.frame == 10;
 
@@ -129,4 +147,31 @@ class GameReport {
   int get totalEncounters => encounterResults.length;
   int get lairsWon => lairEncounterResults.count((value) => value.isSuccess);
   int get totalLairs => lairEncounterResults.length;
+
+  int get percentEncountersWon {
+    if (totalEncounters == 0 || encountersWon == 0) {
+      return 0;
+    }
+
+    return (encountersWon / totalEncounters * 100).round();
+  }
+
+  int get percentLairEncountersWon {
+    if (totalLairs == 0 || lairsWon == 0) {
+      return 0;
+    }
+
+    return (lairsWon / totalLairs * 100).round();
+  }
+
+  int get percentFailure {
+    final total = totalEncounters + totalLairs;
+    final int totalLost = total - (encountersWon + lairsWon);
+
+    if (total == 0 || totalLost == 0) {
+      return 0;
+    }
+
+    return (totalLost / total * 100).round();
+  }
 }

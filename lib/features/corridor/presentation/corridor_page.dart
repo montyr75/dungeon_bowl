@@ -50,7 +50,10 @@ class CorridorPage extends ConsumerWidget {
                       description: "A basic challenge.",
                       imagePath: 'assets/images/room_door.webp',
                       icon: const GoldDisplay(qty: 1, isCompact: true, isAdd: true),
-                      onPressed: () => context.goNamed(AppRoute.room.name),
+                      onPressed: () {
+                        final route = ref.read(gameServiceProvider.notifier).nextRoom();
+                        context.goNamed(route.name);
+                      },
                     )
                   else
                     ImageOptionButton(
