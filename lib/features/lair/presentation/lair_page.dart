@@ -42,6 +42,7 @@ class LairPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       BgBubble(
+                        type: BubbleType.lairEncounter,
                         child: Text(
                           state.encounter.toString(),
                           style: styles.displayLarge,

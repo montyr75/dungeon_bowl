@@ -41,6 +41,7 @@ class CharacterDetailsPage extends ConsumerWidget {
                 child: Column(
                   children: [
                     BgBubble(
+                      type: BubbleType.character,
                       child: Text(
                         character.toString(),
                         style: styles.displayLarge,

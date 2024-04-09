@@ -1,4 +1,3 @@
-import 'package:extra_alignments/extra_alignments.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/characters.dart';
@@ -17,8 +16,6 @@ class CharacterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cornerHeight = size * 0.25;
-
     return SizedBox(
       width: size,
       height: size,
@@ -27,42 +24,14 @@ class CharacterImage extends StatelessWidget {
           Center(
             child: Image.asset(
               character.imagePath,
-              width: size * .95,
-              height: size * .95,
+              width: size * .89,
+              height: size * .89,
             ),
           ),
-          TopLeft(
-            child: RotatedBox(
-              quarterTurns: 1,
-              child: Image.asset(
-                cornerImage,
-                height: cornerHeight,
-              ),
-            ),
-          ),
-          TopRight(
-            child: RotatedBox(
-              quarterTurns: 2,
-              child: Image.asset(
-                cornerImage,
-                height: cornerHeight,
-              ),
-            ),
-          ),
-          BottomLeft(
-            child: Image.asset(
-              cornerImage,
-              height: cornerHeight,
-            ),
-          ),
-          BottomRight(
-            child: RotatedBox(
-              quarterTurns: 3,
-              child: Image.asset(
-                cornerImage,
-                height: cornerHeight,
-              ),
-            ),
+          Image.asset(
+            'assets/images/character_frame.png',
+            width: size,
+            fit: BoxFit.cover,
           ),
         ],
       ),

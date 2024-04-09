@@ -29,7 +29,7 @@ enum LairEncounter {
   ),
   blackDragon(
     level: 7,
-    description: "This creature thrives in moisture, lairing in swampy environs, surrounded by the partially-dissolved remains of victims of its acid breath.",
+    description: "This creature thrives in moisture, lairing in swampy environs, surrounded by the partially dissolved remains of victims of its acid breath.",
   ),
   lich(
     level: 7,

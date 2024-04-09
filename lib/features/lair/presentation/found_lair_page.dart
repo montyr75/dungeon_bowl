@@ -25,7 +25,7 @@ class FoundLairPage extends ConsumerWidget {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/room_bg.webp'),
+            image: AssetImage('assets/images/lair_bg.webp'),
             fit: BoxFit.cover,
           ),
         ),
@@ -41,6 +41,7 @@ class FoundLairPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       BgBubble(
+                        type: BubbleType.lairEncounter,
                         child: Text(
                           state.encounter.toString(),
                           style: styles.displayLarge,
@@ -108,6 +109,8 @@ class FoundLairPage extends ConsumerWidget {
                             )
                           else
                             PageNavButton(
+                              label: 'Success',
+                              color: ButtonColor.green,
                               onPressed: () {
                                 showConfirmDialog(
                                   context: context,
@@ -121,7 +124,6 @@ class FoundLairPage extends ConsumerWidget {
                                   },
                                 );
                               },
-                              label: 'Success',
                             ),
                         ],
                       ),

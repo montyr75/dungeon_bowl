@@ -1,4 +1,3 @@
-import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,8 +20,6 @@ class CorridorPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameServiceProvider);
     final bowlingTip = ref.read(appServiceProvider.notifier).getBowlingTip();
-
-    final styles = context.textStyles;
 
     return Scaffold(
       body: DecoratedBox(

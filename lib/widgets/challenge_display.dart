@@ -166,7 +166,7 @@ class ChallengeDisplay extends StatelessWidget {
                         ),
                         child: Text(
                           challenge.toDisplay(strength),
-                          style: styles.displaySmall,
+                          style: styles.bodyLarge.copyWith(height: 1.2),
                         ),
                       ),
                     ),

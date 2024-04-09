@@ -41,6 +41,7 @@ class RoomPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       BgBubble(
+                        type: BubbleType.encounter,
                         child: Text(
                           state.encounter.toString(),
                           style: styles.displayLarge,
