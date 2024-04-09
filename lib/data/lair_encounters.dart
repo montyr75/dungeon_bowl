@@ -11,6 +11,10 @@ enum LairEncounter {
     level: 4,
     description: "This group of orcs has carved out a home here in the dungeon, and they are ready to attack any who threaten their reign.",
   ),
+  wyvern(
+    level: 4,
+    description: "Cousin to dragons, this fearsome, nearly mindless beast crouches in wait for its next meal to appear.",
+  ),
   mage(
     level: 5,
     description: "Dominating this area of the dungeon with fearsome magic, this mage is furious at you for interrupting his studies.",
@@ -22,6 +26,10 @@ enum LairEncounter {
   hydra(
     level: 6,
     description: "This five-headed, snake-like horror has an endless appetite. In the absence of prey, the heads may even turn on each other, with the creature regenerating any that are severed.",
+  ),
+  medusa(
+    level: 6,
+    description: "A terrible curse twisted this woman into a horrid, serpent-haired menace who turns her victims to stone with her powerful gaze. Don't look at her!",
   ),
   tyrannosaurusRex(
     level: 6,

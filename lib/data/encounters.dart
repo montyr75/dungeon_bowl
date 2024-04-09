@@ -43,6 +43,10 @@ enum Encounter {
     level: 2,
     description: "Sometimes the dead don't stay dead. This undead horror aims to add your skull to its collection.",
   ),
+  troglodyte(
+    level: 2,
+    description: "Violent creatures of the dark, troglodytes lie in wait to feast on anyone unlucky enough to pass by. The creature is surrounded by the disgusting remnants of previous meals.",
+  ),
   breakawayFloor(
     level: 3,
     description: "The floor to this room tumbles into the void as you step inside. Are your reflexes fast enough to avoid disaster?",
@@ -54,6 +58,10 @@ enum Encounter {
   grungs(
     level: 3,
     description: "This pair of grungs, frog-like folk with a tendency to poison their weapons, stands guard over a chest.",
+  ),
+  unicornFoal(
+    level: 3,
+    description: "This lost unicorn foal needs help to get across the treacherous rope bridge. Are you brave and dexterous enough to get it safely to the other side?",
   ),
   web(
     level: 3,
@@ -131,6 +139,10 @@ enum Encounter {
     level: 6,
     description: "When this giant crocodile comes into view, your first thought is, \"How the hell did that thing get in here?\" Now you have to figure out how to kill it.",
   ),
+  manticore(
+    level: 6,
+    description: "With the body of a lion, dragon wings, and a deadly spiked tail, the manticore snarls at your entrance and moves to attack.",
+  ),
   minotaur(
     level: 6,
     description: "This massive, bull-headed humanoid bellows to the ceiling, lifts its mighty axe, and charges toward you.",
@@ -178,6 +190,10 @@ enum Encounter {
   frostGiant(
     level: 8,
     description: "The frost giant is a huge creature of ice and snow, its flesh a glacial blue-white. It has made a wintry home here in the dungeon. Its eyes narrow and its mouth arcs into an angry frown, then it attacks!",
+  ),
+  nightHag(
+    level: 8,
+    description: "This evil fiend is at first angry at your interruption, but then she smiles as she recognizes an opportunity to corrupt another soul.",
   ),
   roomOfBlades(
     level: 8,
