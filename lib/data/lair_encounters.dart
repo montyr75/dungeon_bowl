@@ -71,6 +71,10 @@ enum LairEncounter {
     level: 8,
     description: "There is almost nothing more dangerous than an archmage in his prime. He finishes off another enemy with a fiery burst of magic, then turns to you.",
   ),
+  dracolich(
+    level: 8,
+    description: "A deranged cult of dragon-worshippers is dedicated to convincing evil dragons that they should live forever. With mighty ritual magic, they transform these avaricious wyrms into dracoliches.",
+  ),
   killerBunny(
     level: 8,
     description: "Don't be fooled! This rabbit is dynamite. It will do more than nibble your bum. It can leap great distances to decapitate an enemy with a single mighty chomp, and it has a very foul temper.",
