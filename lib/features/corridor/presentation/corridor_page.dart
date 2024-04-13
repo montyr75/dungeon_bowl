@@ -60,6 +60,7 @@ class CorridorPage extends ConsumerWidget {
                       title: 'Enter Lair',
                       description: "A greater challenge awaits.",
                       imagePath: 'assets/images/lair_door.webp',
+                      icon: const GoldDisplay(qty: 3, isCompact: true, isAdd: true),
                       onPressed: () => context.goNamed(AppRoute.lair.name),
                     ),
                   if (state.canFindLair) ...[

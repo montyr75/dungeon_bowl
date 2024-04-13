@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app_config.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
@@ -40,11 +41,15 @@ class HomePage extends ConsumerWidget {
                 builder: (context, ref, child) {
                   return ref.watch(appServiceProvider).hasValidAverage
                       ? PageNavButton(
-                        onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
-                        label: 'Play',
-                      ).animate(effects: const [FadeEffect()])
+                          onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
+                          label: 'Play',
+                        ).animate(effects: const [FadeEffect()])
                       : const SizedBox.shrink();
                 },
+              ),
+              const Spacer(),
+              const BgBubble(
+                child: Text("v$version"),
               ),
             ],
           ),
