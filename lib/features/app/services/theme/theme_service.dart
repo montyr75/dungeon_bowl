@@ -77,7 +77,7 @@ class ThemeService extends _$ThemeService {
     return base.copyWith(
       displayLarge: base.displayLarge!.copyWith(
         fontSize: 28,
-        fontFamily: 'MedievalSharp',
+        fontFamily: 'Grange',
       ),
       displayMedium: base.displayMedium!.copyWith(
         fontSize: 18,

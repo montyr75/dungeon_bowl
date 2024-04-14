@@ -23,7 +23,7 @@ class HomePage extends ConsumerWidget {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/home.webp'),
+            image: AssetImage('assets/images/home_bg.webp'),
             fit: BoxFit.cover,
           ),
         ),

@@ -68,6 +68,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Grange
+      fonts:
+        - asset: assets/fonts/Grange.ttf
     - family: MedievalSharp
       fonts:
         - asset: assets/fonts/MedievalSharp-Regular.ttf
