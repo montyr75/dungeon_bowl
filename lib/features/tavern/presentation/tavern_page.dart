@@ -1,4 +1,5 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,8 +10,9 @@ import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
-import '../../../widgets/character_bar.dart';
+import '../../../widgets/game_bar.dart';
 import '../../../widgets/image_option_button.dart';
+import '../../../widgets/stats_page.dart';
 import '../../app/services/app/app_service.dart';
 import '../../corridor/services/game_service.dart';
 
@@ -25,8 +27,12 @@ class TavernPage extends ConsumerWidget {
 
     final styles = context.textStyles;
 
-    return Scaffold(
-      body: DecoratedBox(
+    return BackdropScaffold(
+      appBar: buildGameBar(state),
+      maintainBackLayerState: false,
+      backLayerBackgroundColor: Colors.black,
+      backLayer: const StatsPage(),
+      frontLayer: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/tavern_bg.webp'),
@@ -35,77 +41,78 @@ class TavernPage extends ConsumerWidget {
         ),
         child: Padding(
           padding: paddingAllM,
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CharacterBar(
-                state: state,
-                hideFrameDisplay: true,
-              ),
-              const PageBannerTitle(
-                title: "The Tavern",
-              ),
-              boxXXL,
               Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  BgBubble(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Rooms Defeated: ${report.encountersWon} / ${report.totalEncounters} (${report.percentEncountersWon}%)",
-                          style: styles.displayMedium,
+                  const PageBannerTitle(
+                    title: "The Tavern",
+                  ),
+                  boxXXL,
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      BgBubble(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "Rooms Defeated: ${report.encountersWon} / ${report.totalEncounters} (${report.percentEncountersWon}%)",
+                              style: styles.displayMedium,
+                            ),
+                            boxM,
+                            Text(
+                              "Lairs Defeated: ${report.lairsWon} / ${report.totalLairs} (${report.percentLairEncountersWon}%)",
+                              style: styles.displayMedium,
+                            ),
+                          ],
                         ),
-                        boxM,
-                        Text(
-                          "Lairs Defeated: ${report.lairsWon} / ${report.totalLairs} (${report.percentLairEncountersWon}%)",
-                          style: styles.displayMedium,
+                      ),
+                      boxXXL,
+                      ImageOptionButton(
+                        title: 'Next Dungeon',
+                        description: "Brave another dungeon for your next bowling game.",
+                        imagePath: 'assets/images/dungeon_door.webp',
+                        onPressed: () => context.pop(),
+                      ),
+                      boxL,
+                      ImageOptionButton(
+                        title: 'Quit',
+                        description: "Return home alive.",
+                        imagePath: 'assets/images/quit2.webp',
+                        onPressed: () {
+                          showConfirmDialog(
+                            context: context,
+                            message: "Are you sure you want to end this game?",
+                            onConfirm: () => context.goNamed(AppRoute.home.name),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 350.0),
+                    child: Card.filled(
+                      color: Colors.blue,
+                      child: Padding(
+                        padding: paddingAllM,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(FontAwesomeIcons.bowlingBall),
+                            boxL,
+                            Expanded(child: Text(bowlingTip)),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                   boxXXL,
-                  ImageOptionButton(
-                    title: 'Next Dungeon',
-                    description: "Brave another dungeon for your next bowling game.",
-                    imagePath: 'assets/images/dungeon_door.webp',
-                    onPressed: () => context.pop(),
-                  ),
-                  boxL,
-                  ImageOptionButton(
-                    title: 'Quit',
-                    description: "Return home alive.",
-                    imagePath: 'assets/images/quit2.webp',
-                    onPressed: () {
-                      showConfirmDialog(
-                        context: context,
-                        message: "Are you sure you want to end this game?",
-                        onConfirm: () => context.goNamed(AppRoute.home.name),
-                      );
-                    },
-                  ),
                 ],
               ),
-              const Spacer(),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 350.0),
-                child: Card.filled(
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: paddingAllM,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(FontAwesomeIcons.bowlingBall),
-                        boxL,
-                        Expanded(child: Text(bowlingTip)),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              boxXXL,
             ],
           ),
         ),

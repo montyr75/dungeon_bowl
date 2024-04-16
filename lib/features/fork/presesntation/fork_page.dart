@@ -1,4 +1,5 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +11,8 @@ import '../../../utils/screen_utils.dart';
 import '../../../utils/utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
-import '../../../widgets/character_bar.dart';
+import '../../../widgets/game_bar.dart';
+import '../../../widgets/stats_page.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../corridor/services/game_service.dart';
 
@@ -25,8 +27,11 @@ class ForkPage extends ConsumerWidget {
 
     final styles = context.textStyles;
 
-    return Scaffold(
-      body: DecoratedBox(
+    return BackdropScaffold(
+      appBar: buildGameBar(gameState),
+      maintainBackLayerState: false,
+      backLayerBackgroundColor: Colors.black,
+      backLayer: const StatsPage(),frontLayer: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/fork_bg.webp'),
@@ -35,32 +40,33 @@ class ForkPage extends ConsumerWidget {
         ),
         child: Padding(
           padding: paddingAllM,
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CharacterBar(
-                state: gameState,
-                showNext: true,
-              ),
-              const PageBannerTitle(
-                title: "Choose",
-              ),
-              boxXXL,
-              BgBubble(
-                child: Text(
-                  "You've got a decision to make! Are you feeling lucky?",
-                  style: styles.bodyMedium,
-                ),
-              ),
-              boxXXL,
-              Row(
-                mainAxisSize: MainAxisSize.min,
+              Column(
                 children: [
-                  for (final door in Door.values)
-                    PageNavButton(
-                      onPressed: () => _checkDoor(context, door),
-                      label: "$door Door",
+                  const PageBannerTitle(
+                    title: "Choose",
+                  ),
+                  boxXXL,
+                  BgBubble(
+                    child: Text(
+                      "You've got a decision to make! Are you feeling lucky?",
+                      style: styles.bodyMedium,
                     ),
-                ].joinWidgetList(boxM).toList(),
+                  ),
+                  boxXXL,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (final door in Door.values)
+                        PageNavButton(
+                          onPressed: () => _checkDoor(context, door),
+                          label: "$door Door",
+                        ),
+                    ].joinWidgetList(boxM).toList(),
+                  ),
+                ],
               ),
             ],
           ),

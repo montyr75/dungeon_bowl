@@ -1,4 +1,5 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -8,8 +9,9 @@ import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/challenge_display.dart';
-import '../../../widgets/character_bar.dart';
 import '../../../widgets/encounter_image.dart';
+import '../../../widgets/game_bar.dart';
+import '../../../widgets/stats_page.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../corridor/services/game_service.dart';
 import '../controllers/lair_ctrl.dart';
@@ -20,10 +22,16 @@ class LairPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(lairCtrlProvider);
+    final gameState = ref.watch(gameServiceProvider);
+
     final styles = context.textStyles;
 
-    return Scaffold(
-      body: DecoratedBox(
+    return BackdropScaffold(
+      appBar: buildGameBar(gameState),
+      maintainBackLayerState: false,
+      backLayerBackgroundColor: Colors.black,
+      backLayer: const StatsPage(),
+      frontLayer: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/lair_bg.webp'),
@@ -34,9 +42,6 @@ class LairPage extends ConsumerWidget {
           padding: paddingAllM,
           child: Column(
             children: [
-              CharacterBar(
-                state: ref.watch(gameServiceProvider),
-              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
