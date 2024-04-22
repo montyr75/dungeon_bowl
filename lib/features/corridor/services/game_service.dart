@@ -164,6 +164,17 @@ class GameReport {
     return (lairsWon / totalLairs * 100).round();
   }
 
+  int get percentSuccess {
+    final total = totalEncounters + totalLairs;
+    final totalWon = encountersWon + lairsWon;
+
+    if (total == 0 || totalWon == 0) {
+      return 0;
+    }
+
+    return (totalWon / total * 100).round();
+  }
+
   int get percentFailure {
     final total = totalEncounters + totalLairs;
     final int totalLost = total - (encountersWon + lairsWon);

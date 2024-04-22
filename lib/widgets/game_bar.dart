@@ -10,7 +10,7 @@ import 'gold_display.dart';
 
 AppBar buildGameBar(GameState state) {
   return AppBar(
-    toolbarHeight: 75,
+    toolbarHeight: 65,
     centerTitle: true,
     automaticallyImplyLeading: false,
     flexibleSpace: IntrinsicHeight(

@@ -51,8 +51,8 @@ class ForkPage extends ConsumerWidget {
                   boxXXL,
                   BgBubble(
                     child: Text(
-                      "You've got a decision to make! Are you feeling lucky?",
-                      style: styles.bodyMedium,
+                      "Around the next corner, you find yourself looking at multiple doors. You've got a decision to make! Are you feeling lucky?",
+                      style: styles.displaySmall,
                     ),
                   ),
                   boxXXL,

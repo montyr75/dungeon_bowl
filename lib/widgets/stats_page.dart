@@ -16,23 +16,105 @@ class StatsPage extends ConsumerWidget {
     final styles = context.textStyles;
 
     return Container(
-      color: Colors.black,
-      child: Center(
-        child: BgBubble(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Rooms Defeated: ${report.encountersWon} / ${report.totalEncounters} (${report.percentEncountersWon}%)",
-                style: styles.displayMedium,
-              ),
-              boxM,
-              Text(
-                "Lairs Defeated: ${report.lairsWon} / ${report.totalLairs} (${report.percentLairEncountersWon}%)",
-                style: styles.displayMedium,
-              ),
-            ],
-          ),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/bg.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Padding(
+        padding: paddingAllM,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        BgBubble(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Success Rate",
+                                style: styles.displayMedium,
+                              ),
+                              boxM,
+                              Text(
+                                "${report.percentSuccess}%",
+                                style: styles.displayMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        boxM,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            BgBubble(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Rooms Defeated",
+                                    style: styles.displayMedium,
+                                  ),
+                                  boxM,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "${report.encountersWon} / ${report.totalEncounters}",
+                                        style: styles.displayMedium,
+                                      ),
+                                      boxXL,
+                                      Text(
+                                        "${report.percentEncountersWon}%",
+                                        style: styles.displayMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            boxM,
+                            BgBubble(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Lairs Defeated",
+                                    style: styles.displayMedium,
+                                  ),
+                                  boxM,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "${report.lairsWon} / ${report.totalLairs}",
+                                        style: styles.displayMedium,
+                                      ),
+                                      boxXL,
+                                      Text(
+                                        "${report.percentLairEncountersWon}%",
+                                        style: styles.displayMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

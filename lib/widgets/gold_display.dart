@@ -18,7 +18,7 @@ class GoldDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styles = context.textStyles;
-    final style = isCompact ? styles.displayMedium : styles.displayLarge;
+    final style = isCompact ? styles.displayMedium : styles.headlineLarge;
 
     return Row(
       mainAxisSize: MainAxisSize.min,

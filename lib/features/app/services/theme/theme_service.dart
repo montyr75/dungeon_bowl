@@ -88,8 +88,8 @@ class ThemeService extends _$ThemeService {
         fontFamily: 'MedievalSharp',
       ),
       headlineLarge: base.headlineLarge!.copyWith(
-        fontSize: 20,
-        fontFamily: 'Dystopia',
+        fontSize: 28,
+        fontFamily: 'MedievalSharp',
       ),
       headlineMedium: base.headlineMedium!.copyWith(
         fontSize: 18,
