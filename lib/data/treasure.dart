@@ -11,7 +11,7 @@ enum Treasure {
     frequency: Frequency.uncommon,
     value: 3,
     description: "Swirling with the dark power of pure shadow, this dagger infects its victims with a dark poison.",
-    use:
+    instructions:
         "Use this item to succeed on any bowling shot where you failed by 1 pin. Treat a 7 as an 8, a 9 as a strike, a 0 as a 1 or a spare (as appropriate), etc.",
   ),
   gemOfAnnihilation(
@@ -19,7 +19,7 @@ enum Treasure {
     value: 5,
     description:
         "Stare too deeply into it and an unnerving, demonic face stares back! Toss this gem behind you as you flee for your life and turn failure into success, or start with it to guaranty victory.",
-    use:
+    instructions:
         "Use this item to automatically succeed in an encounter, even after your bowling shot, and even if the encounter is multi-frame.",
   ),
   goldCoin1(
@@ -46,9 +46,9 @@ enum Treasure {
   final Frequency frequency;
   final int value;
   final String description;
-  final String? use;
+  final String? instructions;
 
-  const Treasure({required this.frequency, required this.value, required this.description, this.use});
+  const Treasure({required this.frequency, required this.value, required this.description, this.instructions});
 
   @override
   String toString() {
