@@ -11,9 +11,9 @@ import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/game_bar.dart';
-import '../../../widgets/gold_display.dart';
 import '../../../widgets/image_option_button.dart';
 import '../../../widgets/stats_page.dart';
+import '../../../widgets/treasure_display.dart';
 import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../corridor/services/game_service.dart';
 import '../controllers/treasure_room_ctrl.dart';
@@ -53,9 +53,13 @@ class TreasureRoomPage extends ConsumerWidget {
                   boxXXL,
                   BgBubble(
                     child: Text(
-                      "You've stumbled upon a treasure room!\n\nRewards:\n1 Gold Coin",
+                      "You've stumbled upon a treasure room! You cast your eyes about nervously and reach forward. You don't think anyone will mind if you take just a little...",
                       style: styles.displaySmall,
                     ),
+                  ),
+                  boxL,
+                  BgBubble(
+                    child: TreasureDisplay(treasure: state.treasure),
                   ),
                   boxXXL,
                   if (!state.isClaimed)
@@ -68,7 +72,6 @@ class TreasureRoomPage extends ConsumerWidget {
                       title: 'Next Room',
                       description: "Continue to the next room.",
                       imagePath: 'assets/images/room_door.webp',
-                      icon: const GoldDisplay(qty: 1, isCompact: true, isAdd: true),
                       onPressed: () => context.goNamed(AppRoute.room.name),
                     ),
                 ],

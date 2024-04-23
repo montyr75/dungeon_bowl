@@ -4,6 +4,9 @@ import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
+import '../data/treasure.dart';
+import '../features/app/presentation/widgets/page_nav_button.dart';
+import '../widgets/treasure_display.dart';
 import 'screen_utils.dart';
 import 'utils.dart';
 
@@ -16,6 +19,7 @@ Future<void> showConfirmDialog({
   String? yesMsg,
   String? noMsg,
   required VoidCallback onConfirm,
+  bool autoDismiss = true,
 }) {
   final styles = context.textStyles;
 
@@ -30,9 +34,12 @@ Future<void> showConfirmDialog({
             child: Text(noMsg ?? "No"),
           ),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
+              if (autoDismiss) {
+                await SmartDialog.dismiss();
+              }
+
               onConfirm();
-              SmartDialog.dismiss();
             },
             child: Text(yesMsg ?? "Yes"),
           ),
@@ -215,6 +222,68 @@ class FantasyDialog extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class TreasureDialog extends StatelessWidget {
+  static const maxWidth = 350.0;
+
+  final Treasure treasure;
+
+  const TreasureDialog({
+    super.key,
+    required this.treasure,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final styles = context.textStyles;
+
+    return Container(
+      padding: paddingAllXXL,
+      constraints: const BoxConstraints(maxWidth: maxWidth),
+      decoration: BoxDecoration(
+        image: const DecorationImage(
+          image: AssetImage('assets/images/bg.png'),
+          fit: BoxFit.cover,
+        ),
+        border: Border.all(
+          color: Colors.yellow,
+          width: 2,
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(15.0),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Loot!", style: styles.displayLarge),
+          boxXXL,
+          TreasureDisplay(treasure: treasure),
+          boxXXL,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              PageNavButton(
+                label: 'Claim Reward',
+                onPressed: () => SmartDialog.dismiss(),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Future<void> show(Treasure treasure, {VoidCallback? onDismiss}) {
+    return SmartDialog.show(
+      builder: (context) {
+        return TreasureDialog(treasure: treasure);
+      },
+      onDismiss: onDismiss,
     );
   }
 }

@@ -9,7 +9,6 @@ import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/game_bar.dart';
-import '../../../widgets/gold_display.dart';
 import '../../../widgets/image_option_button.dart';
 import '../../../widgets/stats_page.dart';
 import '../../app/services/app/app_service.dart';
@@ -56,7 +55,6 @@ class CorridorPage extends ConsumerWidget {
                               title: 'Next Room',
                               description: "A basic challenge.",
                               imagePath: 'assets/images/room_door.webp',
-                              icon: const GoldDisplay(qty: 1, isCompact: true, isAdd: true),
                               onPressed: () {
                                 final route = ref.read(gameServiceProvider.notifier).nextRoom();
                                 context.goNamed(route.name);
@@ -65,18 +63,16 @@ class CorridorPage extends ConsumerWidget {
                           else
                             ImageOptionButton(
                               title: 'Enter Lair',
-                              description: "A greater challenge awaits.",
+                              description: "A greater challenge awaits, and possibly more riches.",
                               imagePath: 'assets/images/lair_door.webp',
-                              icon: const GoldDisplay(qty: 3, isCompact: true, isAdd: true),
                               onPressed: () => context.goNamed(AppRoute.lair.name),
                             ),
                           if (state.canFindLair) ...[
                             boxL,
                             ImageOptionButton(
                               title: 'Find a Lair',
-                              description: "More risk, more reward.",
+                              description: "More risk, usually more reward.",
                               imagePath: 'assets/images/lair_door.webp',
-                              icon: const GoldDisplay(qty: 3, isCompact: true, isAdd: true),
                               onPressed: () => context.goNamed(AppRoute.foundLair.name),
                             ),
                           ],

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../data/treasure.dart';
+import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
@@ -78,7 +80,7 @@ class RoomPage extends ConsumerWidget {
                                 context: context,
                                 title: "Failure!",
                                 message:
-                                "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                                    "You have failed! Quickly, you turn and run, determined to live to fight another day.",
                                 yesMsg: "Confirm Failure",
                                 noMsg: "Cancel",
                                 onConfirm: () {
@@ -94,14 +96,22 @@ class RoomPage extends ConsumerWidget {
                             color: ButtonColor.green,
                             onPressed: () {
                               showConfirmDialog(
+                                autoDismiss: true,
                                 context: context,
                                 title: "Success!",
-                                message: "You've bested the challenge!\n\nRewards:\n1 Gold Coin",
+                                message: "You've bested the challenge!",
                                 yesMsg: "Confirm Success",
                                 noMsg: "Cancel",
                                 onConfirm: () {
-                                  ref.read(gameServiceProvider.notifier).roomSuccess(state);
-                                  context.pop();
+                                  final treasure = Treasure.random();
+
+                                  TreasureDialog.show(
+                                    treasure,
+                                    onDismiss: () {
+                                      ref.read(gameServiceProvider.notifier).roomSuccess(state, treasure);
+                                      ref.read(goRouterProvider).pop();
+                                    }
+                                  );
                                 },
                               );
                             },

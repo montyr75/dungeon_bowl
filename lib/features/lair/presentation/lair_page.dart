@@ -1,9 +1,11 @@
+
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../data/treasure.dart';
 import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
@@ -79,7 +81,7 @@ class LairPage extends ConsumerWidget {
                                 context: context,
                                 title: "Failure!",
                                 message:
-                                "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                                    "You have failed! Quickly, you turn and run, determined to live to fight another day.",
                                 yesMsg: "Confirm Failure",
                                 noMsg: "Cancel",
                                 onConfirm: () {
@@ -95,14 +97,22 @@ class LairPage extends ConsumerWidget {
                             color: ButtonColor.green,
                             onPressed: () {
                               showConfirmDialog(
+                                autoDismiss: true,
                                 context: context,
                                 title: "Success!",
-                                message: "You've bested the challenge!\n\nRewards:\n3 Gold Coins",
+                                message: "You've bested the challenge!",
                                 yesMsg: "Confirm Success",
                                 noMsg: "Cancel",
                                 onConfirm: () {
-                                  ref.read(gameServiceProvider.notifier).lairSuccess(state);
-                                  context.goNamed(AppRoute.tavern.name);
+                                  final treasure = Treasure.random(mod: 30);
+
+                                  TreasureDialog.show(
+                                    treasure,
+                                    onDismiss: () {
+                                      ref.read(gameServiceProvider.notifier).lairSuccess(state, treasure);
+                                      ref.read(goRouterProvider).goNamed(AppRoute.tavern.name);
+                                    }
+                                  );
                                 },
                               );
                             },

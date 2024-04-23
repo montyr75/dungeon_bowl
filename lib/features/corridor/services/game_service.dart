@@ -1,6 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../data/treasure.dart';
 import '../../../models/active_character.dart';
 import '../../../models/encounter_result.dart';
 import '../../../routes.dart';
@@ -36,9 +37,9 @@ class GameService extends _$GameService {
     return AppRoute.room;
   }
 
-  void roomSuccess(RoomState roomState) {
+  void roomSuccess(RoomState roomState, Treasure treasure) {
     GameState newState = _nextFrame(state);
-    newState = _updateGP(newState, 1);
+    newState = _updateGP(newState, treasure.value);
 
     state = _updateEncounterHistory(
       newState,
@@ -55,9 +56,9 @@ class GameService extends _$GameService {
     );
   }
 
-  void lairSuccess(LairState lairState) {
+  void lairSuccess(LairState lairState, Treasure treasure) {
     GameState newState = _nextFrame(state);
-    newState = _updateGP(newState, 3);
+    newState = _updateGP(newState, treasure.value);
 
     state = _updateEncounterHistory(
       newState,
@@ -74,15 +75,15 @@ class GameService extends _$GameService {
     );
   }
 
-  void foundLairSuccess(FoundLairState foundLairState, {required bool isChallenge1}) {
+  void foundLairSuccess(FoundLairState foundLairState, [Treasure? treasure]) {
     GameState newState = _nextFrame(state);
 
-    if (isChallenge1) {
+    if (treasure == null) {
       state = newState;
       return;
     }
 
-    newState = _updateGP(newState, 3);
+    newState = _updateGP(newState, treasure.value);
 
     state = _updateEncounterHistory(
       newState,

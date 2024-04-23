@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../data/treasure.dart';
+import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
@@ -106,7 +108,7 @@ class FoundLairPage extends ConsumerWidget {
                                   noMsg: "Cancel",
                                   onConfirm: () {
                                     ref.read(foundLairCtrlProvider.notifier).challenge1Success();
-                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: true);
+                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state);
                                   },
                                 );
                               },
@@ -117,14 +119,22 @@ class FoundLairPage extends ConsumerWidget {
                               color: ButtonColor.green,
                               onPressed: () {
                                 showConfirmDialog(
+                                  autoDismiss: true,
                                   context: context,
                                   title: "Success!",
-                                  message: "You've bested both challenges!\n\nRewards:\n3 Gold Coins",
+                                  message: "You've bested both challenges!",
                                   yesMsg: "Confirm Success",
                                   noMsg: "Cancel",
                                   onConfirm: () {
-                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state, isChallenge1: false);
-                                    context.pop();
+                                    final treasure = Treasure.random(mod: 20);
+
+                                    TreasureDialog.show(
+                                      treasure,
+                                      onDismiss: () {
+                                        ref.read(gameServiceProvider.notifier).foundLairSuccess(state, treasure);
+                                        ref.read(goRouterProvider).pop();
+                                      }
+                                    );
                                   },
                                 );
                               },
