@@ -76,8 +76,8 @@ enum Treasure {
     Treasure.goldCoin4,
   ];
 
-  static Treasure random({int mod = 0}) {
-    final freq = Frequency.random(mod: mod);
+  static Treasure random({int mod = 0, bool isLair = false}) {
+    final freq = Frequency.random(mod: mod, isLair: isLair);
     return goldOnly.where((value) => value.frequency == freq).first;
   }
 }
@@ -95,5 +95,16 @@ enum Frequency {
     RollRange(93, 100): Frequency.veryRare,
   });
 
-  static Frequency random({int mod = 0}) => frequencyTable.lookup((roll(100) + mod).maxOf(100))!;
+  static const lairFrequencyTable = RollTable({
+    RollRange(1, 30): Frequency.uncommon,
+    RollRange(31, 75): Frequency.rare,
+    RollRange(76, 100): Frequency.veryRare,
+  });
+
+  static Frequency random({int mod = 0, bool isLair = false}) {
+    final rollResult = (roll(100) + mod).maxOf(100);
+    final table = !isLair ? frequencyTable : lairFrequencyTable;
+
+    return table.lookup(rollResult)!;
+  }
 }

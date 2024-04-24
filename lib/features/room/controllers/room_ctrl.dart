@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../app_config.dart';
 import '../../../data/bowling_challenges.dart';
 import '../../../data/encounters.dart';
+import '../../../data/treasure.dart';
 import '../../../utils/roller.dart';
 import '../../../utils/utils.dart';
 import '../../app/services/app/app_service.dart';
@@ -36,4 +37,6 @@ class RoomCtrl extends _$RoomCtrl {
 
     return initialState;
   }
+
+  Treasure success() => Treasure.random();
 }

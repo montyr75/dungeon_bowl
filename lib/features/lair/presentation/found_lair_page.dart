@@ -126,7 +126,7 @@ class FoundLairPage extends ConsumerWidget {
                                   yesMsg: "Confirm Success",
                                   noMsg: "Cancel",
                                   onConfirm: () {
-                                    final treasure = Treasure.random(mod: 20);
+                                    final treasure = ref.read(foundLairCtrlProvider.notifier).success();
 
                                     TreasureDialog.show(
                                       treasure,

@@ -11,11 +11,11 @@ class BowlingGameFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     final styles = context.textStyles;
 
-    final style = styles.displaySmall.copyWith(fontSize: 11);
+    final style = styles.displaySmall.copyWith(fontSize: 12);
 
     return Container(
-      width: 1265 * .15,
-      height: 404 * .15,
+      width: 1265 * .165,
+      height: 404 * .165,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/bowling_game_frame.png'),

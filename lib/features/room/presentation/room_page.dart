@@ -103,7 +103,7 @@ class RoomPage extends ConsumerWidget {
                                 yesMsg: "Confirm Success",
                                 noMsg: "Cancel",
                                 onConfirm: () {
-                                  final treasure = Treasure.random();
+                                  final treasure = ref.read(roomCtrlProvider.notifier).success();
 
                                   TreasureDialog.show(
                                     treasure,

@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../app_config.dart';
 import '../../../data/bowling_challenges.dart';
 import '../../../data/lair_encounters.dart';
+import '../../../data/treasure.dart';
 import '../../../utils/roller.dart';
 import '../../../utils/utils.dart';
 import '../../app/services/app/app_service.dart';
@@ -47,4 +48,6 @@ class FoundLairCtrl extends _$FoundLairCtrl {
   void challenge1Success() {
     state = state.copyWith(isChallenge1Success: true);
   }
+
+  Treasure success() => Treasure.random(isLair: true);
 }
