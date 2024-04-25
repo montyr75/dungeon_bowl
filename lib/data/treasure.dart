@@ -41,6 +41,11 @@ enum Treasure {
     frequency: Frequency.veryRare,
     value: 4,
     description: "Four shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
+  ),
+  goldCoin5(
+    frequency: Frequency.crazySauce,
+    value: 5,
+    description: "Five shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   );
 
   final Frequency frequency;
@@ -58,12 +63,13 @@ enum Treasure {
       Treasure.goldCoin2 => "2 Gold Coins",
       Treasure.goldCoin3 => "3 Gold Coins",
       Treasure.goldCoin4 => "4 Gold Coins",
+      Treasure.goldCoin5 => "5 Gold Coins",
       _ => ReCase(name).titleCase,
     };
   }
 
   String get imageFile => switch (this) {
-        Treasure.goldCoin1 || Treasure.goldCoin2 || Treasure.goldCoin3 || Treasure.goldCoin4 => "gold_coins.webp",
+        Treasure.goldCoin1 || Treasure.goldCoin2 || Treasure.goldCoin3 || Treasure.goldCoin4 || Treasure.goldCoin5 => "gold_coins.webp",
         _ => "${ReCase(name).snakeCase}.webp",
       };
 
@@ -74,6 +80,7 @@ enum Treasure {
     Treasure.goldCoin2,
     Treasure.goldCoin3,
     Treasure.goldCoin4,
+    Treasure.goldCoin5,
   ];
 
   static Treasure random({int mod = 0, bool isLair = false}) {
@@ -86,7 +93,8 @@ enum Frequency {
   common,
   uncommon,
   rare,
-  veryRare;
+  veryRare,
+  crazySauce;
 
   static const frequencyTable = RollTable({
     RollRange(1, 50): Frequency.common,
@@ -96,9 +104,9 @@ enum Frequency {
   });
 
   static const lairFrequencyTable = RollTable({
-    RollRange(1, 30): Frequency.uncommon,
-    RollRange(31, 75): Frequency.rare,
-    RollRange(76, 100): Frequency.veryRare,
+    RollRange(1, 65): Frequency.rare,
+    RollRange(66, 92): Frequency.veryRare,
+    RollRange(93, 100): Frequency.crazySauce,
   });
 
   static Frequency random({int mod = 0, bool isLair = false}) {

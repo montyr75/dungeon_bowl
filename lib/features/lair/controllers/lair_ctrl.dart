@@ -38,5 +38,5 @@ class LairCtrl extends _$LairCtrl {
     return initialState;
   }
 
-  Treasure success() => Treasure.random(mod: 10, isLair: true);
+  Treasure success() => Treasure.random(mod: 20, isLair: true);
 }
