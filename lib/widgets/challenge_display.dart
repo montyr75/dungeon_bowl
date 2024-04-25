@@ -2,6 +2,8 @@ import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 
 import '../data/bowling_challenges.dart';
+import '../features/app/presentation/widgets/page_nav_button.dart';
+import '../utils/popup_utils.dart';
 import '../utils/screen_utils.dart';
 
 class ChallengeDisplay extends StatelessWidget {
@@ -11,11 +13,17 @@ class ChallengeDisplay extends StatelessWidget {
 
   final BowlingChallenge challenge;
   final int? strength;
+  final bool showButtons;
+  final VoidCallback onSuccess;
+  final VoidCallback onFailure;
 
   const ChallengeDisplay({
     super.key,
     required this.challenge,
     this.strength,
+    this.showButtons = true,
+    required this.onSuccess,
+    required this.onFailure,
   });
 
   @override
@@ -194,6 +202,44 @@ class ChallengeDisplay extends StatelessWidget {
               ],
             ),
           ),
+          if (showButtons) ...[
+            boxM,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                PageNavButton(
+                  label: 'Failure',
+                  color: ButtonColor.red,
+                  onPressed: () {
+                    showConfirmDialog(
+                      context: context,
+                      title: "Failure!",
+                      message: "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                      yesMsg: "Confirm Failure",
+                      noMsg: "Cancel",
+                      onConfirm: onFailure,
+                    );
+                  },
+                ),
+                boxXL,
+                PageNavButton(
+                  label: 'Success',
+                  color: ButtonColor.green,
+                  onPressed: () {
+                    showConfirmDialog(
+                      autoDismiss: true,
+                      context: context,
+                      title: "Success!",
+                      message: "You've bested the challenge!",
+                      yesMsg: "Confirm Success",
+                      noMsg: "Cancel",
+                      onConfirm: onSuccess,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );

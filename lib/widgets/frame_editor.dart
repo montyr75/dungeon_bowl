@@ -1,17 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:popover/popover.dart';
 
 import '../models/frame.dart';
-import '../utils/screen_utils.dart';
 import '../utils/utils.dart';
 
+typedef ScoreOptionSelected = void Function(int ballThrow, int value);
+
 class FrameEditor extends StatelessWidget {
+  static const options = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    endash,
+    "/",
+    "X",
+  ];
+
   final Frame frame;
   final bool showThirdThrow;
+  final ScoreOptionSelected onSelected;
 
   const FrameEditor({
     super.key,
     required this.frame,
     this.showThirdThrow = false,
+    required this.onSelected,
   });
 
   @override
@@ -20,27 +40,7 @@ class FrameEditor extends StatelessWidget {
     Widget? secondThrow;
     Widget? thirdThrow;
 
-    if (frame.isStrike) {
-      firstThrow = const Text("X");
-    }
-    else {
-      firstThrow = switch (frame.firstThrow) {
-        null => noWidget,
-        0 => const Text(endash),
-        _ => Text(frame.firstThrow.toString()),
-      };
-    }
-
-    if (frame.isSpare) {
-      secondThrow = const Text("/");
-    }
-    else {
-      secondThrow = switch (frame.secondThrow) {
-        null => noWidget,
-        0 => const Text(endash),
-        _ => Text(frame.secondThrow.toString()),
-      };
-    }
+    final currentThrow = frame.currentThrow;
 
     return Container(
       decoration: BoxDecoration(
@@ -50,7 +50,36 @@ class FrameEditor extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ThrowBox(
-            child: firstThrow,
+            child: IconButton(
+              icon: const Text('1st'),
+              onPressed: () {
+                showPopover(
+                  context: context,
+                  backgroundColor: Colors.black54,
+                  direction: PopoverDirection.top,
+                  transitionDuration: const Duration(milliseconds: 100),
+                  bodyBuilder: (context) {
+                    return Container(
+                      width: 150,
+                      height: 175,
+                      alignment: Alignment.center,
+                      child: Wrap(
+                        children: [
+                          for (final option in options)
+                            IconButton(
+                              onPressed: () {
+                                _optionSelected(1, option);
+                                context.pop();
+                              },
+                              icon: Text(option),
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ),
           ThrowBox(
             showBorder: true,
@@ -64,6 +93,17 @@ class FrameEditor extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _optionSelected(int ballThrow, String option) {
+    print(option);
+
+    onSelected(ballThrow, switch (option) {
+      endash => 0,
+      '/' => 10 - (frame.firstThrow ?? 0),
+      'X' => 10,
+      _ => int.tryParse(option)!,
+    });
   }
 }
 

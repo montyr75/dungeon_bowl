@@ -24,4 +24,16 @@ class Frame {
   bool get isStrike => (firstThrow ?? 0) == 10;
   bool get isSpare => (firstThrow ?? 0) + (secondThrow ?? 0) == 10;
   bool get isOpen => !isStrike && !isSpare;
+
+  int? get currentThrow {
+    if (firstThrow == null) {
+      return 1;
+    }
+
+    if (secondThrow == null && !isStrike) {
+      return 2;
+    }
+
+    return null;
+  }
 }

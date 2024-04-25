@@ -12,7 +12,6 @@ import '../../../widgets/challenge_display.dart';
 import '../../../widgets/encounter_image.dart';
 import '../../../widgets/game_bar.dart';
 import '../../../widgets/stats_page.dart';
-import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../corridor/services/game_service.dart';
 import '../controllers/found_lair_ctrl.dart';
 
@@ -23,6 +22,7 @@ class FoundLairPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(foundLairCtrlProvider);
     final gameState = ref.watch(gameServiceProvider);
+
     final styles = context.textStyles;
 
     return BackdropScaffold(
@@ -39,110 +39,70 @@ class FoundLairPage extends ConsumerWidget {
         ),
         child: Padding(
           padding: paddingAllM,
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      BgBubble(
-                        type: BubbleType.lairEncounter,
-                        child: Text(
-                          state.encounter.toString(),
-                          style: styles.displayLarge,
-                        ),
-                      ),
-                      boxM,
-                      EncounterImage(imagePath: state.encounter.imagePath),
-                      boxM,
-                      BgBubble(
-                        child: Text(
-                          state.encounter.description,
-                          style: styles.displaySmall,
-                        ),
-                      ),
-                      boxM,
-                      ChallengeDisplay(
-                        challenge: state.challenge1,
-                        strength: state.strength,
-                      ),
-                      if (state.isChallenge1Success)
-                        ChallengeDisplay(
-                          challenge: state.challenge2,
-                          strength: state.strength,
-                        ),
-                      boxM,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
                         children: [
-                          PageNavButton(
-                            label: 'Failure',
-                            color: ButtonColor.red,
-                            onPressed: () {
-                              showConfirmDialog(
-                                context: context,
-                                title: "Failure!",
-                                message:
-                                    "You have failed! Quickly, you turn and run, determined to live to fight another day.",
-                                yesMsg: "Confirm Failure",
-                                noMsg: "Cancel",
-                                onConfirm: () {
-                                  ref.read(gameServiceProvider.notifier).foundLairFailure(state);
-                                  context.pop();
-                                },
-                              );
+                          BgBubble(
+                            type: BubbleType.lairEncounter,
+                            child: Text(
+                              state.encounter.toString(),
+                              style: styles.displayLarge,
+                            ),
+                          ),
+                          boxM,
+                          EncounterImage(imagePath: state.encounter.imagePath),
+                          boxM,
+                          BgBubble(
+                            child: Text(
+                              state.encounter.description,
+                              style: styles.displaySmall,
+                            ),
+                          ),
+                          boxM,
+                          ChallengeDisplay(
+                            challenge: state.challenge1,
+                            strength: state.strength,
+                            showButtons: !state.isChallenge1Success,
+                            onSuccess: () {
+                              ref.read(foundLairCtrlProvider.notifier).challenge1Success();
+                              ref.read(gameServiceProvider.notifier).foundLairSuccess(state);
+                            },
+                            onFailure: () {
+                              ref.read(gameServiceProvider.notifier).foundLairFailure(state);
+                              context.pop();
                             },
                           ),
-                          boxXXL,
-                          if (!state.isChallenge1Success)
-                            PageNavButton(
-                              label: 'Success',
-                              color: ButtonColor.green,
-                              onPressed: () {
-                                showConfirmDialog(
-                                  context: context,
-                                  title: "First Success!",
-                                  message: "You've bested the first challenge, but there's one more to go!",
-                                  yesMsg: "Confirm Success",
-                                  noMsg: "Cancel",
-                                  onConfirm: () {
-                                    ref.read(foundLairCtrlProvider.notifier).challenge1Success();
-                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state);
-                                  },
+                          if (state.isChallenge1Success)
+                            ChallengeDisplay(
+                              challenge: state.challenge2,
+                              strength: state.strength,
+                              onSuccess: () {
+                                final treasure = ref.read(foundLairCtrlProvider.notifier).success();
+
+                                TreasureDialog.show(
+                                    treasure,
+                                    onDismiss: () {
+                                      ref.read(gameServiceProvider.notifier).foundLairSuccess(state, treasure);
+                                      ref.read(goRouterProvider).pop();
+                                    }
                                 );
                               },
-                            )
-                          else
-                            PageNavButton(
-                              label: 'Success',
-                              color: ButtonColor.green,
-                              onPressed: () {
-                                showConfirmDialog(
-                                  autoDismiss: true,
-                                  context: context,
-                                  title: "Success!",
-                                  message: "You've bested both challenges!",
-                                  yesMsg: "Confirm Success",
-                                  noMsg: "Cancel",
-                                  onConfirm: () {
-                                    final treasure = ref.read(foundLairCtrlProvider.notifier).success();
-
-                                    TreasureDialog.show(
-                                      treasure,
-                                      onDismiss: () {
-                                        ref.read(gameServiceProvider.notifier).foundLairSuccess(state, treasure);
-                                        ref.read(goRouterProvider).pop();
-                                      }
-                                    );
-                                  },
-                                );
+                              onFailure: () {
+                                ref.read(gameServiceProvider.notifier).foundLairFailure(state);
+                                context.pop();
                               },
                             ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),

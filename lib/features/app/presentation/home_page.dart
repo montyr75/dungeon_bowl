@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../app_config.dart';
 import '../../../data/bowler_levels.dart';
+import '../../../models/frame.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
+import '../../../widgets/frame_editor.dart';
 import '../services/app/app_service.dart';
 import 'widgets/page_nav_button.dart';
 
@@ -54,6 +56,13 @@ class HomePage extends ConsumerWidget {
               PageNavButton(
                 label: 'Play',
                 onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
+              ),
+              const Spacer(),
+              BgBubble(
+                child: FrameEditor(
+                  frame: Frame(),
+                  onSelected: (ballThrow, value) => null,
+                ),
               ),
               const Spacer(),
               const BgBubble(
