@@ -9,14 +9,12 @@ const treasureImagePath = 'assets/images/treasure';
 enum Treasure {
   shadowDagger(
     frequency: Frequency.uncommon,
-    value: 3,
     description: "Swirling with the dark power of pure shadow, this dagger infects its victims with a dark poison.",
     instructions:
         "Use this item to succeed on any bowling shot where you failed by 1 pin. Treat a 7 as an 8, a 9 as a strike, a 0 as a 1 or a spare (as appropriate), etc.",
   ),
   gemOfAnnihilation(
     frequency: Frequency.veryRare,
-    value: 5,
     description:
         "Stare too deeply into it and an unnerving, demonic face stares back! Toss this gem behind you as you flee for your life and turn failure into success, or start with it to guaranty victory.",
     instructions:
@@ -24,36 +22,36 @@ enum Treasure {
   ),
   goldCoin1(
     frequency: Frequency.common,
-    value: 1,
     description: "A shiny gold coin! Perfect for buying things, paying debts, flipping, or winning games.",
   ),
   goldCoin2(
     frequency: Frequency.uncommon,
-    value: 2,
     description: "Two shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   ),
   goldCoin3(
     frequency: Frequency.rare,
-    value: 3,
     description: "Three shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   ),
   goldCoin4(
     frequency: Frequency.veryRare,
-    value: 4,
     description: "Four shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   ),
   goldCoin5(
     frequency: Frequency.crazySauce,
-    value: 5,
     description: "Five shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   );
 
   final Frequency frequency;
-  final int value;
   final String description;
   final String? instructions;
 
-  const Treasure({required this.frequency, required this.value, required this.description, this.instructions});
+  const Treasure({
+    required this.frequency,
+    required this.description,
+    this.instructions,
+  });
+
+  int get value => frequency.value;
 
   @override
   String toString() {
@@ -69,7 +67,12 @@ enum Treasure {
   }
 
   String get imageFile => switch (this) {
-        Treasure.goldCoin1 || Treasure.goldCoin2 || Treasure.goldCoin3 || Treasure.goldCoin4 || Treasure.goldCoin5 => "gold_coins.webp",
+        Treasure.goldCoin1 ||
+        Treasure.goldCoin2 ||
+        Treasure.goldCoin3 ||
+        Treasure.goldCoin4 ||
+        Treasure.goldCoin5 =>
+          "gold_coins.webp",
         _ => "${ReCase(name).snakeCase}.webp",
       };
 
@@ -95,6 +98,8 @@ enum Frequency {
   rare,
   veryRare,
   crazySauce;
+
+  int get value => index + 1;
 
   static const frequencyTable = RollTable({
     RollRange(1, 50): Frequency.common,

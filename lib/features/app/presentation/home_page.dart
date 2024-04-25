@@ -1,12 +1,10 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
-import 'package:extra_alignments/extra_alignments.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app_config.dart';
+import '../../../data/bowler_levels.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
@@ -19,6 +17,10 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(appServiceProvider);
+
+    final styles = context.textStyles;
+
     return Scaffold(
       body: DecoratedBox(
         decoration: const BoxDecoration(
@@ -32,20 +34,26 @@ class HomePage extends ConsumerWidget {
             children: [
               boxXXL,
               const MainBannerTitle(title: 'Dungeon Bowl'),
-              boxXXL,
-              _AverageTextField(
-                onChanged: (value) => ref.read(appServiceProvider.notifier).newGame(value),
+              BgBubble(
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<BowlerLevel>(
+                    value: state.bowlerLevel,
+                    style: styles.displayMedium,
+                    focusColor: Colors.transparent,
+                    onChanged: (value) => ref.read(appServiceProvider.notifier).selectBowlerLevel(value!),
+                    items: BowlerLevel.values.map<DropdownMenuItem<BowlerLevel>>((value) {
+                      return DropdownMenuItem<BowlerLevel>(
+                        value: value,
+                        child: Text("$value (${value.toRange()} average)"),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
               boxXXL,
-              Consumer(
-                builder: (context, ref, child) {
-                  return ref.watch(appServiceProvider).hasValidAverage
-                      ? PageNavButton(
-                          onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
-                          label: 'Play',
-                        ).animate(effects: const [FadeEffect()])
-                      : const SizedBox.shrink();
-                },
+              PageNavButton(
+                label: 'Play',
+                onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
               ),
               const Spacer(),
               const BgBubble(
@@ -53,103 +61,6 @@ class HomePage extends ConsumerWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _AverageTextField extends StatelessWidget {
-  static const cornerHeight = 50.0;
-
-  final ValueChanged<int> onChanged;
-
-  const _AverageTextField({super.key, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    final styles = context.textStyles;
-
-    return BgBubble(
-      child: SizedBox(
-        width: 175,
-        height: 90,
-        child: Stack(
-          children: [
-            TopLeft(
-              child: Image.asset(
-                'assets/images/top_corner_border.png',
-                height: cornerHeight,
-              ),
-            ),
-            TopRight(
-              child: Transform.flip(
-                flipX: true,
-                child: Image.asset(
-                  'assets/images/top_corner_border.png',
-                  height: cornerHeight,
-                ),
-              ),
-            ),
-            BottomLeft(
-              child: RotatedBox(
-                quarterTurns: 2,
-                child: Image.asset(
-                  'assets/images/bottom_corner_border.png',
-                  height: cornerHeight,
-                ),
-              ),
-            ),
-            BottomRight(
-              child: RotatedBox(
-                quarterTurns: 1,
-                child: Image.asset(
-                  'assets/images/bottom_corner_border.png',
-                  height: cornerHeight,
-                ),
-              ),
-            ),
-            TopCenter(
-              child: Image.asset(
-                'assets/images/top_border.png',
-                height: 13,
-              ),
-            ),
-            BottomCenter(
-              child: Image.asset(
-                'assets/images/top_border.png',
-                height: 12,
-              ),
-            ),
-            Align(
-              alignment: const Alignment(0.5, -0.7),
-              child: TextFormField(
-                style: styles.displayLarge,
-                onChanged: (value) => onChanged(int.tryParse(value) ?? 0),
-                textAlign: TextAlign.center,
-                textAlignVertical: TextAlignVertical.center,
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-                textInputAction: TextInputAction.next,
-                maxLength: 3,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.zero,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  hintText: 'Enter Bowling Average',
-                  hintStyle: styles.displaySmall,
-                  counter: noWidget,
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );

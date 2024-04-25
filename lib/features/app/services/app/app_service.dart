@@ -11,14 +11,11 @@ part 'app_service.g.dart';
 @Riverpod(keepAlive: true)
 class AppService extends _$AppService {
   @override
-  AppState build() {
-    return const AppState();
-  }
+  AppState build() => const AppState();
 
-  void newGame(int average) {
+  void selectBowlerLevel(BowlerLevel value) {
     state = state.copyWith(
-      average: average,
-      bowlerLevel: bowlerLevelTable.lookup(average),
+      bowlerLevel: value,
     );
   }
 

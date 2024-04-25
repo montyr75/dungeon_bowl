@@ -1,3 +1,5 @@
+import 'package:recase/recase.dart';
+
 import '../utils/roll_table.dart';
 
 enum BowlerLevel {
@@ -92,6 +94,15 @@ enum BowlerLevel {
     this.challengeMod = 0,
     required this.encounterLevelTable,
   });
+
+  @override
+  String toString() => ReCase(name).titleCase;
+
+  String toRange() => switch (this) {
+    BowlerLevel.novice => "up to $maxAvg",
+    BowlerLevel.pro => "$minAvg+",
+    _ => "$minAvg-$maxAvg",
+  };
 }
 
 final bowlerLevelTable = RollTable<BowlerLevel>({
