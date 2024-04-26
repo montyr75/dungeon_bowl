@@ -1,7 +1,6 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 
-
 class PageNavButton extends StatelessWidget {
   final String label;
   final ButtonColor color;

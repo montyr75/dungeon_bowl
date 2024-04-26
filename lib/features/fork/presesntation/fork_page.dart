@@ -12,8 +12,8 @@ import '../../../utils/utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/game_bar.dart';
+import '../../../widgets/page_nav_button.dart';
 import '../../../widgets/stats_page.dart';
-import '../../app/presentation/widgets/page_nav_button.dart';
 import '../../corridor/services/game_service.dart';
 
 class ForkPage extends ConsumerWidget {

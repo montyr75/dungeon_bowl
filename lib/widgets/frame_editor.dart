@@ -36,11 +36,15 @@ class FrameEditor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget? firstThrow;
+    String? firstThrow;
     Widget? secondThrow;
     Widget? thirdThrow;
 
     final currentThrow = frame.currentThrow;
+
+    if (frame.isStrike) {
+      firstThrow = "X";
+    }
 
     return Container(
       decoration: BoxDecoration(

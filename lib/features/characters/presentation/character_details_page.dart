@@ -7,7 +7,7 @@ import '../../../data/characters.dart';
 import '../../../routes.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
-import '../../app/presentation/widgets/page_nav_button.dart';
+import '../../../widgets/page_nav_button.dart';
 import '../../app/services/app/app_service.dart';
 import 'character_image.dart';
 

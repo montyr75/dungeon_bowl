@@ -8,10 +8,10 @@ import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
-import '../../../widgets/challenge_display.dart';
 import '../../../widgets/encounter_image.dart';
 import '../../../widgets/game_bar.dart';
 import '../../../widgets/stats_page.dart';
+import '../../bowling_challenge/presentation/challenge_display.dart';
 import '../../corridor/services/game_service.dart';
 import '../controllers/room_ctrl.dart';
 
@@ -72,11 +72,11 @@ class RoomPage extends ConsumerWidget {
                               final treasure = ref.read(roomCtrlProvider.notifier).success();
 
                               TreasureDialog.show(
-                                  treasure,
-                                  onDismiss: () {
-                                    ref.read(gameServiceProvider.notifier).roomSuccess(state, treasure);
-                                    ref.read(goRouterProvider).pop();
-                                  }
+                                treasure,
+                                onDismiss: () {
+                                  ref.read(gameServiceProvider.notifier).roomSuccess(state, treasure);
+                                  ref.read(goRouterProvider).pop();
+                                },
                               );
                             },
                             onFailure: () {

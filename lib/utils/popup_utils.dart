@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import '../data/treasure.dart';
-import '../features/app/presentation/widgets/page_nav_button.dart';
+import '../widgets/page_nav_button.dart';
 import '../widgets/treasure_display.dart';
 import 'screen_utils.dart';
 import 'utils.dart';

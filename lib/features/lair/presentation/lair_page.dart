@@ -1,4 +1,3 @@
-
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,10 @@ import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/bg_bubble.dart';
-import '../../../widgets/challenge_display.dart';
 import '../../../widgets/encounter_image.dart';
 import '../../../widgets/game_bar.dart';
 import '../../../widgets/stats_page.dart';
+import '../../bowling_challenge/presentation/challenge_display.dart';
 import '../../corridor/services/game_service.dart';
 import '../controllers/lair_ctrl.dart';
 
@@ -73,11 +72,11 @@ class LairPage extends ConsumerWidget {
                               final treasure = ref.read(lairCtrlProvider.notifier).success();
 
                               TreasureDialog.show(
-                                  treasure,
-                                  onDismiss: () {
-                                    ref.read(gameServiceProvider.notifier).lairSuccess(state, treasure);
-                                    ref.read(goRouterProvider).goNamed(AppRoute.tavern.name);
-                                  }
+                                treasure,
+                                onDismiss: () {
+                                  ref.read(gameServiceProvider.notifier).lairSuccess(state, treasure);
+                                  ref.read(goRouterProvider).goNamed(AppRoute.tavern.name);
+                                },
                               );
                             },
                             onFailure: () {

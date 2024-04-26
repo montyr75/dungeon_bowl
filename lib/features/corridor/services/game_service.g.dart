@@ -6,7 +6,7 @@ part of 'game_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameServiceHash() => r'fbf487359b09aaa476f1be23decf6f9760c0b90a';
+String _$gameServiceHash() => r'489942c431c916ac29d5ee52a21c2bdc57d64116';
 
 /// See also [GameService].
 @ProviderFor(GameService)

@@ -6,7 +6,7 @@ part of 'treasure_room_ctrl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$treasureRoomCtrlHash() => r'f013fff5f2e529ba6f89549bb8264876d8f393c5';
+String _$treasureRoomCtrlHash() => r'19be0811d5030c85d7fe2e1b9d50c29ef591faf2';
 
 /// See also [TreasureRoomCtrl].
 @ProviderFor(TreasureRoomCtrl)

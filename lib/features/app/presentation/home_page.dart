@@ -11,8 +11,8 @@ import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
 import '../../../widgets/frame_editor.dart';
+import '../../../widgets/page_nav_button.dart';
 import '../services/app/app_service.dart';
-import 'widgets/page_nav_button.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});

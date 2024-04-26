@@ -1,12 +1,15 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/bowling_challenges.dart';
-import '../features/app/presentation/widgets/page_nav_button.dart';
-import '../utils/popup_utils.dart';
-import '../utils/screen_utils.dart';
+import '../../../data/bowling_challenges.dart';
+import '../../../utils/popup_utils.dart';
+import '../../../utils/screen_utils.dart';
+import '../../../widgets/frame_editor.dart';
+import '../../../widgets/page_nav_button.dart';
+import '../controllers/challenge_ctrl.dart';
 
-class ChallengeDisplay extends StatelessWidget {
+class ChallengeDisplay extends ConsumerWidget {
   static const frameWidth = 125.0;
   static const frameHeight = 105.0;
   static const maxWidth = 350.0;
@@ -27,7 +30,9 @@ class ChallengeDisplay extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(challengeCtrlProvider);
+
     final isTenthFrame = challenge is TenthFrameBowlingChallenge;
     final styles = context.textStyles;
 
@@ -201,6 +206,15 @@ class ChallengeDisplay extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          FrameEditor(
+            frame: state.frame,
+            onSelected: (ballThrow, value) {
+              ref.read(challengeCtrlProvider.notifier).updateThrow(
+                ballThrow: ballThrow,
+                value: value,
+              );
+            },
           ),
           if (showButtons) ...[
             boxM,

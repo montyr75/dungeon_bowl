@@ -3,9 +3,9 @@ import 'package:extra_alignments/extra_alignments.dart';
 import 'package:flutter/material.dart';
 
 import '../features/characters/presentation/character_image.dart';
-import '../features/corridor/presentation/bowling_game_frame.dart';
 import '../features/corridor/services/game_state.dart';
 import '../utils/screen_utils.dart';
+import 'bowling_game_frame.dart';
 import 'gold_display.dart';
 
 AppBar buildGameBar(GameState state) {

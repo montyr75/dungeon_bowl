@@ -1,3 +1,5 @@
+import 'package:quiver/core.dart' show Optional;
+
 class Frame {
   final int? firstThrow;
   final int? secondThrow;
@@ -10,14 +12,14 @@ class Frame {
   });
 
   Frame copyWith({
-    int? firstThrow,
-    int? secondThrow,
-    int? score,
+    Optional<int>? firstThrow,
+    Optional<int>? secondThrow,
+    Optional<int>? score,
   }) {
     return Frame(
-      firstThrow: firstThrow ?? this.firstThrow,
-      secondThrow: secondThrow ?? this.secondThrow,
-      score: score ?? this.score,
+      firstThrow: firstThrow == null ? this.firstThrow : firstThrow.orNull,
+      secondThrow: secondThrow == null ? this.secondThrow : secondThrow.orNull,
+      score: score == null ? this.score : score.orNull,
     );
   }
 
