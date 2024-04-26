@@ -9,7 +9,7 @@ const treasureImagePath = 'assets/images/treasure';
 enum Treasure {
   shadowDagger(
     frequency: Frequency.uncommon,
-    description: "Swirling with the dark power of pure shadow, this dagger infects its victims with a dark poison.",
+    description: "Swirling with the dark power of pure shadow, this dagger infects its victims with a malign poison.",
     instructions:
         "Use this item to succeed on any bowling shot where you failed by 1 pin. Treat a 7 as an 8, a 9 as a strike, a 0 as a 1 or a spare (as appropriate), etc.",
   ),

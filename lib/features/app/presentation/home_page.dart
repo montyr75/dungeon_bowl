@@ -58,13 +58,6 @@ class HomePage extends ConsumerWidget {
                 onPressed: () => context.goNamed(AppRoute.characterSelectionPage.name),
               ),
               const Spacer(),
-              BgBubble(
-                child: FrameEditor(
-                  frame: Frame(),
-                  onSelected: (ballThrow, value) => null,
-                ),
-              ),
-              const Spacer(),
               const BgBubble(
                 child: Text("v$version"),
               ),
