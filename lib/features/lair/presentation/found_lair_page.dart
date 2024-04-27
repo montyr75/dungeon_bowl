@@ -1,6 +1,7 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,6 +67,7 @@ class FoundLairPage extends ConsumerWidget {
                           ),
                           boxM,
                           ChallengeDisplay(
+                            challengeID: 1,
                             challenge: state.challenge1,
                             strength: state.strength,
                             showButtons: !state.isChallenge1Success,
@@ -78,9 +80,9 @@ class FoundLairPage extends ConsumerWidget {
                               context.pop();
                             },
                           ),
-                          if (state.isChallenge1Success) ...[
-                            boxXXL,
+                          if (state.isChallenge1Success)
                             ChallengeDisplay(
+                              challengeID: 2,
                               challenge: state.challenge2,
                               strength: state.strength,
                               onSuccess: () {
@@ -98,9 +100,8 @@ class FoundLairPage extends ConsumerWidget {
                                 ref.read(gameServiceProvider.notifier).foundLairFailure(state);
                                 context.pop();
                               },
-                            ),
-                          ],
-                      ],
+                            ).animate().slideY(),
+                        ],
                       ),
                     ),
                   ),

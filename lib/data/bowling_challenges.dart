@@ -200,7 +200,7 @@ final tenthFrameBowlingChallenges = [
     description: "Get a spare on either the second or third throw.",
     evaluate: ({required frame, strength}) {
       final frameTen = frame as TenthFrame;
-      return frameTen.hasSpare;
+      return frameTen.hasSpare || frameTen.strikeCount >= 2;
     },
   ),
   TenthFrameBowlingChallenge(
@@ -211,7 +211,7 @@ final tenthFrameBowlingChallenges = [
     description: "Hit at least # pins on the first throw and spare with the second or third throw.",
     evaluate: ({required frame, strength}) {
       final frameTen = frame as TenthFrame;
-      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) && frameTen.hasSpare;
+      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) && (frameTen.hasSpare || frameTen.secondThrow == 10 || frameTen.thirdThrow == 10);
     },
   ),
   TenthFrameBowlingChallenge(
@@ -223,7 +223,7 @@ final tenthFrameBowlingChallenges = [
     description: "Hit at least # pins on the first throw, spare on the second throw, and hit at least # pins on the third throw.",
     evaluate: ({required frame, strength}) {
       final frameTen = frame as TenthFrame;
-      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) && frameTen.isSpare && (frameTen.thirdThrow ?? 0) >= (strength ?? 10);
+      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) && (frameTen.isSpare || frameTen.secondThrow == 10) && (frameTen.thirdThrow ?? 0) >= (strength ?? 10);
     },
   ),
   TenthFrameBowlingChallenge(

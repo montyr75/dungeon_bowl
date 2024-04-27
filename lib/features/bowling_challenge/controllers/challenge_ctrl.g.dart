@@ -6,7 +6,7 @@ part of 'challenge_ctrl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$challengeCtrlHash() => r'0cc152448f502c20067d1d7722cd32c3d626eb44';
+String _$challengeCtrlHash() => r'ef257e8cc32b0779e1c5cf289e988b180a0bbf1c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,12 @@ class _SystemHash {
 
 abstract class _$ChallengeCtrl
     extends BuildlessAutoDisposeNotifier<ChallengeState> {
+  late final int? id;
   late final BowlingChallenge challenge;
   late final int? strength;
 
   ChallengeState build({
+    int? id,
     required BowlingChallenge challenge,
     int? strength,
   });
@@ -51,10 +53,12 @@ class ChallengeCtrlFamily extends Family<ChallengeState> {
 
   /// See also [ChallengeCtrl].
   ChallengeCtrlProvider call({
+    int? id,
     required BowlingChallenge challenge,
     int? strength,
   }) {
     return ChallengeCtrlProvider(
+      id: id,
       challenge: challenge,
       strength: strength,
     );
@@ -65,6 +69,7 @@ class ChallengeCtrlFamily extends Family<ChallengeState> {
     covariant ChallengeCtrlProvider provider,
   ) {
     return call(
+      id: provider.id,
       challenge: provider.challenge,
       strength: provider.strength,
     );
@@ -90,10 +95,12 @@ class ChallengeCtrlProvider
     extends AutoDisposeNotifierProviderImpl<ChallengeCtrl, ChallengeState> {
   /// See also [ChallengeCtrl].
   ChallengeCtrlProvider({
+    int? id,
     required BowlingChallenge challenge,
     int? strength,
   }) : this._internal(
           () => ChallengeCtrl()
+            ..id = id
             ..challenge = challenge
             ..strength = strength,
           from: challengeCtrlProvider,
@@ -105,6 +112,7 @@ class ChallengeCtrlProvider
           dependencies: ChallengeCtrlFamily._dependencies,
           allTransitiveDependencies:
               ChallengeCtrlFamily._allTransitiveDependencies,
+          id: id,
           challenge: challenge,
           strength: strength,
         );
@@ -116,10 +124,12 @@ class ChallengeCtrlProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
+    required this.id,
     required this.challenge,
     required this.strength,
   }) : super.internal();
 
+  final int? id;
   final BowlingChallenge challenge;
   final int? strength;
 
@@ -128,6 +138,7 @@ class ChallengeCtrlProvider
     covariant ChallengeCtrl notifier,
   ) {
     return notifier.build(
+      id: id,
       challenge: challenge,
       strength: strength,
     );
@@ -139,6 +150,7 @@ class ChallengeCtrlProvider
       origin: this,
       override: ChallengeCtrlProvider._internal(
         () => create()
+          ..id = id
           ..challenge = challenge
           ..strength = strength,
         from: from,
@@ -146,6 +158,7 @@ class ChallengeCtrlProvider
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
+        id: id,
         challenge: challenge,
         strength: strength,
       ),
@@ -161,6 +174,7 @@ class ChallengeCtrlProvider
   @override
   bool operator ==(Object other) {
     return other is ChallengeCtrlProvider &&
+        other.id == id &&
         other.challenge == challenge &&
         other.strength == strength;
   }
@@ -168,6 +182,7 @@ class ChallengeCtrlProvider
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
     hash = _SystemHash.combine(hash, challenge.hashCode);
     hash = _SystemHash.combine(hash, strength.hashCode);
 
@@ -176,6 +191,9 @@ class ChallengeCtrlProvider
 }
 
 mixin ChallengeCtrlRef on AutoDisposeNotifierProviderRef<ChallengeState> {
+  /// The parameter `id` of this provider.
+  int? get id;
+
   /// The parameter `challenge` of this provider.
   BowlingChallenge get challenge;
 
@@ -188,6 +206,8 @@ class _ChallengeCtrlProviderElement
     with ChallengeCtrlRef {
   _ChallengeCtrlProviderElement(super.provider);
 
+  @override
+  int? get id => (origin as ChallengeCtrlProvider).id;
   @override
   BowlingChallenge get challenge => (origin as ChallengeCtrlProvider).challenge;
   @override

@@ -1,6 +1,7 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:recase/recase.dart';
@@ -73,7 +74,7 @@ class TreasureRoomPage extends ConsumerWidget {
                       description: "Continue to the next room.",
                       imagePath: 'assets/images/room_door.webp',
                       onPressed: () => context.goNamed(AppRoute.room.name),
-                    ),
+                    ).animate().fade(),
                 ],
               ),
             ],

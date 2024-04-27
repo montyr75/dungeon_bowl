@@ -25,7 +25,7 @@ class Frame {
   }
 
   bool get isStrike => (firstThrow ?? 0) == 10;
-  bool get isSpare => (firstThrow ?? 0) + (secondThrow ?? 0) == 10;
+  bool get isSpare => !isStrike && (firstThrow ?? 0) + (secondThrow ?? 0) == 10;
   bool get isOpen => !isStrike && !isSpare;
   bool get isComplete => isStrike || firstThrow != null && secondThrow != null;
 
@@ -74,8 +74,9 @@ class TenthFrame extends Frame {
 
   bool get hasThirdThrow => thirdThrow != null;
   bool get requiresThirdThrow => isSpare || secondThrow == 10;
-  bool get hasSpare => isSpare || thirdThrow == 10;
-  bool get hasStrike => isStrike || secondThrow == 10 || thirdThrow == 10;
+  bool get hasSpare => isSpare || isSpare2;
+  bool get isSpare2 => isStrike && (secondThrow ?? 0) + (thirdThrow ?? 0) == 10;
+  bool get hasStrike => strikeCount > 0;
 
   @override
   bool get isComplete => firstThrow != null && secondThrow != null && (!requiresThirdThrow || thirdThrow != null);
@@ -98,7 +99,7 @@ class TenthFrame extends Frame {
       return 2;
     }
 
-    if (thirdThrow == null && (isSpare || secondThrow == 10)) {
+    if (thirdThrow == null && (isStrike || isSpare || secondThrow == 10)) {
       return 3;
     }
 

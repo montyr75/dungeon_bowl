@@ -1,5 +1,6 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/bowling_challenges.dart';
@@ -14,6 +15,7 @@ class ChallengeDisplay extends ConsumerWidget {
   static const frameHeight = 75.0;
   static const maxWidth = 350.0;
 
+  final int? challengeID;
   final BowlingChallenge challenge;
   final int? strength;
   final bool showButtons;
@@ -22,6 +24,7 @@ class ChallengeDisplay extends ConsumerWidget {
 
   const ChallengeDisplay({
     super.key,
+    this.challengeID,
     required this.challenge,
     this.strength,
     this.showButtons = true,
@@ -32,11 +35,13 @@ class ChallengeDisplay extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(challengeCtrlProvider(
+      id: challengeID,
       challenge: challenge,
       strength: strength,
     ));
 
     final ctrl = ref.read(challengeCtrlProvider(
+      id: challengeID,
       challenge: challenge,
       strength: strength,
     ).notifier);
@@ -214,20 +219,23 @@ class ChallengeDisplay extends ConsumerWidget {
               ],
             ),
           ),
-          boxL,
+          boxM,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FrameEditor(
-                frame: state.frame,
-                isTenthFrame: state.isTenthFrame,
-                onSelected: (ballThrow, value) {
-                  ctrl.updateThrow(
-                    ballThrow: ballThrow,
-                    value: value,
-                  );
-                },
-              ),
+              if (showButtons)
+                FrameEditor(
+                  frame: state.frame,
+                  isTenthFrame: state.isTenthFrame,
+                  onSelected: showButtons
+                      ? (ballThrow, value) {
+                          ctrl.updateThrow(
+                            ballThrow: ballThrow,
+                            value: value,
+                          );
+                        }
+                      : null,
+                ),
               if (showButtons && state.frame.isComplete) ...[
                 if (!state.isSuccess)
                   PageNavButton(
@@ -243,7 +251,7 @@ class ChallengeDisplay extends ConsumerWidget {
                         onConfirm: onFailure,
                       );
                     },
-                  )
+                  ).animate().slideX()
                 else
                   PageNavButton(
                     label: 'Success',
@@ -259,7 +267,7 @@ class ChallengeDisplay extends ConsumerWidget {
                         onConfirm: onSuccess,
                       );
                     },
-                  ),
+                  ).animate().slideX(),
               ],
             ],
           ),

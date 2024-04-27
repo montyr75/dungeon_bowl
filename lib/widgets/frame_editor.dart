@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:popover/popover.dart';
 
 import '../models/frame.dart';
-import '../utils/screen_utils.dart';
 import '../utils/utils.dart';
 
 typedef ScoreOptionSelected = void Function(int ballThrow, int value);
@@ -28,7 +27,9 @@ class FrameEditor extends StatelessWidget {
 
   final Frame frame;
   final bool isTenthFrame;
-  final ScoreOptionSelected onSelected;
+  final ScoreOptionSelected? onSelected;
+
+  bool get enabled => onSelected != null;
 
   const FrameEditor({
     super.key,
@@ -57,16 +58,19 @@ class FrameEditor extends StatelessWidget {
       secondThrow = frame.isSpare ? '/' : frame.secondThrow.toThrowString();
 
       if (isTenthFrame && tenthFrame!.hasThirdThrow) {
-        thirdThrow = tenthFrame.thirdThrow.toThrowString();
+        thirdThrow = tenthFrame.isSpare2 ? '/' : tenthFrame.thirdThrow.toThrowString();
       }
-    } else if (currentThrow == 2) {
+    }
+    else if (currentThrow == 2) {
       firstThrow = frame.firstThrow.toThrowString();
-    } else if (currentThrow == 3) {
+    }
+    else if (currentThrow == 3) {
       firstThrow = frame.isStrike ? 'X' : frame.firstThrow.toThrowString();
 
       if (frame.isSpare) {
         secondThrow = '/';
-      } else {
+      }
+      else {
         secondThrow = frame.secondThrow.toThrowString();
       }
     }
@@ -82,46 +86,44 @@ class FrameEditor extends StatelessWidget {
         children: [
           ThrowBox(
             child: TextButton(
-              child: Text(
-                firstThrow ?? '1st',
-                style: firstThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
-              ),
-              onPressed: () => _showSelectionPopup(
+              onPressed: enabled ? () => _showSelectionPopup(
                 context: context,
                 ballThrow: 1,
                 options: _filterOptions(1),
+              ) : null,
+              child: Text(
+                firstThrow ?? '1st',
+                style: firstThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
               ),
             ),
           ),
           if (currentThrow == 2 || (currentThrow == null && (!frame.isStrike || isTenthFrame)) || currentThrow == 3)
             ThrowBox(
               showBorder: true,
-              child: !frame.isStrike || (currentThrow == 2 && isTenthFrame) || currentThrow == 3
-                  ? TextButton(
-                      child: Text(
-                        secondThrow ?? '2nd',
-                        style: secondThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
-                      ),
-                      onPressed: () => _showSelectionPopup(
-                        context: context,
-                        ballThrow: 2,
-                        options: _filterOptions(2),
-                      ),
-                    )
-                  : noWidget,
+              child: TextButton(
+                onPressed: enabled ? () => _showSelectionPopup(
+                  context: context,
+                  ballThrow: 2,
+                  options: _filterOptions(2),
+                ) : null,
+                child: Text(
+                  secondThrow ?? '2nd',
+                  style: secondThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
+                ),
+              ),
             ).animate().fade(),
           if (currentThrow == 3 || (currentThrow == null && isTenthFrame && tenthFrame!.hasThirdThrow))
             ThrowBox(
               showBorder: true,
               child: TextButton(
-                child: Text(
-                  thirdThrow ?? '3rd',
-                  style: thirdThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
-                ),
-                onPressed: () => _showSelectionPopup(
+                onPressed: enabled ? () => _showSelectionPopup(
                   context: context,
                   ballThrow: 3,
                   options: _filterOptions(3),
+                ) : null,
+                child: Text(
+                  thirdThrow ?? '3rd',
+                  style: thirdThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
                 ),
               ),
             ).animate().fade(),
@@ -197,11 +199,11 @@ class FrameEditor extends StatelessWidget {
   }
 
   void _optionSelected(int ballThrow, String option) {
-    onSelected(
+    onSelected?.call(
       ballThrow,
       switch (option) {
         endash => 0,
-        '/' => 10 - (frame.firstThrow ?? 0),
+        '/' => 10 - ((ballThrow != 3 ? frame.firstThrow : frame.secondThrow) ?? 0),
         'X' => 10,
         _ => int.tryParse(option)!,
       },
@@ -210,7 +212,7 @@ class FrameEditor extends StatelessWidget {
 }
 
 class ThrowBox extends StatelessWidget {
-  static const boxSize = 60.0;
+  static const boxSize = 54.0;
 
   final Widget? child;
   final bool showBorder;

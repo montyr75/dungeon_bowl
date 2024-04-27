@@ -10,7 +10,11 @@ part 'challenge_ctrl.g.dart';
 @riverpod
 class ChallengeCtrl extends _$ChallengeCtrl {
   @override
-  ChallengeState build({required BowlingChallenge challenge, int? strength}) {
+  ChallengeState build({
+    int? id,  // to differentiate challenges on found lairs
+    required BowlingChallenge challenge,
+    int? strength,
+  }) {
     return ChallengeState(
       challenge: challenge,
       strength: strength,
