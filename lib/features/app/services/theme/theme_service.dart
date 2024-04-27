@@ -113,7 +113,7 @@ class ThemeService extends _$ThemeService {
         fontFamily: 'HeavyMetal2',
       ),
       bodyLarge: base.bodyLarge!.copyWith(
-        fontSize: 14,
+        fontSize: 18,
         fontFamily: 'FiraCodeMed',
       ),
       bodyMedium: base.bodyMedium!.copyWith(

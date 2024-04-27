@@ -1,4 +1,6 @@
+import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:popover/popover.dart';
 
@@ -40,28 +42,48 @@ class FrameEditor extends StatelessWidget {
     String? firstThrow;
     String? secondThrow;
     String? thirdThrow;
+    TenthFrame? tenthFrame;
+
+    final numberStyle = context.textStyles.bodyLarge;
+
+    if (isTenthFrame) {
+      tenthFrame = frame as TenthFrame;
+    }
 
     final currentThrow = frame.currentThrow;
 
     if (currentThrow == null) {
-      firstThrow = frame.isStrike ? 'X' : frame.firstThrow.toThrowString();
+      firstThrow = frame.firstThrow.toThrowString();
       secondThrow = frame.isSpare ? '/' : frame.secondThrow.toThrowString();
+
+      if (isTenthFrame && tenthFrame!.hasThirdThrow) {
+        thirdThrow = tenthFrame.thirdThrow.toThrowString();
+      }
     } else if (currentThrow == 2) {
       firstThrow = frame.firstThrow.toThrowString();
+    } else if (currentThrow == 3) {
+      firstThrow = frame.isStrike ? 'X' : frame.firstThrow.toThrowString();
+
+      if (frame.isSpare) {
+        secondThrow = '/';
+      } else {
+        secondThrow = frame.secondThrow.toThrowString();
+      }
     }
 
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
+        color: Colors.black87,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           ThrowBox(
-            child: IconButton(
-              icon: Text(
+            child: TextButton(
+              child: Text(
                 firstThrow ?? '1st',
-                style: firstThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : null,
+                style: firstThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
               ),
               onPressed: () => _showSelectionPopup(
                 context: context,
@@ -70,29 +92,38 @@ class FrameEditor extends StatelessWidget {
               ),
             ),
           ),
-          ThrowBox(
-            showBorder: true,
-            child: !frame.isStrike
-                ? IconButton(
-                    icon: Text(
-                      secondThrow ?? '2nd',
-                      style: secondThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : null,
-                    ),
-                    onPressed: currentThrow == null || currentThrow == 2
-                        ? () => _showSelectionPopup(
-                              context: context,
-                              ballThrow: 2,
-                              options: _filterOptions(2),
-                            )
-                        : null,
-                  )
-                : noWidget,
-          ),
-          if (isTenthFrame)
+          if (currentThrow == 2 || (currentThrow == null && (!frame.isStrike || isTenthFrame)) || currentThrow == 3)
             ThrowBox(
               showBorder: true,
-              child: null,
-            ),
+              child: !frame.isStrike || currentThrow == 3
+                  ? TextButton(
+                      child: Text(
+                        secondThrow ?? '2nd',
+                        style: secondThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
+                      ),
+                      onPressed: () => _showSelectionPopup(
+                        context: context,
+                        ballThrow: 2,
+                        options: _filterOptions(2),
+                      ),
+                    )
+                  : noWidget,
+            ).animate().fade(),
+          if (currentThrow == 3 || (currentThrow == null && isTenthFrame && tenthFrame!.hasThirdThrow))
+            ThrowBox(
+              showBorder: true,
+              child: TextButton(
+                child: Text(
+                  thirdThrow ?? '3rd',
+                  style: thirdThrow == null ? const TextStyle(fontStyle: FontStyle.italic) : numberStyle,
+                ),
+                onPressed: () => _showSelectionPopup(
+                  context: context,
+                  ballThrow: 3,
+                  options: _filterOptions(3),
+                ),
+              ),
+            ).animate().fade(),
         ],
       ),
     );
@@ -138,6 +169,17 @@ class FrameEditor extends StatelessWidget {
         ..add('/');
 
       return List.unmodifiable(result);
+    } else if (ballThrow == 3) {
+      if (frame.isSpare || frame.secondThrow == 10) {
+        return List.unmodifiable(options.toList()..remove('/'));
+      }
+
+      final maxPins = 10 - (frame.secondThrow ?? 0) - 1;
+      final result = options.take(maxPins).toList()
+        ..add(endash)
+        ..add('/');
+
+      return List.unmodifiable(result);
     }
 
     return const [];
@@ -157,7 +199,7 @@ class FrameEditor extends StatelessWidget {
 }
 
 class ThrowBox extends StatelessWidget {
-  static const boxSize = 48.0;
+  static const boxSize = 60.0;
 
   final Widget? child;
   final bool showBorder;

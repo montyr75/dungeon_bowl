@@ -78,7 +78,8 @@ class FoundLairPage extends ConsumerWidget {
                               context.pop();
                             },
                           ),
-                          if (state.isChallenge1Success)
+                          if (state.isChallenge1Success) ...[
+                            boxXXL,
                             ChallengeDisplay(
                               challenge: state.challenge2,
                               strength: state.strength,
@@ -98,7 +99,8 @@ class FoundLairPage extends ConsumerWidget {
                                 context.pop();
                               },
                             ),
-                        ],
+                          ],
+                      ],
                       ),
                     ),
                   ),

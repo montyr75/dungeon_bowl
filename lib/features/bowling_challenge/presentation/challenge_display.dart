@@ -11,7 +11,7 @@ import '../controllers/challenge_ctrl.dart';
 
 class ChallengeDisplay extends ConsumerWidget {
   static const frameWidth = 125.0;
-  static const frameHeight = 105.0;
+  static const frameHeight = 75.0;
   static const maxWidth = 350.0;
 
   final BowlingChallenge challenge;
@@ -31,14 +31,21 @@ class ChallengeDisplay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(challengeCtrlProvider);
+    final state = ref.watch(challengeCtrlProvider(
+      challenge: challenge,
+      strength: strength,
+    ));
 
-    final isTenthFrame = challenge is TenthFrameBowlingChallenge;
+    final ctrl = ref.read(challengeCtrlProvider(
+      challenge: challenge,
+      strength: strength,
+    ).notifier);
+
     final styles = context.textStyles;
 
     String? thirdThrow;
 
-    if (isTenthFrame) {
+    if (state.isTenthFrame) {
       final tenthChallenge = challenge as TenthFrameBowlingChallenge;
 
       thirdThrow = switch (tenthChallenge.thirdThrow) {
@@ -61,7 +68,7 @@ class ChallengeDisplay extends ConsumerWidget {
           firstThrow = challenge.firstThrow!.toDisplay(strength);
           break;
         case BowlingHit.strike:
-          if (!isTenthFrame) {
+          if (!state.isTenthFrame) {
             secondThrow = challenge.firstThrow!.toDisplay();
           } else {
             firstThrow = challenge.firstThrow!.toDisplay(strength);
@@ -126,7 +133,7 @@ class ChallengeDisplay extends ConsumerWidget {
                                         )
                                       : noWidget,
                                 ),
-                                if (isTenthFrame)
+                                if (state.isTenthFrame)
                                   Container(
                                     width: frameWidth * .33,
                                     height: double.infinity,
@@ -179,7 +186,7 @@ class ChallengeDisplay extends ConsumerWidget {
                         ),
                         child: Text(
                           challenge.toDisplay(strength),
-                          style: styles.bodyLarge.copyWith(height: 1.2),
+                          style: styles.bodyMedium.copyWith(height: 1.2),
                         ),
                       ),
                     ),
@@ -194,7 +201,7 @@ class ChallengeDisplay extends ConsumerWidget {
                       bottom: BorderSide(color: Colors.grey),
                     ),
                   ),
-                  child: isTenthFrame
+                  child: state.isTenthFrame
                       ? const Text(
                           "* For any throw with a requirement, a strike succeeds.",
                           style: TextStyle(fontSize: 10),
@@ -207,53 +214,55 @@ class ChallengeDisplay extends ConsumerWidget {
               ],
             ),
           ),
-          FrameEditor(
-            frame: state.frame,
-            onSelected: (ballThrow, value) {
-              ref.read(challengeCtrlProvider.notifier).updateThrow(
-                ballThrow: ballThrow,
-                value: value,
-              );
-            },
-          ),
-          if (showButtons) ...[
-            boxM,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PageNavButton(
-                  label: 'Failure',
-                  color: ButtonColor.red,
-                  onPressed: () {
-                    showConfirmDialog(
-                      context: context,
-                      title: "Failure!",
-                      message: "You have failed! Quickly, you turn and run, determined to live to fight another day.",
-                      yesMsg: "Confirm Failure",
-                      noMsg: "Cancel",
-                      onConfirm: onFailure,
-                    );
-                  },
-                ),
-                boxXL,
-                PageNavButton(
-                  label: 'Success',
-                  color: ButtonColor.green,
-                  onPressed: () {
-                    showConfirmDialog(
-                      autoDismiss: true,
-                      context: context,
-                      title: "Success!",
-                      message: "You've bested the challenge!",
-                      yesMsg: "Confirm Success",
-                      noMsg: "Cancel",
-                      onConfirm: onSuccess,
-                    );
-                  },
-                ),
+          boxL,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              FrameEditor(
+                frame: state.frame,
+                isTenthFrame: state.isTenthFrame,
+                onSelected: (ballThrow, value) {
+                  ctrl.updateThrow(
+                    ballThrow: ballThrow,
+                    value: value,
+                  );
+                },
+              ),
+              if (showButtons && state.frame.isComplete) ...[
+                if (!state.isSuccess)
+                  PageNavButton(
+                    label: 'Failure',
+                    color: ButtonColor.red,
+                    onPressed: () {
+                      showConfirmDialog(
+                        context: context,
+                        title: "Failure!",
+                        message: "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                        yesMsg: "Confirm Failure",
+                        noMsg: "Cancel",
+                        onConfirm: onFailure,
+                      );
+                    },
+                  )
+                else
+                  PageNavButton(
+                    label: 'Success',
+                    color: ButtonColor.green,
+                    onPressed: () {
+                      showConfirmDialog(
+                        autoDismiss: true,
+                        context: context,
+                        title: "Success!",
+                        message: "You've bested the challenge!",
+                        yesMsg: "Confirm Success",
+                        noMsg: "Cancel",
+                        onConfirm: onSuccess,
+                      );
+                    },
+                  ),
               ],
-            ),
-          ],
+            ],
+          ),
         ],
       ),
     );
