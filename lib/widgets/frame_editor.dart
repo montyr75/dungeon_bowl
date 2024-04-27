@@ -145,8 +145,12 @@ class FrameEditor extends StatelessWidget {
       bodyBuilder: (context) {
         return Container(
           width: 150,
-          height: 175,
+          height: 180,
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueGrey),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: Wrap(
             children: [
               for (final option in options)
