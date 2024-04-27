@@ -10,7 +10,7 @@ class GameState {
   const GameState({
     required this.character,
     this.game = 1,
-    this.frame = 1,
+    this.frame = 10,
     this.encounterHistory = const [],
   });
 

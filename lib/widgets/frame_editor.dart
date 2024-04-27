@@ -74,6 +74,7 @@ class FrameEditor extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 2),
+        borderRadius: BorderRadius.circular(5),
         color: Colors.black87,
       ),
       child: Row(
@@ -88,14 +89,14 @@ class FrameEditor extends StatelessWidget {
               onPressed: () => _showSelectionPopup(
                 context: context,
                 ballThrow: 1,
-                options: options.toList()..remove('/'),
+                options: _filterOptions(1),
               ),
             ),
           ),
           if (currentThrow == 2 || (currentThrow == null && (!frame.isStrike || isTenthFrame)) || currentThrow == 3)
             ThrowBox(
               showBorder: true,
-              child: !frame.isStrike || currentThrow == 3
+              child: !frame.isStrike || (currentThrow == 2 && isTenthFrame) || currentThrow == 3
                   ? TextButton(
                       child: Text(
                         secondThrow ?? '2nd',
@@ -152,7 +153,10 @@ class FrameEditor extends StatelessWidget {
                     _optionSelected(ballThrow, option);
                     context.pop();
                   },
-                  icon: Text(option),
+                  icon: Text(
+                    option,
+                    style: context.textStyles.bodyLarge,
+                  ),
                 ),
             ],
           ),
@@ -162,27 +166,34 @@ class FrameEditor extends StatelessWidget {
   }
 
   List<String> _filterOptions(int ballThrow) {
-    if (ballThrow == 2) {
-      final maxPins = 10 - (frame.firstThrow ?? 0) - 1;
-      final result = options.take(maxPins).toList()
-        ..add(endash)
-        ..add('/');
-
-      return List.unmodifiable(result);
-    } else if (ballThrow == 3) {
-      if (frame.isSpare || frame.secondThrow == 10) {
-        return List.unmodifiable(options.toList()..remove('/'));
-      }
-
-      final maxPins = 10 - (frame.secondThrow ?? 0) - 1;
-      final result = options.take(maxPins).toList()
-        ..add(endash)
-        ..add('/');
-
-      return List.unmodifiable(result);
+    if (ballThrow == 1) {
+      return List.unmodifiable(options.toList()..remove('/'));
     }
 
-    return const [];
+    if (ballThrow == 2) {
+      if (!frame.isStrike) {
+        final maxPins = 10 - (frame.firstThrow ?? 0) - 1;
+        final result = options.take(maxPins).toList()
+          ..add(endash)
+          ..add('/');
+
+        return List.unmodifiable(result);
+      }
+
+      return List.unmodifiable(options.toList()..remove('/'));
+    }
+
+    // ballThrow == 3
+    if (frame.isSpare || frame.secondThrow == 10) {
+      return List.unmodifiable(options.toList()..remove('/'));
+    }
+
+    final maxPins = 10 - (frame.secondThrow ?? 0) - 1;
+    final result = options.take(maxPins).toList()
+      ..add(endash)
+      ..add('/');
+
+    return List.unmodifiable(result);
   }
 
   void _optionSelected(int ballThrow, String option) {

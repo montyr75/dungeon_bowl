@@ -40,6 +40,11 @@ class Frame {
 
     return null;
   }
+
+  @override
+  String toString() {
+    return 'Frame{firstThrow: $firstThrow, secondThrow: $secondThrow}';
+  }
 }
 
 class TenthFrame extends Frame {
@@ -98,5 +103,10 @@ class TenthFrame extends Frame {
     }
 
     return null;
+  }
+
+  @override
+  String toString() {
+    return 'Frame{firstThrow: $firstThrow, secondThrow: $secondThrow, thirdThrow: $thirdThrow}';
   }
 }
