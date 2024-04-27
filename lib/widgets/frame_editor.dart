@@ -145,7 +145,7 @@ class FrameEditor extends StatelessWidget {
       bodyBuilder: (context) {
         return Container(
           width: 150,
-          height: 180,
+          height: 200,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blueGrey),
