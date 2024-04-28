@@ -59,7 +59,7 @@ class CharacterDetailsPage extends ConsumerWidget {
                         style: styles.displaySmall,
                       ),
                     ),
-                    const Spacer(),
+                    boxXXL,
                     PageNavButton(
                       onPressed: () {
                         ref.read(appServiceProvider.notifier).selectCharacter(character);

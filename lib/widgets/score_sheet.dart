@@ -1,13 +1,17 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 
+import '../models/encounter_result.dart';
 import '../utils/utils.dart';
 
-class ScoreSheet extends StatelessWidget {
-  static const width = 360.0;
-  static const height = width * .1;
-  static const tenthFrameWidth = height + 10;
+const sheetWidth = 360.0;
+const sheetHeight = sheetWidth * .1;
+const frameWidth = sheetHeight;
+const tenthFrameWidth = frameWidth + 10;
+const boxSizeFactor = .47;
+const tenthFrameBoxSizeFactor = .315;
 
+class ScoreSheet extends StatelessWidget {
   const ScoreSheet({super.key});
 
   @override
@@ -15,41 +19,22 @@ class ScoreSheet extends StatelessWidget {
     return DefaultTextStyle(
       style: context.textStyles.bodySmall,
       child: Container(
-        width: width + 12,
-        height: height,
+        width: sheetWidth + 12,
+        height: sheetHeight,
         decoration: BoxDecoration(
           color: Colors.black54,
           border: Border.all(color: Colors.grey),
         ),
         child: Row(
           children: [
-            FrameBox(size: height, showBorder: false),
+            FrameBox(
+              showBorder: false,
+            ),
             for (int i = 1; i < 9; i++)
-              FrameBox(size: height),
-            Container(
-              width: height + 10,
-              height: height,
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(color: Colors.grey, width: 2),
-                ),
+              FrameBox(
               ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        ThrowBox(size: tenthFrameWidth * .31, showBorder: false, child: Text('X'),),
-                        ThrowBox(size: tenthFrameWidth * .32),
-                        ThrowBox(size: tenthFrameWidth * .31),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Text("255"),
-                  ),
-                ],
-              ),
+            FrameBox(
+              isTenthFrame: true,
             ),
           ],
         ),
@@ -59,30 +44,46 @@ class ScoreSheet extends StatelessWidget {
 }
 
 class FrameBox extends StatelessWidget {
-  static const boxSizeFactor = .47;
-
-  final double size;
+  final EncounterResultBase? data;
+  final bool isTenthFrame;
   final bool showBorder;
 
-  const FrameBox({super.key, required this.size, this.showBorder = true});
+  const FrameBox({
+    super.key,
+    this.data,
+    this.isTenthFrame = false,
+    this.showBorder = true,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final width = !isTenthFrame ? frameWidth : tenthFrameWidth;
+    final tbSizeFactor = !isTenthFrame ? boxSizeFactor : tenthFrameBoxSizeFactor;
+
     return Container(
-      width: size,
-      height: size,
+      width: width,
+      height: sheetHeight,
       decoration: BoxDecoration(
-        border: showBorder ? const Border(
-          left: BorderSide(color: Colors.grey, width: 2),
-        ) : null,
+        border: showBorder
+            ? const Border(
+                left: BorderSide(color: Colors.grey, width: 2),
+              )
+            : null,
       ),
       child: Column(
         children: [
           Expanded(
             child: Row(
               children: [
-                ThrowBox(size: size * boxSizeFactor, showBorder: false, child: Text('8'),),
-                ThrowBox(size: size * boxSizeFactor, child: Text('X'),),
+                ThrowBox(
+                  size: width * tbSizeFactor,
+                  showBorder: false,
+                  child: Text('8'),
+                ),
+                ThrowBox(
+                  size: width * tbSizeFactor,
+                  child: Text('X'),
+                ),
               ],
             ),
           ),
@@ -94,7 +95,6 @@ class FrameBox extends StatelessWidget {
     );
   }
 }
-
 
 class ThrowBox extends StatelessWidget {
   final double size;
