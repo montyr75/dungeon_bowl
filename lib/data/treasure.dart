@@ -37,7 +37,7 @@ enum Treasure {
     description: "Four shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   ),
   goldCoin5(
-    frequency: Frequency.crazySauce,
+    frequency: Frequency.inconceivable,
     description: "Five shiny gold coins! Perfect for buying things, paying debts, flipping, or winning games.",
   );
 
@@ -97,7 +97,7 @@ enum Frequency {
   uncommon,
   rare,
   veryRare,
-  crazySauce;
+  inconceivable;
 
   int get value => index + 1;
 
@@ -111,7 +111,7 @@ enum Frequency {
   static const lairFrequencyTable = RollTable({
     RollRange(1, 65): Frequency.rare,
     RollRange(66, 92): Frequency.veryRare,
-    RollRange(93, 100): Frequency.crazySauce,
+    RollRange(93, 100): Frequency.inconceivable,
   });
 
   static Frequency random({int mod = 0, bool isLair = false}) {
@@ -120,4 +120,7 @@ enum Frequency {
 
     return table.lookup(rollResult)!;
   }
+
+  @override
+  String toString() => ReCase(name).sentenceCase.toLowerCase();
 }

@@ -38,6 +38,11 @@ class TreasureDisplay extends StatelessWidget {
               ),
               const Divider(color: Colors.white54),
               Text(treasure.description, style: styles.displaySmall),
+              const Divider(color: Colors.white54),
+              Text(
+                treasure.frequency.toString(),
+                style: styles.bodySmall.copyWith(fontStyle: FontStyle.italic),
+              ),
             ],
           ),
         ),
