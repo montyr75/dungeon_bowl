@@ -33,7 +33,7 @@ class FoundLairCtrl extends _$FoundLairCtrl {
     );
 
     final initialState = FoundLairState(
-      enounterLevel: lvl,
+      encounterLevel: lvl,
       encounter: LairEncounter.randomEncounterByLevel(lvl),
       challenge1: challenge1,
       challenge2: challenge2,

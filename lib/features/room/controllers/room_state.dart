@@ -1,6 +1,7 @@
 import '../../../data/bowling_challenges.dart';
 import '../../../data/encounters.dart';
 import '../../../models/encounter_result.dart';
+import '../../../models/frame.dart';
 
 class RoomState {
   final int enounterLevel;
@@ -29,13 +30,20 @@ class RoomState {
     );
   }
 
-  EncounterResult toEncounterResult({required int game, required bool isSuccess}) {
+  EncounterResult toEncounterResult({
+    required int game,
+    required int frame,
+    required Frame frameData,
+    required bool isSuccess,
+  }) {
     return EncounterResult(
       game: game,
-      enounterLevel: enounterLevel,
+      frame: frame,
+      encounterLevel: enounterLevel,
       strength: strength,
       encounter: encounter,
       challenge: challenge,
+      frameData: frameData,
       isSuccess: isSuccess,
     );
   }

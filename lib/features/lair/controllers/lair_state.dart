@@ -1,6 +1,7 @@
 import '../../../data/bowling_challenges.dart';
 import '../../../data/lair_encounters.dart';
 import '../../../models/encounter_result.dart';
+import '../../../models/frame.dart';
 
 class LairState {
   final int enounterLevel;
@@ -29,13 +30,20 @@ class LairState {
     );
   }
 
-  LairEncounterResult toEncounterResult({required int game, required bool isSuccess}) {
+  LairEncounterResult toEncounterResult({
+    required int game,
+    required int frame,
+    required Frame frameData,
+    required bool isSuccess,
+  }) {
     return LairEncounterResult(
       game: game,
-      enounterLevel: enounterLevel,
+      frame: frame,
+      encounterLevel: enounterLevel,
       strength: strength,
       encounter: encounter,
       challenge: challenge,
+      frameData: frameData,
       isSuccess: isSuccess,
     );
   }

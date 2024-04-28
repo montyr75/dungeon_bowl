@@ -216,18 +216,17 @@ class FrameEditor extends StatelessWidget {
 }
 
 class ThrowBox extends StatelessWidget {
-  static const boxSize = 54.0;
-
   final Widget? child;
+  final double size;
   final bool showBorder;
 
-  const ThrowBox({super.key, this.child, this.showBorder = false});
+  const ThrowBox({super.key, this.child, this.size = 54.0, this.showBorder = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: boxSize,
-      height: boxSize,
+      width: size,
+      height: size,
       alignment: Alignment.center,
       decoration: showBorder
           ? const BoxDecoration(

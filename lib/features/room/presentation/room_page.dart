@@ -68,19 +68,28 @@ class RoomPage extends ConsumerWidget {
                           ChallengeDisplay(
                             challenge: state.challenge,
                             strength: state.strength,
-                            onSuccess: () {
+                            onSuccess: (frame) {
                               final treasure = ref.read(roomCtrlProvider.notifier).success();
 
                               TreasureDialog.show(
                                 treasure,
                                 onDismiss: () {
-                                  ref.read(gameServiceProvider.notifier).roomSuccess(state, treasure);
+                                  ref.read(gameServiceProvider.notifier).roomSuccess(
+                                        roomState: state,
+                                        frameData: frame,
+                                        treasure: treasure,
+                                      );
+
                                   ref.read(goRouterProvider).pop();
                                 },
                               );
                             },
-                            onFailure: () {
-                              ref.read(gameServiceProvider.notifier).roomFailure(state);
+                            onFailure: (frame) {
+                              ref.read(gameServiceProvider.notifier).roomFailure(
+                                    roomState: state,
+                                    frameData: frame,
+                                  );
+
                               context.pop();
                             },
                           ),

@@ -68,19 +68,28 @@ class LairPage extends ConsumerWidget {
                           ChallengeDisplay(
                             challenge: state.challenge,
                             strength: state.strength,
-                            onSuccess: () {
+                            onSuccess: (frame) {
                               final treasure = ref.read(lairCtrlProvider.notifier).success();
 
                               TreasureDialog.show(
                                 treasure,
                                 onDismiss: () {
-                                  ref.read(gameServiceProvider.notifier).lairSuccess(state, treasure);
+                                  ref.read(gameServiceProvider.notifier).lairSuccess(
+                                        lairState: state,
+                                        frameData: frame,
+                                        treasure: treasure,
+                                      );
+
                                   ref.read(goRouterProvider).goNamed(AppRoute.tavern.name);
                                 },
                               );
                             },
-                            onFailure: () {
-                              ref.read(gameServiceProvider.notifier).lairFailure(state);
+                            onFailure: (frame) {
+                              ref.read(gameServiceProvider.notifier).lairFailure(
+                                    lairState: state,
+                                    frameData: frame,
+                                  );
+
                               context.goNamed(AppRoute.tavern.name);
                             },
                           ),

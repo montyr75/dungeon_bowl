@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/bowling_challenges.dart';
+import '../../../models/frame.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/frame_editor.dart';
@@ -19,8 +20,8 @@ class ChallengeDisplay extends ConsumerWidget {
   final BowlingChallenge challenge;
   final int? strength;
   final bool showButtons;
-  final VoidCallback onSuccess;
-  final VoidCallback onFailure;
+  final ValueChanged<Frame> onSuccess;
+  final ValueChanged<Frame> onFailure;
 
   const ChallengeDisplay({
     super.key,
@@ -248,7 +249,7 @@ class ChallengeDisplay extends ConsumerWidget {
                         message: "You have failed! Quickly, you turn and run, determined to live to fight another day.",
                         yesMsg: "Confirm Failure",
                         noMsg: "Cancel",
-                        onConfirm: onFailure,
+                        onConfirm: () => onFailure(state.frame),
                       );
                     },
                   ).animate().slideX()
@@ -264,7 +265,7 @@ class ChallengeDisplay extends ConsumerWidget {
                         message: "You've bested the challenge!",
                         yesMsg: "Confirm Success",
                         noMsg: "Cancel",
-                        onConfirm: onSuccess,
+                        onConfirm: () => onSuccess(state.frame),
                       );
                     },
                   ).animate().slideX(),

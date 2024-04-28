@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../data/treasure.dart';
 import '../../../models/active_character.dart';
 import '../../../models/encounter_result.dart';
+import '../../../models/frame.dart';
 import '../../../routes.dart';
 import '../../../utils/roller.dart';
 import '../../../utils/utils.dart';
@@ -37,66 +38,105 @@ class GameService extends _$GameService {
     return AppRoute.room;
   }
 
-  void roomSuccess(RoomState roomState, Treasure treasure) {
+  void roomSuccess({
+    required RoomState roomState,
+    required Frame frameData,
+    required Treasure treasure,
+  }) {
     GameState newState = _nextFrame(state);
     newState = _updateGP(newState, treasure.value);
 
     state = _updateEncounterHistory(
       newState,
-      roomState.toEncounterResult(game: state.game, isSuccess: true),
+      roomState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: true,
+      ),
     );
   }
 
-  void roomFailure(RoomState roomState) {
+  void roomFailure({required RoomState roomState, required Frame frameData}) {
     GameState newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
-      roomState.toEncounterResult(game: state.game, isSuccess: false),
+      roomState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: false,
+      ),
     );
   }
 
-  void lairSuccess(LairState lairState, Treasure treasure) {
+  void lairSuccess({
+    required LairState lairState,
+    required Frame frameData,
+    required Treasure treasure,
+  }) {
     GameState newState = _nextFrame(state);
     newState = _updateGP(newState, treasure.value);
 
     state = _updateEncounterHistory(
       newState,
-      lairState.toEncounterResult(game: state.game, isSuccess: true),
+      lairState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: true,
+      ),
     );
   }
 
-  void lairFailure(LairState lairState) {
+  void lairFailure({required LairState lairState, required Frame frameData}) {
     GameState newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
-      lairState.toEncounterResult(game: state.game, isSuccess: false),
+      lairState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: false,
+      ),
     );
   }
 
-  void foundLairSuccess(FoundLairState foundLairState, [Treasure? treasure]) {
+  void foundLairSuccess({
+    required FoundLairState foundLairState,
+    required Frame frameData,
+    Treasure? treasure,
+  }) {
     GameState newState = _nextFrame(state);
 
-    if (treasure == null) {
-      state = newState;
-      return;
+    if (treasure != null) {
+      newState = _updateGP(newState, treasure.value);
     }
 
-    newState = _updateGP(newState, treasure.value);
-
     state = _updateEncounterHistory(
       newState,
-      foundLairState.toEncounterResult(game: state.game, isSuccess: true),
+      foundLairState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: true,
+      ),
     );
   }
 
-  void foundLairFailure(FoundLairState foundLairState) {
+  void foundLairFailure({required FoundLairState foundLairState, required Frame frameData}) {
     GameState newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
-      foundLairState.toEncounterResult(game: state.game, isSuccess: false),
+      foundLairState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: false,
+      ),
     );
   }
 

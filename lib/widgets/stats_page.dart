@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../features/corridor/services/game_service.dart';
 import '../utils/screen_utils.dart';
 import 'bg_bubble.dart';
+import 'score_sheet.dart';
 
 class StatsPage extends ConsumerWidget {
   const StatsPage({super.key});
@@ -29,6 +30,8 @@ class StatsPage extends ConsumerWidget {
           children: [
             Column(
               children: [
+                ScoreSheet(),
+                boxXXL,
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(

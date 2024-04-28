@@ -1,9 +1,10 @@
 import '../../../data/bowling_challenges.dart';
 import '../../../data/lair_encounters.dart';
 import '../../../models/encounter_result.dart';
+import '../../../models/frame.dart';
 
 class FoundLairState {
-  final int enounterLevel;
+  final int encounterLevel;
   final LairEncounter encounter;
   final BowlingChallenge challenge1;
   final BowlingChallenge challenge2;
@@ -11,7 +12,7 @@ class FoundLairState {
   final bool isChallenge1Success;
 
   const FoundLairState({
-    required this.enounterLevel,
+    required this.encounterLevel,
     required this.encounter,
     required this.challenge1,
     required this.challenge2,
@@ -20,7 +21,7 @@ class FoundLairState {
   });
 
   FoundLairState copyWith({
-    int? enounterLevel,
+    int? encounterLevel,
     LairEncounter? encounter,
     BowlingChallenge? challenge1,
     BowlingChallenge? challenge2,
@@ -28,7 +29,7 @@ class FoundLairState {
     bool? isChallenge1Success,
   }) {
     return FoundLairState(
-      enounterLevel: enounterLevel ?? this.enounterLevel,
+      encounterLevel: encounterLevel ?? this.encounterLevel,
       encounter: encounter ?? this.encounter,
       challenge1: challenge1 ?? this.challenge1,
       challenge2: challenge2 ?? this.challenge2,
@@ -37,20 +38,27 @@ class FoundLairState {
     );
   }
 
-  FoundLairEncounterResult toEncounterResult({required int game, required bool isSuccess}) {
+  FoundLairEncounterResult toEncounterResult({
+    required int game,
+    required int frame,
+    required Frame frameData,
+    required bool isSuccess,
+  }) {
     return FoundLairEncounterResult(
       game: game,
-      enounterLevel: enounterLevel,
+      frame: frame,
+      encounterLevel: encounterLevel,
       strength: strength,
       encounter: encounter,
       challenge1: challenge1,
       challenge2: challenge2,
+      frameData: frameData,
       isSuccess: isSuccess,
     );
   }
 
   @override
   String toString() {
-    return 'FoundLairState{enounterLevel: $enounterLevel, encounter: $encounter, challenge1: ${challenge1.toDisplay(strength)}, challenge2: ${challenge2.toDisplay(strength)}, strength: $strength}';
+    return 'FoundLairState{enounterLevel: $encounterLevel, encounter: $encounter, challenge1: ${challenge1.toDisplay(strength)}, challenge2: ${challenge2.toDisplay(strength)}, strength: $strength}';
   }
 }

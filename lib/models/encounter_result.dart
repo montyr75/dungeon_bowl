@@ -1,17 +1,22 @@
 import '../data/bowling_challenges.dart';
 import '../data/encounters.dart';
 import '../data/lair_encounters.dart';
+import 'frame.dart';
 
 abstract class EncounterResultBase {
   final int game;
-  final int enounterLevel;
+  final int frame;
+  final int encounterLevel;
   final int? strength;
+  final Frame frameData;
   final bool isSuccess;
 
   const EncounterResultBase({
     required this.game,
-    required this.enounterLevel,
+    required this.frame,
+    required this.encounterLevel,
     this.strength,
+    required this.frameData,
     this.isSuccess = false,
   });
 
@@ -25,10 +30,12 @@ class EncounterResult extends EncounterResultBase {
 
   const EncounterResult({
     required super.game,
-    required super.enounterLevel,
+    required super.frame,
+    required super.encounterLevel,
     super.strength,
     required this.encounter,
     required this.challenge,
+    required super.frameData,
     super.isSuccess = false,
   });
 
@@ -42,10 +49,12 @@ class LairEncounterResult extends EncounterResultBase {
 
   const LairEncounterResult({
     required super.game,
-    required super.enounterLevel,
+    required super.frame,
+    required super.encounterLevel,
     super.strength,
     required this.encounter,
     required this.challenge,
+    required super.frameData,
     super.isSuccess = false,
   });
 
@@ -60,11 +69,13 @@ class FoundLairEncounterResult extends EncounterResultBase {
 
   const FoundLairEncounterResult({
     required super.game,
-    required super.enounterLevel,
+    required super.frame,
+    required super.encounterLevel,
     super.strength,
     required this.encounter,
     required this.challenge1,
     required this.challenge2,
+    required super.frameData,
     super.isSuccess = false,
   });
 

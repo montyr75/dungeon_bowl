@@ -71,12 +71,17 @@ class FoundLairPage extends ConsumerWidget {
                             challenge: state.challenge1,
                             strength: state.strength,
                             showButtons: !state.isChallenge1Success,
-                            onSuccess: () {
+                            onSuccess: (frame) {
                               ref.read(foundLairCtrlProvider.notifier).challenge1Success();
-                              ref.read(gameServiceProvider.notifier).foundLairSuccess(state);
+                              ref.read(gameServiceProvider.notifier).foundLairSuccess(
+                                    foundLairState: state,
+                                    frameData: frame,
+                                  );
                             },
-                            onFailure: () {
-                              ref.read(gameServiceProvider.notifier).foundLairFailure(state);
+                            onFailure: (frame) {
+                              ref.read(gameServiceProvider.notifier)
+                                  .foundLairFailure(foundLairState: state, frameData: frame);
+
                               context.pop();
                             },
                           ),
@@ -85,19 +90,28 @@ class FoundLairPage extends ConsumerWidget {
                               challengeID: 2,
                               challenge: state.challenge2,
                               strength: state.strength,
-                              onSuccess: () {
+                              onSuccess: (frame) {
                                 final treasure = ref.read(foundLairCtrlProvider.notifier).success();
 
                                 TreasureDialog.show(
                                   treasure,
                                   onDismiss: () {
-                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(state, treasure);
+                                    ref.read(gameServiceProvider.notifier).foundLairSuccess(
+                                          foundLairState: state,
+                                          frameData: frame,
+                                          treasure: treasure,
+                                        );
+
                                     ref.read(goRouterProvider).pop();
                                   },
                                 );
                               },
-                              onFailure: () {
-                                ref.read(gameServiceProvider.notifier).foundLairFailure(state);
+                              onFailure: (frame) {
+                                ref.read(gameServiceProvider.notifier).foundLairFailure(
+                                      foundLairState: state,
+                                      frameData: frame,
+                                    );
+
                                 context.pop();
                               },
                             ).animate().slideY(),
