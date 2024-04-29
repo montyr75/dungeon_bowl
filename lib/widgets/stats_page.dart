@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../features/corridor/services/game_service.dart';
+import '../features/corridor/services/game_state.dart';
 import '../utils/screen_utils.dart';
 import 'bg_bubble.dart';
 import 'score_sheet.dart';
@@ -13,7 +14,7 @@ class StatsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final report = ref.read(gameServiceProvider.notifier).generateReport();
-    final encounters = ref.read(gameServiceProvider).encounterHistoryByGame;
+    final encounters = ref.read(gameServiceProvider).encounterHistory.byGame;
 
     final styles = context.textStyles;
 

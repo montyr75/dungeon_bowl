@@ -163,11 +163,34 @@ class GameService extends _$GameService {
   GameState _updateEncounterHistory(GameState state, EncounterResultBase encounter) {
     final encounterHistory = state.encounterHistory.toList()..add(encounter);
 
-    final frames = encounterHistory.map((enc) => enc.frameData).toList();
+    final games = encounterHistory.byGame;
 
+    encounterHistory.clear();
+
+    for (final game in games) {
+      encounterHistory.addAll(_scoreGame(game));
+    }
+
+    return state.copyWith(
+      encounterHistory: List.unmodifiable(
+        List.unmodifiable(encounterHistory),
+      ),
+    );
+  }
+
+  GameReport generateReport() {
+    return GameReport(
+      encounterResults: List.unmodifiable(state.encounterHistory.encounterResults),
+      lairEncounterResults: List.unmodifiable(state.encounterHistory.lairEncounterResults),
+    );
+  }
+
+  List<EncounterResultBase> _scoreGame(List<EncounterResultBase> game) {
     int score = 0;
 
-    final newEncounterHistory = encounterHistory.map((enc) {
+    final frames = game.map((enc) => enc.frameData).toList();
+
+    return game.map((enc) {
       final frameScore = _scoreFrame(enc.frame - 1, frames);
 
       if (frameScore != null) {
@@ -180,19 +203,6 @@ class GameService extends _$GameService {
 
       return enc;
     }).toList();
-
-    return state.copyWith(
-      encounterHistory: List.unmodifiable(
-        newEncounterHistory,
-      ),
-    );
-  }
-
-  GameReport generateReport() {
-    return GameReport(
-      encounterResults: List.unmodifiable(state.encounterHistory.encounterResults),
-      lairEncounterResults: List.unmodifiable(state.encounterHistory.lairEncounterResults),
-    );
   }
 
   int? _scoreFrame(int frameIndex, List<Frame> frames) {

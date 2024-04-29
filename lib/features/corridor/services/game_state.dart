@@ -10,7 +10,7 @@ class GameState {
   const GameState({
     required this.character,
     this.game = 1,
-    this.frame = 1,
+    this.frame = 10,
     this.encounterHistory = const [],
   });
 
@@ -29,20 +29,23 @@ class GameState {
   }
 
   bool get canFindLair => frame < 9;
-
-  List<List<EncounterResultBase>> get encounterHistoryByGame {
-    final result = <List<EncounterResultBase>>[];
-
-    for (int i = 0; i < game; i++) {
-      result.add(encounterHistory.where((enc) => enc.game == i + 1).toList());
-    }
-
-    return result;
-  }
 }
 
 extension ListEncounterResultX on List<EncounterResultBase> {
   List<EncounterResult> get encounterResults => whereType<EncounterResult>().toList();
+
   List<EncounterResultBase> get lairEncounterResults =>
       where((value) => value is LairEncounterResult || value is FoundLairEncounterResult).toList();
+
+  List<List<EncounterResultBase>> get byGame {
+    final result = <List<EncounterResultBase>>[];
+
+    if (isNotEmpty) {
+      for (int i = 0; i < last.game; i++) {
+        result.add(where((enc) => enc.game == i + 1).toList());
+      }
+    }
+
+    return result;
+  }
 }
