@@ -13,6 +13,7 @@ class StatsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final report = ref.read(gameServiceProvider.notifier).generateReport();
+    final encounters = ref.read(gameServiceProvider).encounterHistory;
 
     final styles = context.textStyles;
 
@@ -30,7 +31,7 @@ class StatsPage extends ConsumerWidget {
           children: [
             Column(
               children: [
-                ScoreSheet(),
+                ScoreSheet(results: encounters),
                 boxXXL,
                 Expanded(
                   child: SingleChildScrollView(
