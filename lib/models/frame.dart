@@ -28,6 +28,7 @@ class Frame {
   bool get isSpare => !isStrike && (firstThrow ?? 0) + (secondThrow ?? 0) == 10;
   bool get isOpen => !isStrike && !isSpare;
   bool get isComplete => isStrike || firstThrow != null && secondThrow != null;
+  List<int?> get throws => [firstThrow, secondThrow];
 
   int? get currentThrow {
     if (firstThrow == null) {
@@ -80,6 +81,9 @@ class TenthFrame extends Frame {
 
   @override
   bool get isComplete => firstThrow != null && secondThrow != null && (!requiresThirdThrow || thirdThrow != null);
+
+  @override
+  List<int?> get throws => [...super.throws, thirdThrow];
 
   int get strikeCount {
     return [

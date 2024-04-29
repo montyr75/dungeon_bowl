@@ -22,6 +22,15 @@ abstract class EncounterResultBase {
 
   bool get isLair;
   bool get isFailure => !isSuccess;
+
+  EncounterResultBase copyWith({
+    int? game,
+    int? frame,
+    int? encounterLevel,
+    int? strength,
+    Frame? frameData,
+    bool? isSuccess,
+  });
 }
 
 class EncounterResult extends EncounterResultBase {
@@ -41,6 +50,29 @@ class EncounterResult extends EncounterResultBase {
 
   @override
   bool get isLair => false;
+
+  @override
+  EncounterResult copyWith({
+    int? game,
+    int? frame,
+    int? encounterLevel,
+    int? strength,
+    Frame? frameData,
+    bool? isSuccess,
+    Encounter? encounter,
+    BowlingChallenge? challenge,
+  }) {
+    return EncounterResult(
+      game: game ?? this.game,
+      frame: frame ?? this.frame,
+      encounterLevel: encounterLevel ?? this.encounterLevel,
+      strength: strength ?? this.strength,
+      frameData: frameData ?? this.frameData,
+      isSuccess: isSuccess ?? this.isSuccess,
+      encounter: encounter ?? this.encounter,
+      challenge: challenge ?? this.challenge,
+    );
+  }
 }
 
 class LairEncounterResult extends EncounterResultBase {
@@ -60,6 +92,29 @@ class LairEncounterResult extends EncounterResultBase {
 
   @override
   bool get isLair => true;
+
+  @override
+  LairEncounterResult copyWith({
+    int? game,
+    int? frame,
+    int? encounterLevel,
+    int? strength,
+    Frame? frameData,
+    bool? isSuccess,
+    LairEncounter? encounter,
+    TenthFrameBowlingChallenge? challenge,
+  }) {
+    return LairEncounterResult(
+      game: game ?? this.game,
+      frame: frame ?? this.frame,
+      encounterLevel: encounterLevel ?? this.encounterLevel,
+      strength: strength ?? this.strength,
+      frameData: frameData ?? this.frameData,
+      isSuccess: isSuccess ?? this.isSuccess,
+      encounter: encounter ?? this.encounter,
+      challenge: challenge ?? this.challenge,
+    );
+  }
 }
 
 class FoundLairEncounterResult extends EncounterResultBase {
@@ -81,4 +136,29 @@ class FoundLairEncounterResult extends EncounterResultBase {
 
   @override
   bool get isLair => true;
+
+  @override
+  FoundLairEncounterResult copyWith({
+    int? game,
+    int? frame,
+    int? encounterLevel,
+    int? strength,
+    Frame? frameData,
+    bool? isSuccess,
+    LairEncounter? encounter,
+    BowlingChallenge? challenge1,
+    BowlingChallenge? challenge2,
+  }) {
+    return FoundLairEncounterResult(
+      game: game ?? this.game,
+      frame: frame ?? this.frame,
+      encounterLevel: encounterLevel ?? this.encounterLevel,
+      strength: strength ?? this.strength,
+      frameData: frameData ?? this.frameData,
+      isSuccess: isSuccess ?? this.isSuccess,
+      encounter: encounter ?? this.encounter,
+      challenge1: challenge1 ?? this.challenge1,
+      challenge2: challenge2 ?? this.challenge2,
+    );
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:dartx/dartx.dart';
+import 'package:quiver/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/treasure.dart';
@@ -160,9 +161,29 @@ class GameService extends _$GameService {
   }
 
   GameState _updateEncounterHistory(GameState state, EncounterResultBase encounter) {
+    final encounterHistory = state.encounterHistory.toList()..add(encounter);
+
+    final frames = encounterHistory.map((enc) => enc.frameData).toList();
+
+    int score = 0;
+
+    final newEncounterHistory = encounterHistory.map((enc) {
+      final frameScore = _scoreFrame(enc.frame - 1, frames);
+
+      if (frameScore != null) {
+        return enc.copyWith(
+          frameData: enc.frameData.copyWith(
+            score: Optional<int>.of(score += frameScore),
+          ),
+        );
+      }
+
+      return enc;
+    }).toList();
+
     return state.copyWith(
       encounterHistory: List.unmodifiable(
-        state.encounterHistory.toList()..add(encounter),
+        newEncounterHistory,
       ),
     );
   }
@@ -172,6 +193,47 @@ class GameService extends _$GameService {
       encounterResults: List.unmodifiable(state.encounterHistory.encounterResults),
       lairEncounterResults: List.unmodifiable(state.encounterHistory.lairEncounterResults),
     );
+  }
+
+  int? _scoreFrame(int frameIndex, List<Frame> frames) {
+    final frame = frames[frameIndex];
+
+    int? score;
+
+    if (frame is TenthFrame) {
+      if (frame.isStrike) {
+        final nextTwoThrows = frame.throws.skip(1).whereNotNull();
+        score = 10 + nextTwoThrows.sum();
+      }
+      else if (frame.isSpare) {
+        score = 10 + (frame.thirdThrow ?? 0);
+      }
+      else {
+        score = frame.throws.whereNotNull().sum();
+      }
+    }
+    else {
+      final nextTwoThrows = [
+        if (frames.length >= frameIndex + 2) ...frames[frameIndex + 1].throws,
+        if (frames.length >= frameIndex + 3) ...frames[frameIndex + 2].throws,
+      ].whereNotNull().take(2);
+
+      if (frame.isStrike) {
+        if (nextTwoThrows.length == 2) {
+          score = 10 + nextTwoThrows.sum();
+        }
+      }
+      else if (frame.isSpare) {
+        if (nextTwoThrows.isNotEmpty) {
+          score = 10 + nextTwoThrows.first;
+        }
+      }
+      else {
+        score = frame.throws.whereNotNull().sum();
+      }
+    }
+
+    return score;
   }
 }
 
@@ -185,8 +247,11 @@ class GameReport {
   });
 
   int get encountersWon => encounterResults.count((value) => value.isSuccess);
+
   int get totalEncounters => encounterResults.length;
+
   int get lairsWon => lairEncounterResults.count((value) => value.isSuccess);
+
   int get totalLairs => lairEncounterResults.length;
 
   int get percentEncountersWon {

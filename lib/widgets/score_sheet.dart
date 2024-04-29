@@ -150,7 +150,7 @@ class FrameBox extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Text(frameData?.score.toString() ?? ''),
+                  child: Text(frameData?.score?.toString() ?? ''),
                 ),
               ],
             ),

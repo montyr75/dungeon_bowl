@@ -29,6 +29,16 @@ class GameState {
   }
 
   bool get canFindLair => frame < 9;
+
+  List<List<EncounterResultBase>> get encounterHistoryByGame {
+    final result = <List<EncounterResultBase>>[];
+
+    for (int i = 0; i < game; i++) {
+      result.add(encounterHistory.where((enc) => enc.game == i + 1).toList());
+    }
+
+    return result;
+  }
 }
 
 extension ListEncounterResultX on List<EncounterResultBase> {
