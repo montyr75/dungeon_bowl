@@ -67,15 +67,6 @@ class CorridorPage extends ConsumerWidget {
                               imagePath: 'assets/images/lair_door.webp',
                               onPressed: () => context.goNamed(AppRoute.lair.name),
                             ),
-                          if (state.canFindLair) ...[
-                            boxL,
-                            ImageOptionButton(
-                              title: 'Find a Lair',
-                              description: "More risk, usually more reward.",
-                              imagePath: 'assets/images/lair_door.webp',
-                              onPressed: () => context.goNamed(AppRoute.foundLair.name),
-                            ),
-                          ],
                           boxL,
                           ImageOptionButton(
                             title: 'Quit',

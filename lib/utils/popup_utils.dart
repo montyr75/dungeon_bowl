@@ -49,6 +49,30 @@ Future<void> showConfirmDialog({
   );
 }
 
+Future<void> showInfoDialog({
+  required BuildContext context,
+  String? title,
+  required String message,
+  String? closeMsg,
+}) {
+  final styles = context.textStyles;
+
+  return SmartDialog.show(
+    builder: (_) {
+      return FantasyDialog(
+        title: Text(title ?? "Info", style: styles.displayMedium),
+        content: Text(message, style: styles.displaySmall),
+        actions: [
+          TextButton(
+            onPressed: SmartDialog.dismiss,
+            child: Text(closeMsg ?? "Close"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 void showStringInputDialog({
   required String title,
   required String label,
