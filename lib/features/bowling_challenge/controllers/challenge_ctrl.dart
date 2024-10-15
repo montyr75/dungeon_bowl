@@ -1,4 +1,3 @@
-import 'package:quiver/core.dart' show Optional;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/bowling_challenges.dart';
@@ -11,14 +10,16 @@ part 'challenge_ctrl.g.dart';
 class ChallengeCtrl extends _$ChallengeCtrl {
   @override
   ChallengeState build({
-    int? id,  // to differentiate challenges on found lairs
+    int? id, // to differentiate challenges on found lairs
     required BowlingChallenge challenge,
     int? strength,
   }) {
     return ChallengeState(
       challenge: challenge,
       strength: strength,
-      frame: challenge is TenthFrameBowlingChallenge ? const TenthFrame() : const Frame(),
+      frame: challenge is TenthFrameBowlingChallenge
+          ? const TenthFrame()
+          : const Frame(),
     );
   }
 
@@ -26,40 +27,25 @@ class ChallengeCtrl extends _$ChallengeCtrl {
     ChallengeState newState = state;
 
     if (ballThrow == 1) {
-      newState = newState.copyWith(
-        frame: newState.frame.copyWith(
-          firstThrow: Optional<int>.of(value),
-          secondThrow: const Optional<int>.absent(),
-        ),
-      );
+      final frame = newState.frame.clearThrowsAfter(ballThrow);
 
-      if (newState.isTenthFrame) {
-        newState = newState.copyWith(
-          frame: (newState.frame as TenthFrame).copyWith(
-            thirdThrow: const Optional<int>.absent(),
-          ),
-        );
-      }
+      newState = newState.copyWith(
+        frame: frame.copyWith(firstThrow: value),
+      );
     }
     else if (ballThrow == 2) {
+      final frame = newState.frame.clearThrowsAfter(ballThrow);
+
       newState = newState.copyWith(
-        frame: newState.frame.copyWith(
-          secondThrow: Optional<int>.of(value),
+        frame: frame.copyWith(
+          secondThrow: value,
         ),
       );
-
-      if (newState.isTenthFrame) {
-        newState = newState.copyWith(
-          frame: (newState.frame as TenthFrame).copyWith(
-            thirdThrow: const Optional<int>.absent(),
-          ),
-        );
-      }
     }
     else if (ballThrow == 3) {
       newState = newState.copyWith(
         frame: (newState.frame as TenthFrame).copyWith(
-          thirdThrow: Optional<int>.of(value),
+          thirdThrow: value,
         ),
       );
     }

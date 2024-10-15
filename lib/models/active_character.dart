@@ -1,6 +1,11 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
 import '../data/characters.dart';
 
-class ActiveCharacter {
+part 'active_character.mapper.dart';
+
+@MappableClass()
+class ActiveCharacter with ActiveCharacterMappable {
   final Character character;
   final int gp;
 
@@ -9,13 +14,6 @@ class ActiveCharacter {
     this.gp = 0,
   });
 
-  ActiveCharacter copyWith({
-    Character? character,
-    int? gp,
-  }) {
-    return ActiveCharacter(
-      character: character ?? this.character,
-      gp: gp ?? this.gp,
-    );
-  }
+  static const fromMap = ActiveCharacterMapper.fromMap;
+  static const fromJson = ActiveCharacterMapper.fromJson;
 }

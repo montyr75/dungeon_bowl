@@ -1,9 +1,14 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
 import '../data/bowling_challenges.dart';
 import '../data/encounters.dart';
 import '../data/lair_encounters.dart';
 import 'frame.dart';
 
-abstract class EncounterResultBase {
+part 'encounter_result.mapper.dart';
+
+@MappableClass()
+abstract class EncounterResultBase with EncounterResultBaseMappable {
   final int game;
   final int frame;
   final int encounterLevel;
@@ -22,18 +27,10 @@ abstract class EncounterResultBase {
 
   bool get isLair;
   bool get isFailure => !isSuccess;
-
-  EncounterResultBase copyWith({
-    int? game,
-    int? frame,
-    int? encounterLevel,
-    int? strength,
-    Frame? frameData,
-    bool? isSuccess,
-  });
 }
 
-class EncounterResult extends EncounterResultBase {
+@MappableClass()
+class EncounterResult extends EncounterResultBase with EncounterResultMappable {
   final Encounter encounter;
   final BowlingChallenge challenge;
 
@@ -50,32 +47,10 @@ class EncounterResult extends EncounterResultBase {
 
   @override
   bool get isLair => false;
-
-  @override
-  EncounterResult copyWith({
-    int? game,
-    int? frame,
-    int? encounterLevel,
-    int? strength,
-    Frame? frameData,
-    bool? isSuccess,
-    Encounter? encounter,
-    BowlingChallenge? challenge,
-  }) {
-    return EncounterResult(
-      game: game ?? this.game,
-      frame: frame ?? this.frame,
-      encounterLevel: encounterLevel ?? this.encounterLevel,
-      strength: strength ?? this.strength,
-      frameData: frameData ?? this.frameData,
-      isSuccess: isSuccess ?? this.isSuccess,
-      encounter: encounter ?? this.encounter,
-      challenge: challenge ?? this.challenge,
-    );
-  }
 }
 
-class LairEncounterResult extends EncounterResultBase {
+@MappableClass()
+class LairEncounterResult extends EncounterResultBase with LairEncounterResultMappable {
   final LairEncounter encounter;
   final TenthFrameBowlingChallenge challenge;
 
@@ -92,32 +67,10 @@ class LairEncounterResult extends EncounterResultBase {
 
   @override
   bool get isLair => true;
-
-  @override
-  LairEncounterResult copyWith({
-    int? game,
-    int? frame,
-    int? encounterLevel,
-    int? strength,
-    Frame? frameData,
-    bool? isSuccess,
-    LairEncounter? encounter,
-    TenthFrameBowlingChallenge? challenge,
-  }) {
-    return LairEncounterResult(
-      game: game ?? this.game,
-      frame: frame ?? this.frame,
-      encounterLevel: encounterLevel ?? this.encounterLevel,
-      strength: strength ?? this.strength,
-      frameData: frameData ?? this.frameData,
-      isSuccess: isSuccess ?? this.isSuccess,
-      encounter: encounter ?? this.encounter,
-      challenge: challenge ?? this.challenge,
-    );
-  }
 }
 
-class FoundLairEncounterResult extends EncounterResultBase {
+@MappableClass()
+class FoundLairEncounterResult extends EncounterResultBase with FoundLairEncounterResultMappable {
   final LairEncounter encounter;
   final BowlingChallenge challenge1;
   final BowlingChallenge challenge2;
@@ -136,29 +89,4 @@ class FoundLairEncounterResult extends EncounterResultBase {
 
   @override
   bool get isLair => true;
-
-  @override
-  FoundLairEncounterResult copyWith({
-    int? game,
-    int? frame,
-    int? encounterLevel,
-    int? strength,
-    Frame? frameData,
-    bool? isSuccess,
-    LairEncounter? encounter,
-    BowlingChallenge? challenge1,
-    BowlingChallenge? challenge2,
-  }) {
-    return FoundLairEncounterResult(
-      game: game ?? this.game,
-      frame: frame ?? this.frame,
-      encounterLevel: encounterLevel ?? this.encounterLevel,
-      strength: strength ?? this.strength,
-      frameData: frameData ?? this.frameData,
-      isSuccess: isSuccess ?? this.isSuccess,
-      encounter: encounter ?? this.encounter,
-      challenge1: challenge1 ?? this.challenge1,
-      challenge2: challenge2 ?? this.challenge2,
-    );
-  }
 }

@@ -1,7 +1,11 @@
-import 'package:dartx/dartx.dart';
-import 'package:quiver/core.dart' show Optional;
+import 'package:dart_mappable/dart_mappable.dart';
 
-class Frame {
+import 'package:dartx/dartx.dart';
+
+part 'frame.mapper.dart';
+
+@MappableClass()
+class Frame with FrameMappable {
   final int? firstThrow;
   final int? secondThrow;
   final int? score;
@@ -12,17 +16,11 @@ class Frame {
     this.score,
   });
 
-  Frame copyWith({
-    Optional<int>? firstThrow,
-    Optional<int>? secondThrow,
-    Optional<int>? score,
-  }) {
-    return Frame(
-      firstThrow: firstThrow == null ? this.firstThrow : firstThrow.orNull,
-      secondThrow: secondThrow == null ? this.secondThrow : secondThrow.orNull,
-      score: score == null ? this.score : score.orNull,
-    );
-  }
+  Frame clearThrowsAfter(int ballThrow) => Frame(
+    firstThrow: ballThrow >= 1 ? firstThrow : null,
+    secondThrow: ballThrow >= 2 ? secondThrow : null,
+    score: score,
+  );
 
   bool get isStrike => (firstThrow ?? 0) == 10;
   bool get isSpare => !isStrike && (firstThrow ?? 0) + (secondThrow ?? 0) == 10;
@@ -48,7 +46,8 @@ class Frame {
   }
 }
 
-class TenthFrame extends Frame {
+@MappableClass()
+class TenthFrame extends Frame with TenthFrameMappable {
   final int? thirdThrow;
 
   const TenthFrame({
@@ -59,19 +58,12 @@ class TenthFrame extends Frame {
   });
 
   @override
-  TenthFrame copyWith({
-    Optional<int>? firstThrow,
-    Optional<int>? secondThrow,
-    Optional<int>? thirdThrow,
-    Optional<int>? score,
-  }) {
-    return TenthFrame(
-      firstThrow: firstThrow == null ? this.firstThrow : firstThrow.orNull,
-      secondThrow: secondThrow == null ? this.secondThrow : secondThrow.orNull,
-      thirdThrow: thirdThrow == null ? this.thirdThrow : thirdThrow.orNull,
-      score: score == null ? this.score : score.orNull,
-    );
-  }
+  TenthFrame clearThrowsAfter(int ballThrow) => TenthFrame(
+    firstThrow: ballThrow >= 1 ? firstThrow : null,
+    secondThrow: ballThrow >= 2 ? secondThrow : null,
+    thirdThrow: ballThrow >= 3 ? thirdThrow : null,
+    score: score,
+  );
 
   bool get hasThirdThrow => thirdThrow != null;
   bool get requiresThirdThrow => isStrike || isSpare || secondThrow == 10;

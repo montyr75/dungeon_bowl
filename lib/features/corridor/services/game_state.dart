@@ -1,7 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
 import '../../../models/active_character.dart';
 import '../../../models/encounter_result.dart';
 
-class GameState {
+part 'game_state.mapper.dart';
+
+@MappableClass()
+class GameState with GameStateMappable {
   final ActiveCharacter character;
   final int game;
   final int frame;
@@ -14,21 +19,10 @@ class GameState {
     this.encounterHistory = const [],
   });
 
-  GameState copyWith({
-    ActiveCharacter? character,
-    int? game,
-    int? frame,
-    List<EncounterResultBase>? encounterHistory,
-  }) {
-    return GameState(
-      character: character ?? this.character,
-      game: game ?? this.game,
-      frame: frame ?? this.frame,
-      encounterHistory: encounterHistory ?? this.encounterHistory,
-    );
-  }
-
   bool get canFindLair => frame < 9;
+
+  static const fromMap = GameStateMapper.fromMap;
+  static const fromJson = GameStateMapper.fromJson;
 }
 
 extension ListEncounterResultX on List<EncounterResultBase> {

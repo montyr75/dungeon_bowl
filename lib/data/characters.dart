@@ -1,8 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:recase/recase.dart';
+
+part 'characters.mapper.dart';
 
 const characterImagePath = 'assets/images/characters';
 const characterBgImagePath = 'assets/images/characters/backgrounds';
 
+@MappableEnum()
 enum Character {
   sirBowlregard(
     race: 'Human',

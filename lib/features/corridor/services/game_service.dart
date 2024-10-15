@@ -1,5 +1,4 @@
 import 'package:dartx/dartx.dart';
-import 'package:quiver/core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/treasure.dart';
@@ -196,7 +195,7 @@ class GameService extends _$GameService {
       if (frameScore != null) {
         return enc.copyWith(
           frameData: enc.frameData.copyWith(
-            score: Optional<int>.of(score += frameScore),
+            score: score += frameScore,
           ),
         );
       }
