@@ -1,7 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
 import 'package:recase/recase.dart';
+
+part 'encounters.mapper.dart';
 
 const encounterImagePath = 'assets/images/encounters';
 
+@MappableEnum()
 enum Encounter {
   bat(
     level: 1,

@@ -97,6 +97,8 @@ class EncounterResultMapper extends ClassMapperBase<EncounterResult> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EncounterResultMapper._());
       EncounterResultBaseMapper.ensureInitialized();
+      EncounterMapper.ensureInitialized();
+      BowlingChallengeMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }
     return _instance!;
@@ -205,6 +207,8 @@ extension EncounterResultValueCopy<$R, $Out>
 
 abstract class EncounterResultCopyWith<$R, $In extends EncounterResult, $Out>
     implements EncounterResultBaseCopyWith<$R, $In, $Out> {
+  BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
+      get challenge;
   @override
   FrameCopyWith<$R, Frame, Frame> get frameData;
   @override
@@ -229,6 +233,10 @@ class _EncounterResultCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<EncounterResult> $mapper =
       EncounterResultMapper.ensureInitialized();
+  @override
+  BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
+      get challenge =>
+          $value.challenge.copyWith.$chain((v) => call(challenge: v));
   @override
   FrameCopyWith<$R, Frame, Frame> get frameData =>
       $value.frameData.copyWith.$chain((v) => call(frameData: v));
@@ -277,6 +285,7 @@ class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = LairEncounterResultMapper._());
       EncounterResultBaseMapper.ensureInitialized();
+      TenthFrameBowlingChallengeMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }
     return _instance!;
@@ -389,6 +398,8 @@ extension LairEncounterResultValueCopy<$R, $Out>
 
 abstract class LairEncounterResultCopyWith<$R, $In extends LairEncounterResult,
     $Out> implements EncounterResultBaseCopyWith<$R, $In, $Out> {
+  TenthFrameBowlingChallengeCopyWith<$R, TenthFrameBowlingChallenge,
+      TenthFrameBowlingChallenge> get challenge;
   @override
   FrameCopyWith<$R, Frame, Frame> get frameData;
   @override
@@ -413,6 +424,11 @@ class _LairEncounterResultCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<LairEncounterResult> $mapper =
       LairEncounterResultMapper.ensureInitialized();
+  @override
+  TenthFrameBowlingChallengeCopyWith<$R, TenthFrameBowlingChallenge,
+          TenthFrameBowlingChallenge>
+      get challenge =>
+          $value.challenge.copyWith.$chain((v) => call(challenge: v));
   @override
   FrameCopyWith<$R, Frame, Frame> get frameData =>
       $value.frameData.copyWith.$chain((v) => call(frameData: v));
@@ -463,6 +479,7 @@ class FoundLairEncounterResultMapper
       MapperContainer.globals
           .use(_instance = FoundLairEncounterResultMapper._());
       EncounterResultBaseMapper.ensureInitialized();
+      BowlingChallengeMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }
     return _instance!;
@@ -584,6 +601,10 @@ abstract class FoundLairEncounterResultCopyWith<
     $R,
     $In extends FoundLairEncounterResult,
     $Out> implements EncounterResultBaseCopyWith<$R, $In, $Out> {
+  BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
+      get challenge1;
+  BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
+      get challenge2;
   @override
   FrameCopyWith<$R, Frame, Frame> get frameData;
   @override
@@ -610,6 +631,14 @@ class _FoundLairEncounterResultCopyWithImpl<$R, $Out>
   @override
   late final ClassMapperBase<FoundLairEncounterResult> $mapper =
       FoundLairEncounterResultMapper.ensureInitialized();
+  @override
+  BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
+      get challenge1 =>
+          $value.challenge1.copyWith.$chain((v) => call(challenge1: v));
+  @override
+  BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
+      get challenge2 =>
+          $value.challenge2.copyWith.$chain((v) => call(challenge2: v));
   @override
   FrameCopyWith<$R, Frame, Frame> get frameData =>
       $value.frameData.copyWith.$chain((v) => call(frameData: v));

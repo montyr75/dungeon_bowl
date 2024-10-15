@@ -1,11 +1,15 @@
 import 'package:collection/collection.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
 import '../models/frame.dart';
 import '../utils/roller.dart';
 import '../utils/utils.dart';
 
+part 'bowling_challenges.mapper.dart';
+
 typedef ChallengeEvaluation = bool Function({required Frame frame, int? strength});
 
+@MappableEnum()
 enum BowlingHit {
   strike,
   spare,
@@ -22,7 +26,8 @@ enum BowlingHit {
   }
 }
 
-class BowlingChallenge {
+@MappableClass()
+class BowlingChallenge with BowlingChallengeMappable {
   final int level;
   final bool isVariable; // does this challenge require a strength input?
   final BowlingHit? firstThrow;
@@ -74,7 +79,8 @@ class BowlingChallenge {
   }
 }
 
-class TenthFrameBowlingChallenge extends BowlingChallenge {
+@MappableClass()
+class TenthFrameBowlingChallenge extends BowlingChallenge with TenthFrameBowlingChallengeMappable {
   final BowlingHit? thirdThrow;
 
   const TenthFrameBowlingChallenge({
@@ -144,8 +150,9 @@ final bowlingChallenges = [
     firstThrow: BowlingHit.min,
     secondThrow: BowlingHit.min1,
     description: "Hit at least # pins with the first throw and at least 1 pin with the second throw.",
-    evaluate: ({required frame, strength}) => (frame.firstThrow ?? 0) >= (strength ?? 10) && (frame.secondThrow ?? 0) >= 1,
-),
+    evaluate: ({required frame, strength}) =>
+        (frame.firstThrow ?? 0) >= (strength ?? 10) && (frame.secondThrow ?? 0) >= 1,
+  ),
   BowlingChallenge(
     level: 6,
     secondThrow: BowlingHit.spare,
@@ -165,7 +172,7 @@ final bowlingChallenges = [
     firstThrow: BowlingHit.strike,
     description: "Get a strike.",
     evaluate: ({required frame, strength}) => frame.isStrike,
-),
+  ),
 ];
 
 extension ListBowlingChallegeX on List<BowlingChallenge> {
@@ -181,8 +188,10 @@ final tenthFrameBowlingChallenges = [
     description: "Hit at least 1 pin with every throw (including the third throw, if there is one).",
     evaluate: ({required frame, strength}) {
       final frameTen = frame as TenthFrame;
-      return (frameTen.firstThrow ?? 0) >= 1 && (frameTen.secondThrow ?? 0) >= 1 && ((frameTen.thirdThrow ?? 0) >= 1 || !frameTen.hasThirdThrow);
-    }, 
+      return (frameTen.firstThrow ?? 0) >= 1 &&
+          (frameTen.secondThrow ?? 0) >= 1 &&
+          ((frameTen.thirdThrow ?? 0) >= 1 || !frameTen.hasThirdThrow);
+    },
   ),
   TenthFrameBowlingChallenge(
     level: 2,
@@ -211,7 +220,8 @@ final tenthFrameBowlingChallenges = [
     description: "Hit at least # pins on the first throw and spare with the second or third throw.",
     evaluate: ({required frame, strength}) {
       final frameTen = frame as TenthFrame;
-      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) && (frameTen.hasSpare || frameTen.secondThrow == 10 || frameTen.thirdThrow == 10);
+      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) &&
+          (frameTen.hasSpare || frameTen.secondThrow == 10 || frameTen.thirdThrow == 10);
     },
   ),
   TenthFrameBowlingChallenge(
@@ -220,10 +230,13 @@ final tenthFrameBowlingChallenges = [
     firstThrow: BowlingHit.min,
     secondThrow: BowlingHit.spare,
     thirdThrow: BowlingHit.min,
-    description: "Hit at least # pins on the first throw, spare on the second throw, and hit at least # pins on the third throw.",
+    description:
+        "Hit at least # pins on the first throw, spare on the second throw, and hit at least # pins on the third throw.",
     evaluate: ({required frame, strength}) {
       final frameTen = frame as TenthFrame;
-      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) && (frameTen.isSpare || frameTen.secondThrow == 10) && (frameTen.thirdThrow ?? 0) >= (strength ?? 10);
+      return (frameTen.firstThrow ?? 0) >= (strength ?? 10) &&
+          (frameTen.isSpare || frameTen.secondThrow == 10) &&
+          (frameTen.thirdThrow ?? 0) >= (strength ?? 10);
     },
   ),
   TenthFrameBowlingChallenge(

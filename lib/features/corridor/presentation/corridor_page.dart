@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app_config.dart';
 import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
@@ -80,6 +81,13 @@ class CorridorPage extends ConsumerWidget {
                               );
                             },
                           ),
+                          if (debugMode) ...[
+                            boxXXL,
+                            TextButton(
+                              onPressed: () => ref.watch(gameServiceProvider.notifier).showSerialization(),
+                              child: Text("Show Game State"),
+                            ),
+                          ],
                         ],
                       ),
                     ),

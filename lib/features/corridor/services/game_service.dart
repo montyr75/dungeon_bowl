@@ -27,6 +27,10 @@ class GameService extends _$GameService {
     );
   }
 
+  String serialize() => state.toJson();
+
+  void showSerialization() => print(serialize());
+
   AppRoute nextRoom() {
     final report = generateReport();
     final chanceOfSpecial = report.percentFailure.maxOf(50);
@@ -256,11 +260,8 @@ class GameReport {
   });
 
   int get encountersWon => encounterResults.count((value) => value.isSuccess);
-
   int get totalEncounters => encounterResults.length;
-
   int get lairsWon => lairEncounterResults.count((value) => value.isSuccess);
-
   int get totalLairs => lairEncounterResults.length;
 
   int get percentEncountersWon {
