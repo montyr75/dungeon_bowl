@@ -30,96 +30,40 @@ class StatsPage extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                for (final encHist in encounters) ...[
-                  ScoreSheet(results: encHist),
-                  boxXXL,
-                ],
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        BgBubble(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "Success Rate",
-                                style: styles.displayMedium,
-                              ),
-                              boxM,
-                              Text(
-                                "${report.percentSuccess}%",
-                                style: styles.displayMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                        boxM,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            BgBubble(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "Rooms Defeated",
-                                    style: styles.displayMedium,
-                                  ),
-                                  boxM,
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "${report.encountersWon} / ${report.totalEncounters}",
-                                        style: styles.displayMedium,
-                                      ),
-                                      boxXL,
-                                      Text(
-                                        "${report.percentEncountersWon}%",
-                                        style: styles.displayMedium,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            boxM,
-                            BgBubble(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "Lairs Defeated",
-                                    style: styles.displayMedium,
-                                  ),
-                                  boxM,
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "${report.lairsWon} / ${report.totalLairs}",
-                                        style: styles.displayMedium,
-                                      ),
-                                      boxXL,
-                                      Text(
-                                        "${report.percentLairEncountersWon}%",
-                                        style: styles.displayMedium,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        // ref.read(gameServiceProvider.notifier).showSerialization()
+                      },
+                      child: Text("Load State"),
                     ),
-                  ),
+                    boxXXL,
+                    BgBubble(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Success Rate:",
+                            style: styles.displayMedium,
+                          ),
+                          boxM,
+                          Text(
+                            "${report.percentSuccess}%",
+                            style: styles.displayMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                    for (final encHist in encounters) ...[
+                      boxXXL,
+                      ScoreSheet(results: encHist),
+                    ],
+                  ],
                 ),
-              ],
+              ),
             ),
           ],
         ),

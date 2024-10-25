@@ -93,12 +93,6 @@ class BowlingChallengeMapper extends ClassMapperBase<BowlingChallenge> {
   static String _$description(BowlingChallenge v) => v.description;
   static const Field<BowlingChallenge, String> _f$description =
       Field('description', _$description);
-  static bool Function({required Frame frame, int? strength}) _$evaluate(
-          BowlingChallenge v) =>
-      v.evaluate;
-  static const Field<BowlingChallenge,
-          bool Function({required Frame frame, int strength})> _f$evaluate =
-      Field('evaluate', _$evaluate);
 
   @override
   final MappableFields<BowlingChallenge> fields = const {
@@ -108,7 +102,6 @@ class BowlingChallengeMapper extends ClassMapperBase<BowlingChallenge> {
     #secondThrow: _f$secondThrow,
     #frameTotal: _f$frameTotal,
     #description: _f$description,
-    #evaluate: _f$evaluate,
   };
 
   static BowlingChallenge _instantiate(DecodingData data) {
@@ -118,8 +111,7 @@ class BowlingChallengeMapper extends ClassMapperBase<BowlingChallenge> {
         firstThrow: data.dec(_f$firstThrow),
         secondThrow: data.dec(_f$secondThrow),
         frameTotal: data.dec(_f$frameTotal),
-        description: data.dec(_f$description),
-        evaluate: data.dec(_f$evaluate));
+        description: data.dec(_f$description));
   }
 
   @override
@@ -182,8 +174,7 @@ abstract class BowlingChallengeCopyWith<$R, $In extends BowlingChallenge, $Out>
       BowlingHit? firstThrow,
       BowlingHit? secondThrow,
       BowlingHit? frameTotal,
-      String? description,
-      bool Function({required Frame frame, int strength})? evaluate});
+      String? description});
   BowlingChallengeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -203,16 +194,14 @@ class _BowlingChallengeCopyWithImpl<$R, $Out>
           Object? firstThrow = $none,
           Object? secondThrow = $none,
           Object? frameTotal = $none,
-          String? description,
-          bool Function({required Frame frame, int strength})? evaluate}) =>
+          String? description}) =>
       $apply(FieldCopyWithData({
         if (level != null) #level: level,
         if (isVariable != null) #isVariable: isVariable,
         if (firstThrow != $none) #firstThrow: firstThrow,
         if (secondThrow != $none) #secondThrow: secondThrow,
         if (frameTotal != $none) #frameTotal: frameTotal,
-        if (description != null) #description: description,
-        if (evaluate != null) #evaluate: evaluate
+        if (description != null) #description: description
       }));
   @override
   BowlingChallenge $make(CopyWithData data) => BowlingChallenge(
@@ -221,8 +210,7 @@ class _BowlingChallengeCopyWithImpl<$R, $Out>
       firstThrow: data.get(#firstThrow, or: $value.firstThrow),
       secondThrow: data.get(#secondThrow, or: $value.secondThrow),
       frameTotal: data.get(#frameTotal, or: $value.frameTotal),
-      description: data.get(#description, or: $value.description),
-      evaluate: data.get(#evaluate, or: $value.evaluate));
+      description: data.get(#description, or: $value.description));
 
   @override
   BowlingChallengeCopyWith<$R2, BowlingChallenge, $Out2> $chain<$R2, $Out2>(
@@ -270,12 +258,6 @@ class TenthFrameBowlingChallengeMapper
   static String _$description(TenthFrameBowlingChallenge v) => v.description;
   static const Field<TenthFrameBowlingChallenge, String> _f$description =
       Field('description', _$description);
-  static bool Function({required Frame frame, int? strength}) _$evaluate(
-          TenthFrameBowlingChallenge v) =>
-      v.evaluate;
-  static const Field<TenthFrameBowlingChallenge,
-          bool Function({required Frame frame, int strength})> _f$evaluate =
-      Field('evaluate', _$evaluate);
 
   @override
   final MappableFields<TenthFrameBowlingChallenge> fields = const {
@@ -286,7 +268,6 @@ class TenthFrameBowlingChallengeMapper
     #thirdThrow: _f$thirdThrow,
     #frameTotal: _f$frameTotal,
     #description: _f$description,
-    #evaluate: _f$evaluate,
   };
 
   static TenthFrameBowlingChallenge _instantiate(DecodingData data) {
@@ -297,8 +278,7 @@ class TenthFrameBowlingChallengeMapper
         secondThrow: data.dec(_f$secondThrow),
         thirdThrow: data.dec(_f$thirdThrow),
         frameTotal: data.dec(_f$frameTotal),
-        description: data.dec(_f$description),
-        evaluate: data.dec(_f$evaluate));
+        description: data.dec(_f$description));
   }
 
   @override
@@ -368,8 +348,7 @@ abstract class TenthFrameBowlingChallengeCopyWith<
       BowlingHit? secondThrow,
       BowlingHit? thirdThrow,
       BowlingHit? frameTotal,
-      String? description,
-      bool Function({required Frame frame, int strength})? evaluate});
+      String? description});
   TenthFrameBowlingChallengeCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -392,8 +371,7 @@ class _TenthFrameBowlingChallengeCopyWithImpl<$R, $Out>
           Object? secondThrow = $none,
           Object? thirdThrow = $none,
           Object? frameTotal = $none,
-          String? description,
-          bool Function({required Frame frame, int strength})? evaluate}) =>
+          String? description}) =>
       $apply(FieldCopyWithData({
         if (level != null) #level: level,
         if (isVariable != null) #isVariable: isVariable,
@@ -401,8 +379,7 @@ class _TenthFrameBowlingChallengeCopyWithImpl<$R, $Out>
         if (secondThrow != $none) #secondThrow: secondThrow,
         if (thirdThrow != $none) #thirdThrow: thirdThrow,
         if (frameTotal != $none) #frameTotal: frameTotal,
-        if (description != null) #description: description,
-        if (evaluate != null) #evaluate: evaluate
+        if (description != null) #description: description
       }));
   @override
   TenthFrameBowlingChallenge $make(CopyWithData data) =>
@@ -413,8 +390,7 @@ class _TenthFrameBowlingChallengeCopyWithImpl<$R, $Out>
           secondThrow: data.get(#secondThrow, or: $value.secondThrow),
           thirdThrow: data.get(#thirdThrow, or: $value.thirdThrow),
           frameTotal: data.get(#frameTotal, or: $value.frameTotal),
-          description: data.get(#description, or: $value.description),
-          evaluate: data.get(#evaluate, or: $value.evaluate));
+          description: data.get(#description, or: $value.description));
 
   @override
   TenthFrameBowlingChallengeCopyWith<$R2, TenthFrameBowlingChallenge, $Out2>

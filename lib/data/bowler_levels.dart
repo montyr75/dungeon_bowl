@@ -1,7 +1,11 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:recase/recase.dart';
 
 import '../utils/roll_table.dart';
 
+part 'bowler_levels.mapper.dart';
+
+@MappableEnum()
 enum BowlerLevel {
   novice(
     minAvg: 0,

@@ -2,7 +2,6 @@ import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../routes.dart';
@@ -10,10 +9,10 @@ import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
 import '../../../widgets/bg_bubble.dart';
+import '../../../widgets/bowling_tip.dart';
 import '../../../widgets/game_bar.dart';
 import '../../../widgets/image_option_button.dart';
 import '../../../widgets/stats_page.dart';
-import '../../app/services/app/app_service.dart';
 import '../../corridor/services/game_service.dart';
 
 class TavernPage extends ConsumerWidget {
@@ -23,7 +22,6 @@ class TavernPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameServiceProvider);
     final report = ref.read(gameServiceProvider.notifier).generateReport();
-    final bowlingTip = ref.read(appServiceProvider.notifier).getBowlingTip();
 
     final styles = context.textStyles;
 
@@ -54,16 +52,16 @@ class TavernPage extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       BgBubble(
-                        child: Column(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              "Rooms Defeated: ${report.encountersWon} / ${report.totalEncounters} (${report.percentEncountersWon}%)",
+                              "Success Rate:",
                               style: styles.displayMedium,
                             ),
                             boxM,
                             Text(
-                              "Lairs Defeated: ${report.lairsWon} / ${report.totalLairs} (${report.percentLairEncountersWon}%)",
+                              "${report.percentSuccess}%",
                               style: styles.displayMedium,
                             ),
                           ],
@@ -94,21 +92,7 @@ class TavernPage extends ConsumerWidget {
                   const Spacer(),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 350.0),
-                    child: Card.filled(
-                      color: Colors.blue,
-                      child: Padding(
-                        padding: paddingAllM,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(FontAwesomeIcons.bowlingBall),
-                            boxL,
-                            Expanded(child: Text(bowlingTip)),
-                          ],
-                        ),
-                      ),
-                    ),
+                    child: BowlingTip(),
                   ),
                   boxXXL,
                 ],

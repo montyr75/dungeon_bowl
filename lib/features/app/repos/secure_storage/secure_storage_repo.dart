@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:recase/recase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -8,7 +9,8 @@ part 'secure_storage_repo.g.dart';
 
 enum StorageKey {
   sessionId,
-  email;
+  email,
+  savedGame;
 
   String toKey() => ReCase(name).snakeCase;
 }
@@ -50,4 +52,4 @@ class SecureStorageRepo {
 }
 
 @riverpod
-SecureStorageRepo secureStorageRepo(SecureStorageRepoRef ref) => const SecureStorageRepo();
+SecureStorageRepo secureStorageRepo(Ref ref) => const SecureStorageRepo();

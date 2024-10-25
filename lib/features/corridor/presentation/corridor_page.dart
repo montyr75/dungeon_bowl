@@ -1,7 +1,6 @@
 import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app_config.dart';
@@ -9,6 +8,7 @@ import '../../../routes.dart';
 import '../../../utils/popup_utils.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widgets/banner_title.dart';
+import '../../../widgets/bowling_tip.dart';
 import '../../../widgets/game_bar.dart';
 import '../../../widgets/image_option_button.dart';
 import '../../../widgets/stats_page.dart';
@@ -21,7 +21,6 @@ class CorridorPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(gameServiceProvider);
-    final bowlingTip = ref.read(appServiceProvider.notifier).getBowlingTip();
 
     return BackdropScaffold(
       appBar: buildGameBar(state),
@@ -84,8 +83,17 @@ class CorridorPage extends ConsumerWidget {
                           if (debugMode) ...[
                             boxXXL,
                             TextButton(
-                              onPressed: () => ref.watch(gameServiceProvider.notifier).showSerialization(),
-                              child: Text("Show Game State"),
+                              onPressed: () {
+                                log.info(ref.read(appServiceProvider.notifier).serializeGameData());
+                              },
+                              child: Text("Show State"),
+                            ),
+                            boxM,
+                            TextButton(
+                              onPressed: () {
+                                // ref.read(gameServiceProvider.notifier).showSerialization()
+                              },
+                              child: Text("Save State"),
                             ),
                           ],
                         ],
@@ -94,21 +102,7 @@ class CorridorPage extends ConsumerWidget {
                   ),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 350.0),
-                    child: Card.filled(
-                      color: Colors.blue,
-                      child: Padding(
-                        padding: paddingAllM,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Icon(FontAwesomeIcons.bowlingBall),
-                            boxL,
-                            Expanded(child: Text(bowlingTip)),
-                          ],
-                        ),
-                      ),
-                    ),
+                    child: BowlingTip(),
                   ),
                 ],
               ),

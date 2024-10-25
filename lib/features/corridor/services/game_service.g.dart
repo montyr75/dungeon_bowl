@@ -6,7 +6,7 @@ part of 'game_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$gameServiceHash() => r'e57736909f750214728b9f9bfc4fc7d518cf6735';
+String _$gameServiceHash() => r'9e937eb47f0b39870a580f9f2f1b7a6fc030b953';
 
 /// See also [GameService].
 @ProviderFor(GameService)
@@ -22,4 +22,4 @@ final gameServiceProvider =
 
 typedef _$GameService = AutoDisposeNotifier<GameState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

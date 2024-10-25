@@ -20,9 +20,6 @@ class GameState with GameStateMappable {
   });
 
   bool get canFindLair => frame < 9;
-
-  static const fromMap = GameStateMapper.fromMap;
-  static const fromJson = GameStateMapper.fromJson;
 }
 
 extension ListEncounterResultX on List<EncounterResultBase> {

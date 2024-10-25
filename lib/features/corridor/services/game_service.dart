@@ -23,13 +23,9 @@ class GameService extends _$GameService {
     final appState = ref.read(appServiceProvider);
 
     return GameState(
-      character: ActiveCharacter(character: appState.character),
+      character: ActiveCharacter(character: appState.character!),
     );
   }
-
-  String serialize() => state.toJson();
-
-  void showSerialization() => print(serialize());
 
   AppRoute nextRoom() {
     final report = generateReport();
@@ -147,6 +143,8 @@ class GameService extends _$GameService {
   void awardGP(int value) {
     state = _updateGP(state, value);
   }
+
+  String serialize() => state.toJson();
 
   GameState _nextFrame(GameState state) {
     final isNewGame = state.frame == 10;

@@ -6,7 +6,7 @@ part of 'app_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appServiceHash() => r'6e9827d103870e043e2119ee79d549079cbf9e6c';
+String _$appServiceHash() => r'b7d45ac902dbe00084482397df0ab4d617a480ab';
 
 /// See also [AppService].
 @ProviderFor(AppService)
@@ -21,4 +21,4 @@ final appServiceProvider = NotifierProvider<AppService, AppState>.internal(
 
 typedef _$AppService = Notifier<AppState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
