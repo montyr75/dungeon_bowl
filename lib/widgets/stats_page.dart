@@ -2,8 +2,10 @@ import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../features/app/services/app/app_service.dart';
 import '../features/corridor/services/game_service.dart';
 import '../features/corridor/services/game_state.dart';
+import '../utils/popup_utils.dart';
 import '../utils/screen_utils.dart';
 import 'bg_bubble.dart';
 import 'score_sheet.dart';
@@ -13,6 +15,7 @@ class StatsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appState = ref.watch(appServiceProvider);
     final report = ref.read(gameServiceProvider.notifier).generateReport();
     final encounters = ref.read(gameServiceProvider).encounterHistory.byGame;
 
@@ -34,11 +37,15 @@ class StatsPage extends ConsumerWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    TextButton(
+                    if (appState.hasValidSave) TextButton(
                       onPressed: () {
-                        // ref.read(gameServiceProvider.notifier).showSerialization()
+                        showConfirmDialog(
+                          context: context,
+                          message: "Are you sure you want to load the last autosave?",
+                          onConfirm: () => ref.read(appServiceProvider.notifier).restoreState(),
+                        );
                       },
-                      child: Text("Load State"),
+                      child: Text("Load Last Autosave"),
                     ),
                     boxXXL,
                     BgBubble(

@@ -48,53 +48,55 @@ class TavernPage extends ConsumerWidget {
                     title: "The Tavern",
                   ),
                   boxXXL,
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      BgBubble(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "Success Rate:",
-                              style: styles.displayMedium,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          BgBubble(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "Success Rate:",
+                                  style: styles.displayMedium,
+                                ),
+                                boxM,
+                                Text(
+                                  "${report.percentSuccess}%",
+                                  style: styles.displayMedium,
+                                ),
+                              ],
                             ),
-                            boxM,
-                            Text(
-                              "${report.percentSuccess}%",
-                              style: styles.displayMedium,
-                            ),
-                          ],
-                        ),
+                          ),
+                          boxXXL,
+                          ImageOptionButton(
+                            title: 'Next Dungeon',
+                            description: "Brave another dungeon for your next bowling game.",
+                            imagePath: 'assets/images/dungeon_door.webp',
+                            onPressed: () => context.pop(),
+                          ),
+                          boxL,
+                          ImageOptionButton(
+                            title: 'Quit',
+                            description: "Return home alive.",
+                            imagePath: 'assets/images/quit2.webp',
+                            onPressed: () {
+                              showConfirmDialog(
+                                context: context,
+                                message: "Are you sure you want to end this game?",
+                                onConfirm: () => context.goNamed(AppRoute.home.name),
+                              );
+                            },
+                          ),
+                        ],
                       ),
-                      boxXXL,
-                      ImageOptionButton(
-                        title: 'Next Dungeon',
-                        description: "Brave another dungeon for your next bowling game.",
-                        imagePath: 'assets/images/dungeon_door.webp',
-                        onPressed: () => context.pop(),
-                      ),
-                      boxL,
-                      ImageOptionButton(
-                        title: 'Quit',
-                        description: "Return home alive.",
-                        imagePath: 'assets/images/quit2.webp',
-                        onPressed: () {
-                          showConfirmDialog(
-                            context: context,
-                            message: "Are you sure you want to end this game?",
-                            onConfirm: () => context.goNamed(AppRoute.home.name),
-                          );
-                        },
-                      ),
-                    ],
+                    ),
                   ),
-                  const Spacer(),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 350.0),
                     child: BowlingTip(),
                   ),
-                  boxXXL,
                 ],
               ),
             ],

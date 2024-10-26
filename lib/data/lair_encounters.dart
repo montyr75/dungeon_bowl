@@ -1,7 +1,12 @@
+import 'package:dart_mappable/dart_mappable.dart';
+
 import 'package:recase/recase.dart';
+
+part 'lair_encounters.mapper.dart';
 
 const lairEncounterImagePath = 'assets/images/lair_encounters';
 
+@MappableEnum()
 enum LairEncounter {
   chimera(
     level: 4,

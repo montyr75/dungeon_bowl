@@ -25,6 +25,9 @@ class SavedGameMapper extends ClassMapperBase<SavedGame> {
   static String _$version(SavedGame v) => v.version;
   static const Field<SavedGame, String> _f$version =
       Field('version', _$version);
+  static DateTime _$timeStamp(SavedGame v) => v.timeStamp;
+  static const Field<SavedGame, DateTime> _f$timeStamp =
+      Field('timeStamp', _$timeStamp);
   static AppState _$appState(SavedGame v) => v.appState;
   static const Field<SavedGame, AppState> _f$appState =
       Field('appState', _$appState);
@@ -35,6 +38,7 @@ class SavedGameMapper extends ClassMapperBase<SavedGame> {
   @override
   final MappableFields<SavedGame> fields = const {
     #version: _f$version,
+    #timeStamp: _f$timeStamp,
     #appState: _f$appState,
     #gameState: _f$gameState,
   };
@@ -42,6 +46,7 @@ class SavedGameMapper extends ClassMapperBase<SavedGame> {
   static SavedGame _instantiate(DecodingData data) {
     return SavedGame(
         version: data.dec(_f$version),
+        timeStamp: data.dec(_f$timeStamp),
         appState: data.dec(_f$appState),
         gameState: data.dec(_f$gameState));
   }
@@ -98,7 +103,11 @@ abstract class SavedGameCopyWith<$R, $In extends SavedGame, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   AppStateCopyWith<$R, AppState, AppState> get appState;
   GameStateCopyWith<$R, GameState, GameState> get gameState;
-  $R call({String? version, AppState? appState, GameState? gameState});
+  $R call(
+      {String? version,
+      DateTime? timeStamp,
+      AppState? appState,
+      GameState? gameState});
   SavedGameCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -117,15 +126,21 @@ class _SavedGameCopyWithImpl<$R, $Out>
   GameStateCopyWith<$R, GameState, GameState> get gameState =>
       $value.gameState.copyWith.$chain((v) => call(gameState: v));
   @override
-  $R call({String? version, AppState? appState, GameState? gameState}) =>
+  $R call(
+          {String? version,
+          DateTime? timeStamp,
+          AppState? appState,
+          GameState? gameState}) =>
       $apply(FieldCopyWithData({
         if (version != null) #version: version,
+        if (timeStamp != null) #timeStamp: timeStamp,
         if (appState != null) #appState: appState,
         if (gameState != null) #gameState: gameState
       }));
   @override
   SavedGame $make(CopyWithData data) => SavedGame(
       version: data.get(#version, or: $value.version),
+      timeStamp: data.get(#timeStamp, or: $value.timeStamp),
       appState: data.get(#appState, or: $value.appState),
       gameState: data.get(#gameState, or: $value.gameState));
 

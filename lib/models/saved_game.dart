@@ -14,8 +14,23 @@ class SavedGame with SavedGameMappable {
 
   SavedGame({
     required this.version,
-    this.timeStamp,
+    required this.timeStamp,
     required this.appState,
     required this.gameState,
   });
+
+  factory SavedGame.now({
+    required String version,
+    required AppState appState,
+    required GameState gameState,
+  }) {
+    return SavedGame(
+      version: version,
+      timeStamp: DateTime.now(),
+      appState: appState,
+      gameState: gameState,
+    );
+  }
+
+  static SavedGame fromJson(String json) => SavedGameMapper.fromJson(json);
 }

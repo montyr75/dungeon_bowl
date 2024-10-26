@@ -15,6 +15,7 @@ class AppStateMapper extends ClassMapperBase<AppState> {
       MapperContainer.globals.use(_instance = AppStateMapper._());
       BowlerLevelMapper.ensureInitialized();
       CharacterMapper.ensureInitialized();
+      SavedGameMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -28,17 +29,22 @@ class AppStateMapper extends ClassMapperBase<AppState> {
   static Character? _$character(AppState v) => v.character;
   static const Field<AppState, Character> _f$character =
       Field('character', _$character, opt: true);
+  static SavedGame? _$savedGame(AppState v) => v.savedGame;
+  static const Field<AppState, SavedGame> _f$savedGame =
+      Field('savedGame', _$savedGame, opt: true);
 
   @override
   final MappableFields<AppState> fields = const {
     #bowlerLevel: _f$bowlerLevel,
     #character: _f$character,
+    #savedGame: _f$savedGame,
   };
 
   static AppState _instantiate(DecodingData data) {
     return AppState(
         bowlerLevel: data.dec(_f$bowlerLevel),
-        character: data.dec(_f$character));
+        character: data.dec(_f$character),
+        savedGame: data.dec(_f$savedGame));
   }
 
   @override
@@ -90,7 +96,9 @@ extension AppStateValueCopy<$R, $Out> on ObjectCopyWith<$R, AppState, $Out> {
 
 abstract class AppStateCopyWith<$R, $In extends AppState, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({BowlerLevel? bowlerLevel, Character? character});
+  SavedGameCopyWith<$R, SavedGame, SavedGame>? get savedGame;
+  $R call(
+      {BowlerLevel? bowlerLevel, Character? character, SavedGame? savedGame});
   AppStateCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -103,15 +111,23 @@ class _AppStateCopyWithImpl<$R, $Out>
   late final ClassMapperBase<AppState> $mapper =
       AppStateMapper.ensureInitialized();
   @override
-  $R call({BowlerLevel? bowlerLevel, Object? character = $none}) =>
+  SavedGameCopyWith<$R, SavedGame, SavedGame>? get savedGame =>
+      $value.savedGame?.copyWith.$chain((v) => call(savedGame: v));
+  @override
+  $R call(
+          {BowlerLevel? bowlerLevel,
+          Object? character = $none,
+          Object? savedGame = $none}) =>
       $apply(FieldCopyWithData({
         if (bowlerLevel != null) #bowlerLevel: bowlerLevel,
-        if (character != $none) #character: character
+        if (character != $none) #character: character,
+        if (savedGame != $none) #savedGame: savedGame
       }));
   @override
   AppState $make(CopyWithData data) => AppState(
       bowlerLevel: data.get(#bowlerLevel, or: $value.bowlerLevel),
-      character: data.get(#character, or: $value.character));
+      character: data.get(#character, or: $value.character),
+      savedGame: data.get(#savedGame, or: $value.savedGame));
 
   @override
   AppStateCopyWith<$R2, AppState, $Out2> $chain<$R2, $Out2>(

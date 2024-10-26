@@ -27,6 +27,10 @@ class GameService extends _$GameService {
     );
   }
 
+  void restore(GameState value) {
+    state = value;
+  }
+
   AppRoute nextRoom() {
     final report = generateReport();
     final chanceOfSpecial = report.percentFailure.maxOf(50);
@@ -55,10 +59,12 @@ class GameService extends _$GameService {
         isSuccess: true,
       ),
     );
+
+    _saveState();
   }
 
   void roomFailure({required RoomState roomState, required Frame frameData}) {
-    GameState newState = _nextFrame(state);
+    final newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
@@ -69,6 +75,8 @@ class GameService extends _$GameService {
         isSuccess: false,
       ),
     );
+
+    _saveState();
   }
 
   void lairSuccess({
@@ -88,10 +96,12 @@ class GameService extends _$GameService {
         isSuccess: true,
       ),
     );
+
+    _saveState();
   }
 
   void lairFailure({required LairState lairState, required Frame frameData}) {
-    GameState newState = _nextFrame(state);
+    final newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
@@ -102,6 +112,8 @@ class GameService extends _$GameService {
         isSuccess: false,
       ),
     );
+
+    _saveState();
   }
 
   void foundLairSuccess({
@@ -124,10 +136,12 @@ class GameService extends _$GameService {
         isSuccess: true,
       ),
     );
+
+    _saveState();
   }
 
   void foundLairFailure({required FoundLairState foundLairState, required Frame frameData}) {
-    GameState newState = _nextFrame(state);
+    final newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
@@ -138,13 +152,13 @@ class GameService extends _$GameService {
         isSuccess: false,
       ),
     );
+
+    _saveState();
   }
 
   void awardGP(int value) {
     state = _updateGP(state, value);
   }
-
-  String serialize() => state.toJson();
 
   GameState _nextFrame(GameState state) {
     final isNewGame = state.frame == 10;
@@ -245,6 +259,10 @@ class GameService extends _$GameService {
     }
 
     return score;
+  }
+
+  void _saveState() {
+    ref.read(appServiceProvider.notifier).saveState();
   }
 }
 

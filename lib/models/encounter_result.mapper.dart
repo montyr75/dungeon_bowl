@@ -285,6 +285,7 @@ class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = LairEncounterResultMapper._());
       EncounterResultBaseMapper.ensureInitialized();
+      LairEncounterMapper.ensureInitialized();
       TenthFrameBowlingChallengeMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }
@@ -479,6 +480,7 @@ class FoundLairEncounterResultMapper
       MapperContainer.globals
           .use(_instance = FoundLairEncounterResultMapper._());
       EncounterResultBaseMapper.ensureInitialized();
+      LairEncounterMapper.ensureInitialized();
       BowlingChallengeMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }

@@ -76,7 +76,10 @@ class CorridorPage extends ConsumerWidget {
                               showConfirmDialog(
                                 context: context,
                                 message: "Are you sure you want to end this game?",
-                                onConfirm: () => context.goNamed(AppRoute.home.name),
+                                onConfirm: () {
+                                  ref.read(appServiceProvider.notifier).clearSaves();
+                                  context.goNamed(AppRoute.home.name);
+                                },
                               );
                             },
                           ),
@@ -91,9 +94,9 @@ class CorridorPage extends ConsumerWidget {
                             boxM,
                             TextButton(
                               onPressed: () {
-                                // ref.read(gameServiceProvider.notifier).showSerialization()
+                                ref.read(appServiceProvider.notifier).clearSaves();
                               },
-                              child: Text("Save State"),
+                              child: Text("Clear Saves"),
                             ),
                           ],
                         ],

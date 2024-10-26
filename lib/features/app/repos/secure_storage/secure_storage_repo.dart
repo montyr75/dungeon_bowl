@@ -45,10 +45,6 @@ class SecureStorageRepo {
   Future<void> deleteAll() {
     return storage.deleteAll();
   }
-
-  void logout() {
-    deleteAll();
-  }
 }
 
 @riverpod
