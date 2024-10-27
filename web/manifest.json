@@ -1,11 +1,11 @@
 {
-    "name": "Dungeon Bowl",
-    "short_name": "DB",
+    "name": "dungeon_bowl",
+    "short_name": "dungeon_bowl",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A fantasy adventure game crossed with real bowling.",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

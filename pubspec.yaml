@@ -1,7 +1,7 @@
 name: dungeon_bowl
 description: "A fantasy adventure game crossed with real bowling."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.0.12
+version: 0.0.14
 
 environment:
   sdk: ^3.5.3
@@ -40,12 +40,12 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.13
-  custom_lint: ^0.6.8
+  custom_lint: ^0.7.0
   dart_mappable_builder: ^4.3.0
   flutter_launcher_icons: ^0.14.1
   flutter_lints: ^5.0.0
-  riverpod_generator: ^2.6.1
-  riverpod_lint: ^2.6.1
+  riverpod_generator: ^2.6.2
+  riverpod_lint: ^2.6.2
 
 flutter:
   uses-material-design: true
@@ -58,7 +58,6 @@ flutter:
     - assets/images/encounters/
     - assets/images/lair_encounters/
     - assets/images/treasure/
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

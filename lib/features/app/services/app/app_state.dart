@@ -20,4 +20,6 @@ class AppState with AppStateMappable{
   });
 
   bool get hasValidSave => savedGame != null && savedGame!.version == version;
+
+  bool get isGameActive => character != null;
 }

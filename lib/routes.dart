@@ -6,10 +6,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'data/characters.dart';
 import 'features/app/presentation/home_page.dart';
 import 'features/app/presentation/not_found_page.dart';
+import 'features/app/services/app/app_service.dart';
 import 'features/characters/presentation/character_details_page.dart';
 import 'features/characters/presentation/character_selection_page.dart';
 import 'features/corridor/presentation/corridor_page.dart';
-import 'features/fork/presesntation/fork_page.dart';
+import 'features/fork/presentation/fork_page.dart';
 import 'features/lair/presentation/found_lair_page.dart';
 import 'features/lair/presentation/lair_page.dart';
 import 'features/room/presentation/room_page.dart';
@@ -41,8 +42,20 @@ enum AppRoute {
 GoRouter goRouter(Ref ref) {
   return GoRouter(
     debugLogDiagnostics: false,
+    routerNeglect: true,
     initialLocation: AppRoute.home.path,
     observers: [FlutterSmartDialog.observer],
+    redirect: (context, state) {
+      final appState = ref.read(appServiceProvider);
+
+      // if the app starts on a deep link with an uninitialized app state, redirect home
+      if (appState.isGameActive || !state.fullPath!.contains(AppRoute.corridor.path)) {
+        return null;
+      }
+      else {
+        return '/';
+      }
+    },
     routes: [
       GoRoute(
         name: AppRoute.home.name,
