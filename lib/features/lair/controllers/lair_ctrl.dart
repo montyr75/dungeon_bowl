@@ -14,23 +14,30 @@ part 'lair_ctrl.g.dart';
 @riverpod
 class LairCtrl extends _$LairCtrl {
   @override
-  LairState build() {
+  FoundLairState build() {
     final bowlerLevel = ref.read(appServiceProvider).bowlerLevel;
 
     final lvl = bowlerLevel.encounterLevelTable.lookup(roll(100))!.minOf(4);
     final str = (rollDice(1, lvl, 3) + bowlerLevel.challengeMod).maxOf(10);
 
-    final challenge = TenthFrameBowlingChallenge.generateBowlingChallenge(
+    final challenge1 = BowlingChallenge.generateBowlingChallenge(
       level: lvl,
       mod: bowlerLevel.challengeMod,
       strength: str,
     );
 
-    final initialState = LairState(
-      enounterLevel: lvl,
+    final challenge2 = BowlingChallenge.generateBowlingChallenge(
+      level: lvl,
+      mod: bowlerLevel.challengeMod + 1,
+      strength: str,
+    );
+
+    final initialState = FoundLairState(
+      encounterLevel: lvl,
       encounter: LairEncounter.randomEncounterByLevel(lvl),
-      challenge: challenge,
-      strength: challenge.isVariable ? str : null,
+      challenge1: challenge1,
+      challenge2: challenge2,
+      strength: str,
     );
 
     log.info(initialState);
@@ -38,5 +45,9 @@ class LairCtrl extends _$LairCtrl {
     return initialState;
   }
 
-  Treasure success() => Treasure.random(mod: 20, isLair: true);
+  void challenge1Success() {
+    state = state.copyWith(isChallenge1Success: true);
+  }
+
+  Treasure success() => Treasure.random(isLair: true);
 }

@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'routes.dart';
+part of 'boss_lair_ctrl.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$goRouterHash() => r'a0b9ed96e280a4012babf104d19764f0a915fb85';
+String _$bossLairCtrlHash() => r'467f63333194b1ee2976b91ff4be7df515ebcc5e';
 
-/// See also [goRouter].
-@ProviderFor(goRouter)
-final goRouterProvider = AutoDisposeProvider<GoRouter>.internal(
-  goRouter,
-  name: r'goRouterProvider',
+/// See also [BossLairCtrl].
+@ProviderFor(BossLairCtrl)
+final bossLairCtrlProvider =
+    AutoDisposeNotifierProvider<BossLairCtrl, BossLairState>.internal(
+  BossLairCtrl.new,
+  name: r'bossLairCtrlProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$goRouterHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$bossLairCtrlHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GoRouterRef = AutoDisposeProviderRef<GoRouter>;
+typedef _$BossLairCtrl = AutoDisposeNotifier<BossLairState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

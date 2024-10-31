@@ -9,7 +9,7 @@ import '../../../routes.dart';
 import '../../../utils/roller.dart';
 import '../../../utils/utils.dart';
 import '../../app/services/app/app_service.dart';
-import '../../lair/controllers/found_lair_state.dart';
+import '../../lair/controllers/boss_lair_state.dart';
 import '../../lair/controllers/lair_state.dart';
 import '../../room/controllers/room_state.dart';
 import 'game_state.dart';
@@ -80,7 +80,7 @@ class GameService extends _$GameService {
   }
 
   void lairSuccess({
-    required LairState lairState,
+    required BossLairState lairState,
     required Frame frameData,
     required Treasure treasure,
   }) {
@@ -100,7 +100,7 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void lairFailure({required LairState lairState, required Frame frameData}) {
+  void lairFailure({required BossLairState lairState, required Frame frameData}) {
     final newState = _nextFrame(state);
 
     state = _updateEncounterHistory(

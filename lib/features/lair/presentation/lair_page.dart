@@ -1,5 +1,6 @@
 import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,33 +43,54 @@ class LairPage extends ConsumerWidget {
         ),
         boxM,
         ChallengeDisplay(
-          challenge: state.challenge,
+          challengeID: 1,
+          challenge: state.challenge1,
           strength: state.strength,
+          showButtons: !state.isChallenge1Success,
           onSuccess: (frame) {
-            final treasure = ref.read(lairCtrlProvider.notifier).success();
-
-            TreasureDialog.show(
-              treasure,
-              onDismiss: () {
-                ref.read(gameServiceProvider.notifier).lairSuccess(
-                  lairState: state,
-                  frameData: frame,
-                  treasure: treasure,
-                );
-
-                ref.read(goRouterProvider).goNamed(AppRoute.tavern.name);
-              },
+            ref.read(lairCtrlProvider.notifier).challenge1Success();
+            ref.read(gameServiceProvider.notifier).foundLairSuccess(
+              foundLairState: state,
+              frameData: frame,
             );
           },
           onFailure: (frame) {
-            ref.read(gameServiceProvider.notifier).lairFailure(
-              lairState: state,
-              frameData: frame,
-            );
+            ref.read(gameServiceProvider.notifier)
+                .foundLairFailure(foundLairState: state, frameData: frame);
 
-            context.goNamed(AppRoute.tavern.name);
+            context.pop();
           },
         ),
+        if (state.isChallenge1Success)
+          ChallengeDisplay(
+            challengeID: 2,
+            challenge: state.challenge2,
+            strength: state.strength,
+            onSuccess: (frame) {
+              final treasure = ref.read(lairCtrlProvider.notifier).success();
+
+              TreasureDialog.show(
+                treasure,
+                onDismiss: () {
+                  ref.read(gameServiceProvider.notifier).foundLairSuccess(
+                    foundLairState: state,
+                    frameData: frame,
+                    treasure: treasure,
+                  );
+
+                  ref.read(goRouterProvider).pop();
+                },
+              );
+            },
+            onFailure: (frame) {
+              ref.read(gameServiceProvider.notifier).foundLairFailure(
+                foundLairState: state,
+                frameData: frame,
+              );
+
+              context.pop();
+            },
+          ).animate().slideY(),
       ],
     );
   }

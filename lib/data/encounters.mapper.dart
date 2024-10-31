@@ -6,6 +6,56 @@
 
 part of 'encounters.dart';
 
+class EncounterTypeMapper extends EnumMapper<EncounterType> {
+  EncounterTypeMapper._();
+
+  static EncounterTypeMapper? _instance;
+  static EncounterTypeMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals.use(_instance = EncounterTypeMapper._());
+    }
+    return _instance!;
+  }
+
+  static EncounterType fromValue(dynamic value) {
+    ensureInitialized();
+    return MapperContainer.globals.fromValue(value);
+  }
+
+  @override
+  EncounterType decode(dynamic value) {
+    switch (value) {
+      case 'friendly':
+        return EncounterType.friendly;
+      case 'trap':
+        return EncounterType.trap;
+      case 'hostile':
+        return EncounterType.hostile;
+      default:
+        throw MapperException.unknownEnumValue(value);
+    }
+  }
+
+  @override
+  dynamic encode(EncounterType self) {
+    switch (self) {
+      case EncounterType.friendly:
+        return 'friendly';
+      case EncounterType.trap:
+        return 'trap';
+      case EncounterType.hostile:
+        return 'hostile';
+    }
+  }
+}
+
+extension EncounterTypeMapperExtension on EncounterType {
+  String toValue() {
+    EncounterTypeMapper.ensureInitialized();
+    return MapperContainer.globals.toValue<EncounterType>(this) as String;
+  }
+}
+
 class EncounterMapper extends EnumMapper<Encounter> {
   EncounterMapper._();
 
