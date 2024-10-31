@@ -7,6 +7,13 @@ part 'encounters.mapper.dart';
 const encounterImagePath = 'assets/images/encounters';
 
 @MappableEnum()
+enum EncounterType {
+  friendly,
+  trap,
+  hostile,
+}
+
+@MappableEnum()
 enum Encounter {
   bat(
     level: 1,
@@ -218,10 +225,12 @@ enum Encounter {
   );
 
   final int level;
+  final EncounterType type;
   final String description;
 
   const Encounter({
     required this.level,
+    required this.type,
     required this.description,
   });
 
