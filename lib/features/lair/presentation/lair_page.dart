@@ -49,14 +49,14 @@ class LairPage extends ConsumerWidget {
           showButtons: !state.isChallenge1Success,
           onSuccess: (frame) {
             ref.read(lairCtrlProvider.notifier).challenge1Success();
-            ref.read(gameServiceProvider.notifier).foundLairSuccess(
-              foundLairState: state,
+            ref.read(gameServiceProvider.notifier).lairSuccess(
+              lairState: state,
               frameData: frame,
             );
           },
           onFailure: (frame) {
             ref.read(gameServiceProvider.notifier)
-                .foundLairFailure(foundLairState: state, frameData: frame);
+                .lairFailure(lairState: state, frameData: frame);
 
             context.pop();
           },
@@ -72,8 +72,8 @@ class LairPage extends ConsumerWidget {
               TreasureDialog.show(
                 treasure,
                 onDismiss: () {
-                  ref.read(gameServiceProvider.notifier).foundLairSuccess(
-                    foundLairState: state,
+                  ref.read(gameServiceProvider.notifier).lairSuccess(
+                    lairState: state,
                     frameData: frame,
                     treasure: treasure,
                   );
@@ -83,8 +83,8 @@ class LairPage extends ConsumerWidget {
               );
             },
             onFailure: (frame) {
-              ref.read(gameServiceProvider.notifier).foundLairFailure(
-                foundLairState: state,
+              ref.read(gameServiceProvider.notifier).lairFailure(
+                lairState: state,
                 frameData: frame,
               );
 

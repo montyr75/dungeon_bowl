@@ -14,8 +14,8 @@ class EncounterResultBaseMapper extends ClassMapperBase<EncounterResultBase> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = EncounterResultBaseMapper._());
       EncounterResultMapper.ensureInitialized();
+      BossLairEncounterResultMapper.ensureInitialized();
       LairEncounterResultMapper.ensureInitialized();
-      FoundLairEncounterResultMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }
     return _instance!;
@@ -277,6 +277,205 @@ class _EncounterResultCopyWithImpl<$R, $Out>
       _EncounterResultCopyWithImpl($value, $cast, t);
 }
 
+class BossLairEncounterResultMapper
+    extends ClassMapperBase<BossLairEncounterResult> {
+  BossLairEncounterResultMapper._();
+
+  static BossLairEncounterResultMapper? _instance;
+  static BossLairEncounterResultMapper ensureInitialized() {
+    if (_instance == null) {
+      MapperContainer.globals
+          .use(_instance = BossLairEncounterResultMapper._());
+      EncounterResultBaseMapper.ensureInitialized();
+      LairEncounterMapper.ensureInitialized();
+      TenthFrameBowlingChallengeMapper.ensureInitialized();
+      FrameMapper.ensureInitialized();
+    }
+    return _instance!;
+  }
+
+  @override
+  final String id = 'BossLairEncounterResult';
+
+  static int _$game(BossLairEncounterResult v) => v.game;
+  static const Field<BossLairEncounterResult, int> _f$game =
+      Field('game', _$game);
+  static int _$frame(BossLairEncounterResult v) => v.frame;
+  static const Field<BossLairEncounterResult, int> _f$frame =
+      Field('frame', _$frame);
+  static int _$encounterLevel(BossLairEncounterResult v) => v.encounterLevel;
+  static const Field<BossLairEncounterResult, int> _f$encounterLevel =
+      Field('encounterLevel', _$encounterLevel);
+  static int? _$strength(BossLairEncounterResult v) => v.strength;
+  static const Field<BossLairEncounterResult, int> _f$strength =
+      Field('strength', _$strength, opt: true);
+  static LairEncounter _$encounter(BossLairEncounterResult v) => v.encounter;
+  static const Field<BossLairEncounterResult, LairEncounter> _f$encounter =
+      Field('encounter', _$encounter);
+  static TenthFrameBowlingChallenge _$challenge(BossLairEncounterResult v) =>
+      v.challenge;
+  static const Field<BossLairEncounterResult, TenthFrameBowlingChallenge>
+      _f$challenge = Field('challenge', _$challenge);
+  static Frame _$frameData(BossLairEncounterResult v) => v.frameData;
+  static const Field<BossLairEncounterResult, Frame> _f$frameData =
+      Field('frameData', _$frameData);
+  static bool _$isSuccess(BossLairEncounterResult v) => v.isSuccess;
+  static const Field<BossLairEncounterResult, bool> _f$isSuccess =
+      Field('isSuccess', _$isSuccess, opt: true, def: false);
+
+  @override
+  final MappableFields<BossLairEncounterResult> fields = const {
+    #game: _f$game,
+    #frame: _f$frame,
+    #encounterLevel: _f$encounterLevel,
+    #strength: _f$strength,
+    #encounter: _f$encounter,
+    #challenge: _f$challenge,
+    #frameData: _f$frameData,
+    #isSuccess: _f$isSuccess,
+  };
+
+  static BossLairEncounterResult _instantiate(DecodingData data) {
+    return BossLairEncounterResult(
+        game: data.dec(_f$game),
+        frame: data.dec(_f$frame),
+        encounterLevel: data.dec(_f$encounterLevel),
+        strength: data.dec(_f$strength),
+        encounter: data.dec(_f$encounter),
+        challenge: data.dec(_f$challenge),
+        frameData: data.dec(_f$frameData),
+        isSuccess: data.dec(_f$isSuccess));
+  }
+
+  @override
+  final Function instantiate = _instantiate;
+
+  static BossLairEncounterResult fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<BossLairEncounterResult>(map);
+  }
+
+  static BossLairEncounterResult fromJson(String json) {
+    return ensureInitialized().decodeJson<BossLairEncounterResult>(json);
+  }
+}
+
+mixin BossLairEncounterResultMappable {
+  String toJson() {
+    return BossLairEncounterResultMapper.ensureInitialized()
+        .encodeJson<BossLairEncounterResult>(this as BossLairEncounterResult);
+  }
+
+  Map<String, dynamic> toMap() {
+    return BossLairEncounterResultMapper.ensureInitialized()
+        .encodeMap<BossLairEncounterResult>(this as BossLairEncounterResult);
+  }
+
+  BossLairEncounterResultCopyWith<BossLairEncounterResult,
+          BossLairEncounterResult, BossLairEncounterResult>
+      get copyWith => _BossLairEncounterResultCopyWithImpl(
+          this as BossLairEncounterResult, $identity, $identity);
+  @override
+  String toString() {
+    return BossLairEncounterResultMapper.ensureInitialized()
+        .stringifyValue(this as BossLairEncounterResult);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return BossLairEncounterResultMapper.ensureInitialized()
+        .equalsValue(this as BossLairEncounterResult, other);
+  }
+
+  @override
+  int get hashCode {
+    return BossLairEncounterResultMapper.ensureInitialized()
+        .hashValue(this as BossLairEncounterResult);
+  }
+}
+
+extension BossLairEncounterResultValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, BossLairEncounterResult, $Out> {
+  BossLairEncounterResultCopyWith<$R, BossLairEncounterResult, $Out>
+      get $asBossLairEncounterResult => $base
+          .as((v, t, t2) => _BossLairEncounterResultCopyWithImpl(v, t, t2));
+}
+
+abstract class BossLairEncounterResultCopyWith<
+    $R,
+    $In extends BossLairEncounterResult,
+    $Out> implements EncounterResultBaseCopyWith<$R, $In, $Out> {
+  TenthFrameBowlingChallengeCopyWith<$R, TenthFrameBowlingChallenge,
+      TenthFrameBowlingChallenge> get challenge;
+  @override
+  FrameCopyWith<$R, Frame, Frame> get frameData;
+  @override
+  $R call(
+      {int? game,
+      int? frame,
+      int? encounterLevel,
+      int? strength,
+      LairEncounter? encounter,
+      TenthFrameBowlingChallenge? challenge,
+      Frame? frameData,
+      bool? isSuccess});
+  BossLairEncounterResultCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+      Then<$Out2, $R2> t);
+}
+
+class _BossLairEncounterResultCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, BossLairEncounterResult, $Out>
+    implements
+        BossLairEncounterResultCopyWith<$R, BossLairEncounterResult, $Out> {
+  _BossLairEncounterResultCopyWithImpl(super.value, super.then, super.then2);
+
+  @override
+  late final ClassMapperBase<BossLairEncounterResult> $mapper =
+      BossLairEncounterResultMapper.ensureInitialized();
+  @override
+  TenthFrameBowlingChallengeCopyWith<$R, TenthFrameBowlingChallenge,
+          TenthFrameBowlingChallenge>
+      get challenge =>
+          $value.challenge.copyWith.$chain((v) => call(challenge: v));
+  @override
+  FrameCopyWith<$R, Frame, Frame> get frameData =>
+      $value.frameData.copyWith.$chain((v) => call(frameData: v));
+  @override
+  $R call(
+          {int? game,
+          int? frame,
+          int? encounterLevel,
+          Object? strength = $none,
+          LairEncounter? encounter,
+          TenthFrameBowlingChallenge? challenge,
+          Frame? frameData,
+          bool? isSuccess}) =>
+      $apply(FieldCopyWithData({
+        if (game != null) #game: game,
+        if (frame != null) #frame: frame,
+        if (encounterLevel != null) #encounterLevel: encounterLevel,
+        if (strength != $none) #strength: strength,
+        if (encounter != null) #encounter: encounter,
+        if (challenge != null) #challenge: challenge,
+        if (frameData != null) #frameData: frameData,
+        if (isSuccess != null) #isSuccess: isSuccess
+      }));
+  @override
+  BossLairEncounterResult $make(CopyWithData data) => BossLairEncounterResult(
+      game: data.get(#game, or: $value.game),
+      frame: data.get(#frame, or: $value.frame),
+      encounterLevel: data.get(#encounterLevel, or: $value.encounterLevel),
+      strength: data.get(#strength, or: $value.strength),
+      encounter: data.get(#encounter, or: $value.encounter),
+      challenge: data.get(#challenge, or: $value.challenge),
+      frameData: data.get(#frameData, or: $value.frameData),
+      isSuccess: data.get(#isSuccess, or: $value.isSuccess));
+
+  @override
+  BossLairEncounterResultCopyWith<$R2, BossLairEncounterResult, $Out2>
+      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
+          _BossLairEncounterResultCopyWithImpl($value, $cast, t);
+}
+
 class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
   LairEncounterResultMapper._();
 
@@ -286,7 +485,7 @@ class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
       MapperContainer.globals.use(_instance = LairEncounterResultMapper._());
       EncounterResultBaseMapper.ensureInitialized();
       LairEncounterMapper.ensureInitialized();
-      TenthFrameBowlingChallengeMapper.ensureInitialized();
+      BowlingChallengeMapper.ensureInitialized();
       FrameMapper.ensureInitialized();
     }
     return _instance!;
@@ -309,10 +508,12 @@ class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
   static LairEncounter _$encounter(LairEncounterResult v) => v.encounter;
   static const Field<LairEncounterResult, LairEncounter> _f$encounter =
       Field('encounter', _$encounter);
-  static TenthFrameBowlingChallenge _$challenge(LairEncounterResult v) =>
-      v.challenge;
-  static const Field<LairEncounterResult, TenthFrameBowlingChallenge>
-      _f$challenge = Field('challenge', _$challenge);
+  static BowlingChallenge _$challenge1(LairEncounterResult v) => v.challenge1;
+  static const Field<LairEncounterResult, BowlingChallenge> _f$challenge1 =
+      Field('challenge1', _$challenge1);
+  static BowlingChallenge _$challenge2(LairEncounterResult v) => v.challenge2;
+  static const Field<LairEncounterResult, BowlingChallenge> _f$challenge2 =
+      Field('challenge2', _$challenge2);
   static Frame _$frameData(LairEncounterResult v) => v.frameData;
   static const Field<LairEncounterResult, Frame> _f$frameData =
       Field('frameData', _$frameData);
@@ -327,7 +528,8 @@ class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
     #encounterLevel: _f$encounterLevel,
     #strength: _f$strength,
     #encounter: _f$encounter,
-    #challenge: _f$challenge,
+    #challenge1: _f$challenge1,
+    #challenge2: _f$challenge2,
     #frameData: _f$frameData,
     #isSuccess: _f$isSuccess,
   };
@@ -339,7 +541,8 @@ class LairEncounterResultMapper extends ClassMapperBase<LairEncounterResult> {
         encounterLevel: data.dec(_f$encounterLevel),
         strength: data.dec(_f$strength),
         encounter: data.dec(_f$encounter),
-        challenge: data.dec(_f$challenge),
+        challenge1: data.dec(_f$challenge1),
+        challenge2: data.dec(_f$challenge2),
         frameData: data.dec(_f$frameData),
         isSuccess: data.dec(_f$isSuccess));
   }
@@ -399,210 +602,6 @@ extension LairEncounterResultValueCopy<$R, $Out>
 
 abstract class LairEncounterResultCopyWith<$R, $In extends LairEncounterResult,
     $Out> implements EncounterResultBaseCopyWith<$R, $In, $Out> {
-  TenthFrameBowlingChallengeCopyWith<$R, TenthFrameBowlingChallenge,
-      TenthFrameBowlingChallenge> get challenge;
-  @override
-  FrameCopyWith<$R, Frame, Frame> get frameData;
-  @override
-  $R call(
-      {int? game,
-      int? frame,
-      int? encounterLevel,
-      int? strength,
-      LairEncounter? encounter,
-      TenthFrameBowlingChallenge? challenge,
-      Frame? frameData,
-      bool? isSuccess});
-  LairEncounterResultCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
-}
-
-class _LairEncounterResultCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, LairEncounterResult, $Out>
-    implements LairEncounterResultCopyWith<$R, LairEncounterResult, $Out> {
-  _LairEncounterResultCopyWithImpl(super.value, super.then, super.then2);
-
-  @override
-  late final ClassMapperBase<LairEncounterResult> $mapper =
-      LairEncounterResultMapper.ensureInitialized();
-  @override
-  TenthFrameBowlingChallengeCopyWith<$R, TenthFrameBowlingChallenge,
-          TenthFrameBowlingChallenge>
-      get challenge =>
-          $value.challenge.copyWith.$chain((v) => call(challenge: v));
-  @override
-  FrameCopyWith<$R, Frame, Frame> get frameData =>
-      $value.frameData.copyWith.$chain((v) => call(frameData: v));
-  @override
-  $R call(
-          {int? game,
-          int? frame,
-          int? encounterLevel,
-          Object? strength = $none,
-          LairEncounter? encounter,
-          TenthFrameBowlingChallenge? challenge,
-          Frame? frameData,
-          bool? isSuccess}) =>
-      $apply(FieldCopyWithData({
-        if (game != null) #game: game,
-        if (frame != null) #frame: frame,
-        if (encounterLevel != null) #encounterLevel: encounterLevel,
-        if (strength != $none) #strength: strength,
-        if (encounter != null) #encounter: encounter,
-        if (challenge != null) #challenge: challenge,
-        if (frameData != null) #frameData: frameData,
-        if (isSuccess != null) #isSuccess: isSuccess
-      }));
-  @override
-  LairEncounterResult $make(CopyWithData data) => LairEncounterResult(
-      game: data.get(#game, or: $value.game),
-      frame: data.get(#frame, or: $value.frame),
-      encounterLevel: data.get(#encounterLevel, or: $value.encounterLevel),
-      strength: data.get(#strength, or: $value.strength),
-      encounter: data.get(#encounter, or: $value.encounter),
-      challenge: data.get(#challenge, or: $value.challenge),
-      frameData: data.get(#frameData, or: $value.frameData),
-      isSuccess: data.get(#isSuccess, or: $value.isSuccess));
-
-  @override
-  LairEncounterResultCopyWith<$R2, LairEncounterResult, $Out2>
-      $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-          _LairEncounterResultCopyWithImpl($value, $cast, t);
-}
-
-class FoundLairEncounterResultMapper
-    extends ClassMapperBase<FoundLairEncounterResult> {
-  FoundLairEncounterResultMapper._();
-
-  static FoundLairEncounterResultMapper? _instance;
-  static FoundLairEncounterResultMapper ensureInitialized() {
-    if (_instance == null) {
-      MapperContainer.globals
-          .use(_instance = FoundLairEncounterResultMapper._());
-      EncounterResultBaseMapper.ensureInitialized();
-      LairEncounterMapper.ensureInitialized();
-      BowlingChallengeMapper.ensureInitialized();
-      FrameMapper.ensureInitialized();
-    }
-    return _instance!;
-  }
-
-  @override
-  final String id = 'FoundLairEncounterResult';
-
-  static int _$game(FoundLairEncounterResult v) => v.game;
-  static const Field<FoundLairEncounterResult, int> _f$game =
-      Field('game', _$game);
-  static int _$frame(FoundLairEncounterResult v) => v.frame;
-  static const Field<FoundLairEncounterResult, int> _f$frame =
-      Field('frame', _$frame);
-  static int _$encounterLevel(FoundLairEncounterResult v) => v.encounterLevel;
-  static const Field<FoundLairEncounterResult, int> _f$encounterLevel =
-      Field('encounterLevel', _$encounterLevel);
-  static int? _$strength(FoundLairEncounterResult v) => v.strength;
-  static const Field<FoundLairEncounterResult, int> _f$strength =
-      Field('strength', _$strength, opt: true);
-  static LairEncounter _$encounter(FoundLairEncounterResult v) => v.encounter;
-  static const Field<FoundLairEncounterResult, LairEncounter> _f$encounter =
-      Field('encounter', _$encounter);
-  static BowlingChallenge _$challenge1(FoundLairEncounterResult v) =>
-      v.challenge1;
-  static const Field<FoundLairEncounterResult, BowlingChallenge> _f$challenge1 =
-      Field('challenge1', _$challenge1);
-  static BowlingChallenge _$challenge2(FoundLairEncounterResult v) =>
-      v.challenge2;
-  static const Field<FoundLairEncounterResult, BowlingChallenge> _f$challenge2 =
-      Field('challenge2', _$challenge2);
-  static Frame _$frameData(FoundLairEncounterResult v) => v.frameData;
-  static const Field<FoundLairEncounterResult, Frame> _f$frameData =
-      Field('frameData', _$frameData);
-  static bool _$isSuccess(FoundLairEncounterResult v) => v.isSuccess;
-  static const Field<FoundLairEncounterResult, bool> _f$isSuccess =
-      Field('isSuccess', _$isSuccess, opt: true, def: false);
-
-  @override
-  final MappableFields<FoundLairEncounterResult> fields = const {
-    #game: _f$game,
-    #frame: _f$frame,
-    #encounterLevel: _f$encounterLevel,
-    #strength: _f$strength,
-    #encounter: _f$encounter,
-    #challenge1: _f$challenge1,
-    #challenge2: _f$challenge2,
-    #frameData: _f$frameData,
-    #isSuccess: _f$isSuccess,
-  };
-
-  static FoundLairEncounterResult _instantiate(DecodingData data) {
-    return FoundLairEncounterResult(
-        game: data.dec(_f$game),
-        frame: data.dec(_f$frame),
-        encounterLevel: data.dec(_f$encounterLevel),
-        strength: data.dec(_f$strength),
-        encounter: data.dec(_f$encounter),
-        challenge1: data.dec(_f$challenge1),
-        challenge2: data.dec(_f$challenge2),
-        frameData: data.dec(_f$frameData),
-        isSuccess: data.dec(_f$isSuccess));
-  }
-
-  @override
-  final Function instantiate = _instantiate;
-
-  static FoundLairEncounterResult fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<FoundLairEncounterResult>(map);
-  }
-
-  static FoundLairEncounterResult fromJson(String json) {
-    return ensureInitialized().decodeJson<FoundLairEncounterResult>(json);
-  }
-}
-
-mixin FoundLairEncounterResultMappable {
-  String toJson() {
-    return FoundLairEncounterResultMapper.ensureInitialized()
-        .encodeJson<FoundLairEncounterResult>(this as FoundLairEncounterResult);
-  }
-
-  Map<String, dynamic> toMap() {
-    return FoundLairEncounterResultMapper.ensureInitialized()
-        .encodeMap<FoundLairEncounterResult>(this as FoundLairEncounterResult);
-  }
-
-  FoundLairEncounterResultCopyWith<FoundLairEncounterResult,
-          FoundLairEncounterResult, FoundLairEncounterResult>
-      get copyWith => _FoundLairEncounterResultCopyWithImpl(
-          this as FoundLairEncounterResult, $identity, $identity);
-  @override
-  String toString() {
-    return FoundLairEncounterResultMapper.ensureInitialized()
-        .stringifyValue(this as FoundLairEncounterResult);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return FoundLairEncounterResultMapper.ensureInitialized()
-        .equalsValue(this as FoundLairEncounterResult, other);
-  }
-
-  @override
-  int get hashCode {
-    return FoundLairEncounterResultMapper.ensureInitialized()
-        .hashValue(this as FoundLairEncounterResult);
-  }
-}
-
-extension FoundLairEncounterResultValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, FoundLairEncounterResult, $Out> {
-  FoundLairEncounterResultCopyWith<$R, FoundLairEncounterResult, $Out>
-      get $asFoundLairEncounterResult => $base
-          .as((v, t, t2) => _FoundLairEncounterResultCopyWithImpl(v, t, t2));
-}
-
-abstract class FoundLairEncounterResultCopyWith<
-    $R,
-    $In extends FoundLairEncounterResult,
-    $Out> implements EncounterResultBaseCopyWith<$R, $In, $Out> {
   BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
       get challenge1;
   BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
@@ -620,19 +619,18 @@ abstract class FoundLairEncounterResultCopyWith<
       BowlingChallenge? challenge2,
       Frame? frameData,
       bool? isSuccess});
-  FoundLairEncounterResultCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
+  LairEncounterResultCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
 
-class _FoundLairEncounterResultCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, FoundLairEncounterResult, $Out>
-    implements
-        FoundLairEncounterResultCopyWith<$R, FoundLairEncounterResult, $Out> {
-  _FoundLairEncounterResultCopyWithImpl(super.value, super.then, super.then2);
+class _LairEncounterResultCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, LairEncounterResult, $Out>
+    implements LairEncounterResultCopyWith<$R, LairEncounterResult, $Out> {
+  _LairEncounterResultCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<FoundLairEncounterResult> $mapper =
-      FoundLairEncounterResultMapper.ensureInitialized();
+  late final ClassMapperBase<LairEncounterResult> $mapper =
+      LairEncounterResultMapper.ensureInitialized();
   @override
   BowlingChallengeCopyWith<$R, BowlingChallenge, BowlingChallenge>
       get challenge1 =>
@@ -667,7 +665,7 @@ class _FoundLairEncounterResultCopyWithImpl<$R, $Out>
         if (isSuccess != null) #isSuccess: isSuccess
       }));
   @override
-  FoundLairEncounterResult $make(CopyWithData data) => FoundLairEncounterResult(
+  LairEncounterResult $make(CopyWithData data) => LairEncounterResult(
       game: data.get(#game, or: $value.game),
       frame: data.get(#frame, or: $value.frame),
       encounterLevel: data.get(#encounterLevel, or: $value.encounterLevel),
@@ -679,7 +677,7 @@ class _FoundLairEncounterResultCopyWithImpl<$R, $Out>
       isSuccess: data.get(#isSuccess, or: $value.isSuccess));
 
   @override
-  FoundLairEncounterResultCopyWith<$R2, FoundLairEncounterResult, $Out2>
+  LairEncounterResultCopyWith<$R2, LairEncounterResult, $Out2>
       $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>
-          _FoundLairEncounterResultCopyWithImpl($value, $cast, t);
+          _LairEncounterResultCopyWithImpl($value, $cast, t);
 }

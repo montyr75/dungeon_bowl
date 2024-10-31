@@ -57,7 +57,7 @@ class ForkPage extends ConsumerWidget {
                       message: "This isn't where you hoped to be! With trepidation, you explore the lair you've stumbled into.",
                     );
 
-                    ref.read(goRouterProvider).goNamed(AppRoute.foundLair.name);
+                    ref.read(goRouterProvider).goNamed(AppRoute.lair.name);
                   } else {
                     await showInfoDialog(
                       context: context,

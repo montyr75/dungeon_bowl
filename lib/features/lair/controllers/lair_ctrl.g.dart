@@ -6,12 +6,12 @@ part of 'lair_ctrl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$lairCtrlHash() => r'ccdf79c2f0aad901cf2a61c52b84c546e0620483';
+String _$lairCtrlHash() => r'3a5a0e4ca19bd92b75917cca80e2d21333e1f211';
 
 /// See also [LairCtrl].
 @ProviderFor(LairCtrl)
 final lairCtrlProvider =
-    AutoDisposeNotifierProvider<LairCtrl, FoundLairState>.internal(
+    AutoDisposeNotifierProvider<LairCtrl, LairState>.internal(
   LairCtrl.new,
   name: r'lairCtrlProvider',
   debugGetCreateSourceHash:
@@ -20,6 +20,6 @@ final lairCtrlProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$LairCtrl = AutoDisposeNotifier<FoundLairState>;
+typedef _$LairCtrl = AutoDisposeNotifier<LairState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

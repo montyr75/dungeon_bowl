@@ -26,8 +26,8 @@ enum AppRoute {
   corridor,
   tavern,
   room,
-  foundLair,
   lair,
+  bossLair,
   fork,
   treasureRoom;
 
@@ -86,13 +86,13 @@ GoRouter goRouter(Ref ref) {
                 builder: (context, state) => const RoomPage(),
               ),
               GoRoute(
-                name: AppRoute.foundLair.name,
-                path: AppRoute.foundLair.path,
+                name: AppRoute.lair.name,
+                path: AppRoute.lair.path,
                 builder: (context, state) => const LairPage(),
               ),
               GoRoute(
-                name: AppRoute.lair.name,
-                path: AppRoute.lair.path,
+                name: AppRoute.bossLair.name,
+                path: AppRoute.bossLair.path,
                 builder: (context, state) => const BossLairPage(),
               ),
                GoRoute(

@@ -26,7 +26,7 @@ extension ListEncounterResultX on List<EncounterResultBase> {
   List<EncounterResult> get encounterResults => whereType<EncounterResult>().toList();
 
   List<EncounterResultBase> get lairEncounterResults =>
-      where((value) => value is LairEncounterResult || value is FoundLairEncounterResult).toList();
+      where((value) => value is BossLairEncounterResult || value is LairEncounterResult).toList();
 
   List<List<EncounterResultBase>> get byGame {
     final result = <List<EncounterResultBase>>[];

@@ -50,8 +50,8 @@ class BossLairPage extends ConsumerWidget {
             TreasureDialog.show(
               treasure,
               onDismiss: () {
-                ref.read(gameServiceProvider.notifier).lairSuccess(
-                  lairState: state,
+                ref.read(gameServiceProvider.notifier).bossLairSuccess(
+                  bossLairState: state,
                   frameData: frame,
                   treasure: treasure,
                 );
@@ -61,8 +61,8 @@ class BossLairPage extends ConsumerWidget {
             );
           },
           onFailure: (frame) {
-            ref.read(gameServiceProvider.notifier).lairFailure(
-              lairState: state,
+            ref.read(gameServiceProvider.notifier).bossLairFailure(
+              bossLairState: state,
               frameData: frame,
             );
 

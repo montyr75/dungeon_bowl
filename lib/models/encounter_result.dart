@@ -50,11 +50,11 @@ class EncounterResult extends EncounterResultBase with EncounterResultMappable {
 }
 
 @MappableClass()
-class LairEncounterResult extends EncounterResultBase with LairEncounterResultMappable {
+class BossLairEncounterResult extends EncounterResultBase with BossLairEncounterResultMappable {
   final LairEncounter encounter;
   final TenthFrameBowlingChallenge challenge;
 
-  const LairEncounterResult({
+  const BossLairEncounterResult({
     required super.game,
     required super.frame,
     required super.encounterLevel,
@@ -70,12 +70,12 @@ class LairEncounterResult extends EncounterResultBase with LairEncounterResultMa
 }
 
 @MappableClass()
-class FoundLairEncounterResult extends EncounterResultBase with FoundLairEncounterResultMappable {
+class LairEncounterResult extends EncounterResultBase with LairEncounterResultMappable {
   final LairEncounter encounter;
   final BowlingChallenge challenge1;
   final BowlingChallenge challenge2;
 
-  const FoundLairEncounterResult({
+  const LairEncounterResult({
     required super.game,
     required super.frame,
     required super.encounterLevel,

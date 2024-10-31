@@ -14,7 +14,7 @@ part 'lair_ctrl.g.dart';
 @riverpod
 class LairCtrl extends _$LairCtrl {
   @override
-  FoundLairState build() {
+  LairState build() {
     final bowlerLevel = ref.read(appServiceProvider).bowlerLevel;
 
     final lvl = bowlerLevel.encounterLevelTable.lookup(roll(100))!.minOf(4);
@@ -32,7 +32,7 @@ class LairCtrl extends _$LairCtrl {
       strength: str,
     );
 
-    final initialState = FoundLairState(
+    final initialState = LairState(
       encounterLevel: lvl,
       encounter: LairEncounter.randomEncounterByLevel(lvl),
       challenge1: challenge1,

@@ -17,26 +17,26 @@ class BossLairState {
   });
 
   BossLairState copyWith({
-    int? enounterLevel,
+    int? encounterLevel,
     LairEncounter? encounter,
     TenthFrameBowlingChallenge? challenge,
     int? strength,
   }) {
     return BossLairState(
-      enounterLevel: enounterLevel ?? this.enounterLevel,
+      enounterLevel: encounterLevel ?? this.enounterLevel,
       encounter: encounter ?? this.encounter,
       challenge: challenge ?? this.challenge,
       strength: strength ?? this.strength,
     );
   }
 
-  LairEncounterResult toEncounterResult({
+  BossLairEncounterResult toEncounterResult({
     required int game,
     required int frame,
     required Frame frameData,
     required bool isSuccess,
   }) {
-    return LairEncounterResult(
+    return BossLairEncounterResult(
       game: game,
       frame: frame,
       encounterLevel: enounterLevel,
@@ -50,6 +50,6 @@ class BossLairState {
 
   @override
   String toString() {
-    return 'LairState{enounterLevel: $enounterLevel, encounter: $encounter, strength: $strength, challenge: ${challenge.toDisplay(strength)}}';
+    return 'BossLairState{enounterLevel: $enounterLevel, encounter: $encounter, strength: $strength, challenge: ${challenge.toDisplay(strength)}}';
   }
 }

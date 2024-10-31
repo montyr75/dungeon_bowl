@@ -39,7 +39,7 @@ class CorridorPage extends ConsumerWidget {
             title: 'Enter Lair',
             description: "A greater challenge awaits, and possibly more riches.",
             imagePath: 'assets/images/lair_door.webp',
-            onPressed: () => context.goNamed(AppRoute.lair.name),
+            onPressed: () => context.goNamed(AppRoute.bossLair.name),
           ),
         if (appState.hasValidSave) ...[
           boxL,

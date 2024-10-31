@@ -10,7 +10,7 @@ part 'challenge_ctrl.g.dart';
 class ChallengeCtrl extends _$ChallengeCtrl {
   @override
   ChallengeState build({
-    int? id, // to differentiate challenges on found lairs
+    int? id, // to differentiate challenges on 2-frame lairs
     required BowlingChallenge challenge,
     int? strength,
   }) {

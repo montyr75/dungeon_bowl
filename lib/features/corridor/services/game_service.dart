@@ -79,8 +79,8 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void lairSuccess({
-    required BossLairState lairState,
+  void bossLairSuccess({
+    required BossLairState bossLairState,
     required Frame frameData,
     required Treasure treasure,
   }) {
@@ -89,7 +89,7 @@ class GameService extends _$GameService {
 
     state = _updateEncounterHistory(
       newState,
-      lairState.toEncounterResult(
+      bossLairState.toEncounterResult(
         game: state.game,
         frame: state.frame,
         frameData: frameData,
@@ -100,12 +100,12 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void lairFailure({required BossLairState lairState, required Frame frameData}) {
+  void bossLairFailure({required BossLairState bossLairState, required Frame frameData}) {
     final newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
-      lairState.toEncounterResult(
+      bossLairState.toEncounterResult(
         game: state.game,
         frame: state.frame,
         frameData: frameData,
@@ -116,8 +116,8 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void foundLairSuccess({
-    required FoundLairState foundLairState,
+  void lairSuccess({
+    required LairState lairState,
     required Frame frameData,
     Treasure? treasure,
   }) {
@@ -129,7 +129,7 @@ class GameService extends _$GameService {
 
     state = _updateEncounterHistory(
       newState,
-      foundLairState.toEncounterResult(
+      lairState.toEncounterResult(
         game: state.game,
         frame: state.frame,
         frameData: frameData,
@@ -140,12 +140,12 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void foundLairFailure({required FoundLairState foundLairState, required Frame frameData}) {
+  void lairFailure({required LairState lairState, required Frame frameData}) {
     final newState = _nextFrame(state);
 
     state = _updateEncounterHistory(
       newState,
-      foundLairState.toEncounterResult(
+      lairState.toEncounterResult(
         game: state.game,
         frame: state.frame,
         frameData: frameData,

@@ -3,7 +3,7 @@ import '../../../data/lair_encounters.dart';
 import '../../../models/encounter_result.dart';
 import '../../../models/frame.dart';
 
-class FoundLairState {
+class LairState {
   final int encounterLevel;
   final LairEncounter encounter;
   final BowlingChallenge challenge1;
@@ -11,7 +11,7 @@ class FoundLairState {
   final int? strength;
   final bool isChallenge1Success;
 
-  const FoundLairState({
+  const LairState({
     required this.encounterLevel,
     required this.encounter,
     required this.challenge1,
@@ -20,7 +20,7 @@ class FoundLairState {
     this.isChallenge1Success = false,
   });
 
-  FoundLairState copyWith({
+  LairState copyWith({
     int? encounterLevel,
     LairEncounter? encounter,
     BowlingChallenge? challenge1,
@@ -28,7 +28,7 @@ class FoundLairState {
     int? strength,
     bool? isChallenge1Success,
   }) {
-    return FoundLairState(
+    return LairState(
       encounterLevel: encounterLevel ?? this.encounterLevel,
       encounter: encounter ?? this.encounter,
       challenge1: challenge1 ?? this.challenge1,
@@ -38,13 +38,13 @@ class FoundLairState {
     );
   }
 
-  FoundLairEncounterResult toEncounterResult({
+  LairEncounterResult toEncounterResult({
     required int game,
     required int frame,
     required Frame frameData,
     required bool isSuccess,
   }) {
-    return FoundLairEncounterResult(
+    return LairEncounterResult(
       game: game,
       frame: frame,
       encounterLevel: encounterLevel,
@@ -59,6 +59,6 @@ class FoundLairState {
 
   @override
   String toString() {
-    return 'FoundLairState{enounterLevel: $encounterLevel, encounter: $encounter, challenge1: ${challenge1.toDisplay(strength)}, challenge2: ${challenge2.toDisplay(strength)}, strength: $strength}';
+    return 'LairState{enounterLevel: $encounterLevel, encounter: $encounter, challenge1: ${challenge1.toDisplay(strength)}, challenge2: ${challenge2.toDisplay(strength)}, strength: $strength}';
   }
 }
