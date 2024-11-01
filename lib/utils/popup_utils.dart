@@ -254,10 +254,12 @@ class TreasureDialog extends StatelessWidget {
   static const maxWidth = 350.0;
 
   final Treasure treasure;
+  final bool isInventory;
 
   const TreasureDialog({
     super.key,
     required this.treasure,
+    this.isInventory = false,
   });
 
   @override
@@ -292,7 +294,7 @@ class TreasureDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PageNavButton(
-                label: 'Claim Reward',
+                label: !isInventory ? 'Claim Reward' : 'Close',
                 onPressed: () => SmartDialog.dismiss(),
               )
             ],
@@ -302,10 +304,17 @@ class TreasureDialog extends StatelessWidget {
     );
   }
 
-  static Future<void> show(Treasure treasure, {VoidCallback? onDismiss}) {
+  static Future<void> show(
+    Treasure treasure, {
+    bool isInventory = false,
+    VoidCallback? onDismiss,
+  }) {
     return SmartDialog.show(
       builder: (context) {
-        return TreasureDialog(treasure: treasure);
+        return TreasureDialog(
+          treasure: treasure,
+          isInventory: isInventory,
+        );
       },
       onDismiss: onDismiss,
     );

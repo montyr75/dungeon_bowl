@@ -16,14 +16,7 @@ class TreasureDisplay extends StatelessWidget {
 
     return Row(
       children: [
-        SizedBox(
-          width: 75,
-          height: 75,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(treasure.imagePath),
-          ),
-        ),
+        TreasureImage(treasure: treasure),
         boxM,
         Expanded(
           child: Column(
@@ -47,6 +40,24 @@ class TreasureDisplay extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class TreasureImage extends StatelessWidget {
+  final Treasure treasure;
+
+  const TreasureImage({super.key, required this.treasure});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 75,
+      height: 75,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(treasure.imagePath),
+      ),
     );
   }
 }

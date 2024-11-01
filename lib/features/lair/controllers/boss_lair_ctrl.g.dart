@@ -6,7 +6,7 @@ part of 'boss_lair_ctrl.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bossLairCtrlHash() => r'467f63333194b1ee2976b91ff4be7df515ebcc5e';
+String _$bossLairCtrlHash() => r'b70e002bf38a75b91fbdab963f1afd3b60f752c0';
 
 /// See also [BossLairCtrl].
 @ProviderFor(BossLairCtrl)

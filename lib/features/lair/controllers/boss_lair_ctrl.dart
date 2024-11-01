@@ -27,7 +27,7 @@ class BossLairCtrl extends _$BossLairCtrl {
     );
 
     final initialState = BossLairState(
-      enounterLevel: lvl,
+      encounterLevel: lvl,
       encounter: LairEncounter.randomEncounterByLevel(lvl),
       challenge: challenge,
       strength: challenge.isVariable ? str : null,

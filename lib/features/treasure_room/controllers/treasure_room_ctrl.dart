@@ -13,6 +13,6 @@ class TreasureRoomCtrl extends _$TreasureRoomCtrl {
 
   void claimTreasure() {
     state = state.copyWith(isClaimed: true);
-    ref.read(gameServiceProvider.notifier).awardGP(state.treasure.value);
+    ref.read(gameServiceProvider.notifier).awardTreasure(state.treasure);
   }
 }

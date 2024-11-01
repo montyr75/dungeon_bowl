@@ -48,7 +48,8 @@ class GameService extends _$GameService {
     required Treasure treasure,
   }) {
     GameState newState = _nextFrame(state);
-    newState = _updateGP(newState, treasure.value);
+
+    newState = _updateTreasure(newState, treasure);
 
     state = _updateEncounterHistory(
       newState,
@@ -79,43 +80,6 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void bossLairSuccess({
-    required BossLairState bossLairState,
-    required Frame frameData,
-    required Treasure treasure,
-  }) {
-    GameState newState = _nextFrame(state);
-    newState = _updateGP(newState, treasure.value);
-
-    state = _updateEncounterHistory(
-      newState,
-      bossLairState.toEncounterResult(
-        game: state.game,
-        frame: state.frame,
-        frameData: frameData,
-        isSuccess: true,
-      ),
-    );
-
-    _saveState();
-  }
-
-  void bossLairFailure({required BossLairState bossLairState, required Frame frameData}) {
-    final newState = _nextFrame(state);
-
-    state = _updateEncounterHistory(
-      newState,
-      bossLairState.toEncounterResult(
-        game: state.game,
-        frame: state.frame,
-        frameData: frameData,
-        isSuccess: false,
-      ),
-    );
-
-    _saveState();
-  }
-
   void lairSuccess({
     required LairState lairState,
     required Frame frameData,
@@ -124,7 +88,7 @@ class GameService extends _$GameService {
     GameState newState = _nextFrame(state);
 
     if (treasure != null) {
-      newState = _updateGP(newState, treasure.value);
+      newState = _updateTreasure(newState, treasure);
     }
 
     state = _updateEncounterHistory(
@@ -156,8 +120,45 @@ class GameService extends _$GameService {
     _saveState();
   }
 
-  void awardGP(int value) {
-    state = _updateGP(state, value);
+  void bossLairSuccess({
+    required BossLairState bossLairState,
+    required Frame frameData,
+    required Treasure treasure,
+  }) {
+    GameState newState = _nextFrame(state);
+    newState = _updateTreasure(newState, treasure);
+
+    state = _updateEncounterHistory(
+      newState,
+      bossLairState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: true,
+      ),
+    );
+
+    _saveState();
+  }
+
+  void bossLairFailure({required BossLairState bossLairState, required Frame frameData}) {
+    final newState = _nextFrame(state);
+
+    state = _updateEncounterHistory(
+      newState,
+      bossLairState.toEncounterResult(
+        game: state.game,
+        frame: state.frame,
+        frameData: frameData,
+        isSuccess: false,
+      ),
+    );
+
+    _saveState();
+  }
+
+  void awardTreasure(Treasure treasure) {
+    state = _updateTreasure(state, treasure);
   }
 
   GameState _nextFrame(GameState state) {
@@ -169,9 +170,9 @@ class GameService extends _$GameService {
     );
   }
 
-  GameState _updateGP(GameState state, int value) {
+  GameState _updateTreasure(GameState state, Treasure treasure) {
     return state.copyWith(
-      character: state.character.copyWith(gp: state.character.gp + value),
+      character: state.character.addTreasure(treasure),
     );
   }
 

@@ -14,6 +14,7 @@ class ActiveCharacterMapper extends ClassMapperBase<ActiveCharacter> {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = ActiveCharacterMapper._());
       CharacterMapper.ensureInitialized();
+      TreasureMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -27,16 +28,22 @@ class ActiveCharacterMapper extends ClassMapperBase<ActiveCharacter> {
   static int _$gp(ActiveCharacter v) => v.gp;
   static const Field<ActiveCharacter, int> _f$gp =
       Field('gp', _$gp, opt: true, def: 0);
+  static List<Treasure> _$inventory(ActiveCharacter v) => v.inventory;
+  static const Field<ActiveCharacter, List<Treasure>> _f$inventory =
+      Field('inventory', _$inventory, opt: true, def: const []);
 
   @override
   final MappableFields<ActiveCharacter> fields = const {
     #character: _f$character,
     #gp: _f$gp,
+    #inventory: _f$inventory,
   };
 
   static ActiveCharacter _instantiate(DecodingData data) {
     return ActiveCharacter(
-        character: data.dec(_f$character), gp: data.dec(_f$gp));
+        character: data.dec(_f$character),
+        gp: data.dec(_f$gp),
+        inventory: data.dec(_f$inventory));
   }
 
   @override
@@ -92,7 +99,9 @@ extension ActiveCharacterValueCopy<$R, $Out>
 
 abstract class ActiveCharacterCopyWith<$R, $In extends ActiveCharacter, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call({Character? character, int? gp});
+  ListCopyWith<$R, Treasure, ObjectCopyWith<$R, Treasure, Treasure>>
+      get inventory;
+  $R call({Character? character, int? gp, List<Treasure>? inventory});
   ActiveCharacterCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
       Then<$Out2, $R2> t);
 }
@@ -106,12 +115,21 @@ class _ActiveCharacterCopyWithImpl<$R, $Out>
   late final ClassMapperBase<ActiveCharacter> $mapper =
       ActiveCharacterMapper.ensureInitialized();
   @override
-  $R call({Character? character, int? gp}) => $apply(FieldCopyWithData(
-      {if (character != null) #character: character, if (gp != null) #gp: gp}));
+  ListCopyWith<$R, Treasure, ObjectCopyWith<$R, Treasure, Treasure>>
+      get inventory => ListCopyWith($value.inventory,
+          (v, t) => ObjectCopyWith(v, $identity, t), (v) => call(inventory: v));
+  @override
+  $R call({Character? character, int? gp, List<Treasure>? inventory}) =>
+      $apply(FieldCopyWithData({
+        if (character != null) #character: character,
+        if (gp != null) #gp: gp,
+        if (inventory != null) #inventory: inventory
+      }));
   @override
   ActiveCharacter $make(CopyWithData data) => ActiveCharacter(
       character: data.get(#character, or: $value.character),
-      gp: data.get(#gp, or: $value.gp));
+      gp: data.get(#gp, or: $value.gp),
+      inventory: data.get(#inventory, or: $value.inventory));
 
   @override
   ActiveCharacterCopyWith<$R2, ActiveCharacter, $Out2> $chain<$R2, $Out2>(

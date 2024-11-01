@@ -16,7 +16,7 @@ enum LairEncounter {
   ),
   madDwarf(
     level: 4,
-    type: EncounterType.trap,
+    type: EncounterType.friendly,
     description: "A crazy-eyed dwarf confronts you before this locked door, babbling about a magic key. You'll have to convince him to reveal the key's location to get through.",
   ),
   orcs(

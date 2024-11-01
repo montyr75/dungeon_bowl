@@ -33,7 +33,7 @@ class HomePage extends ConsumerWidget {
           child: Column(
             children: [
               boxXXL,
-              const MainBannerTitle(title: 'Dungeon Bowl'),
+              const MainBannerTitle(title: 'Dungeon Bowler'),
               BgBubble(
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<BowlerLevel>(

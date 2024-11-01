@@ -4,13 +4,13 @@ import '../../../models/encounter_result.dart';
 import '../../../models/frame.dart';
 
 class BossLairState {
-  final int enounterLevel;
+  final int encounterLevel;
   final LairEncounter encounter;
   final TenthFrameBowlingChallenge challenge;
   final int? strength;
 
   const BossLairState({
-    required this.enounterLevel,
+    required this.encounterLevel,
     required this.encounter,
     required this.challenge,
     this.strength,
@@ -23,7 +23,7 @@ class BossLairState {
     int? strength,
   }) {
     return BossLairState(
-      enounterLevel: encounterLevel ?? this.enounterLevel,
+      encounterLevel: encounterLevel ?? this.encounterLevel,
       encounter: encounter ?? this.encounter,
       challenge: challenge ?? this.challenge,
       strength: strength ?? this.strength,
@@ -39,7 +39,7 @@ class BossLairState {
     return BossLairEncounterResult(
       game: game,
       frame: frame,
-      encounterLevel: enounterLevel,
+      encounterLevel: encounterLevel,
       strength: strength,
       encounter: encounter,
       challenge: challenge,
@@ -50,6 +50,6 @@ class BossLairState {
 
   @override
   String toString() {
-    return 'BossLairState{enounterLevel: $enounterLevel, encounter: $encounter, strength: $strength, challenge: ${challenge.toDisplay(strength)}}';
+    return 'BossLairState{enounterLevel: $encounterLevel, encounter: $encounter, strength: $strength, challenge: ${challenge.toDisplay(strength)}}';
   }
 }

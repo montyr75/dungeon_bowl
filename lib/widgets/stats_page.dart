@@ -1,8 +1,12 @@
+import 'package:awesome_flutter_extensions/awesome_flutter_extensions.dart';
+import 'package:extra_alignments/extra_alignments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/treasure.dart';
 import '../features/corridor/services/game_service.dart';
 import '../features/corridor/services/game_state.dart';
+import '../utils/popup_utils.dart';
 import '../utils/screen_utils.dart';
 import 'score_sheet.dart';
 import 'success_rate_bubble.dart';
@@ -12,7 +16,8 @@ class StatsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final encounters = ref.read(gameServiceProvider).encounterHistory.byGame;
+    final state = ref.read(gameServiceProvider);
+    final encounters = state.encounterHistory.byGame;
 
     return DecoratedBox(
       decoration: const BoxDecoration(
@@ -33,6 +38,22 @@ class StatsPage extends ConsumerWidget {
                     child: Column(
                       children: [
                         SuccessRateBubble(),
+                        boxXXL,
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: sheetWidth),
+                          child: Wrap(
+                            spacing: med,
+                            runSpacing: med,
+                            children: state.character.inventory.map((item) {
+                              return TreasureButton(
+                                treasure: item,
+                                onPressed: () {
+                                  TreasureDialog.show(item, isInventory: true);
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ),
                         for (final encHist in encounters) ...[
                           boxXXL,
                           ScoreSheet(results: encHist),
@@ -86,13 +107,61 @@ class StatsPage extends ConsumerWidget {
                                 ],
                               ),
                             ),
-                          ],                          ],
+                          ],
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TreasureButton extends StatelessWidget {
+  final Treasure treasure;
+  final VoidCallback onPressed;
+
+  const TreasureButton({
+    super.key,
+    required this.treasure,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final styles = context.textStyles;
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Material(
+        color: Colors.transparent,
+        child: SizedBox(
+          width: 75,
+          height: 75,
+          child: InkWell(
+            radius: 100,
+            onTap: onPressed,
+            child: Ink.image(
+              image: AssetImage(treasure.imagePath),
+              fit: BoxFit.fill,
+              child: BottomCenter(
+                child: Container(
+                  color: Colors.black38,
+                  width: double.infinity,
+                  padding: paddingAllS,
+                  child: Text(
+                    treasure.toString(),
+                    style: styles.bodySmall.copyWith(fontWeight: FontWeight.bold, fontSize: 8),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),
