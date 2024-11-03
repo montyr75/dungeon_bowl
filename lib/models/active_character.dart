@@ -14,10 +14,10 @@ class ActiveCharacter with ActiveCharacterMappable {
   ActiveCharacter({
     required this.character,
     this.gp = 0,
-    this.inventory = const [],
+    this.inventory = const [Treasure.magicSword, Treasure.magicSword, Treasure.magicSword, ],
   });
 
-  ActiveCharacter addTreasure(Treasure treasure) {
+  ActiveCharacter addItem(Treasure treasure) {
     if (treasure.isMoney) {
       return copyWith(gp: gp + treasure.value);
     }
@@ -28,6 +28,16 @@ class ActiveCharacter with ActiveCharacterMappable {
       ),
     );
   }
+
+  ActiveCharacter useItem(Treasure treasure) {
+    return copyWith(
+      inventory: List.unmodifiable(
+        inventory.toList()..remove(treasure),
+      ),
+    );
+  }
+
+  bool get hasInventory => inventory.isNotEmpty;
 
   static const fromMap = ActiveCharacterMapper.fromMap;
   static const fromJson = ActiveCharacterMapper.fromJson;

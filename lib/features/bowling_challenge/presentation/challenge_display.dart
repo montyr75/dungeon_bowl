@@ -246,7 +246,7 @@ class ChallengeDisplay extends ConsumerWidget {
                       showConfirmDialog(
                         context: context,
                         title: "Failure!",
-                        message: "You have failed! Quickly, you turn and run, determined to live to fight another day.",
+                        message: "You have failed! Quickly, you turn to run, determined to live to fight another day.",
                         yesMsg: "Confirm Failure",
                         noMsg: "Cancel",
                         onConfirm: () => onFailure(state.frame),

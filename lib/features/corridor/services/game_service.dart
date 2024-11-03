@@ -1,6 +1,7 @@
 import 'package:dartx/dartx.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../data/encounters.dart';
 import '../../../data/treasure.dart';
 import '../../../models/active_character.dart';
 import '../../../models/encounter_result.dart';
@@ -49,7 +50,7 @@ class GameService extends _$GameService {
   }) {
     GameState newState = _nextFrame(state);
 
-    newState = _updateTreasure(newState, treasure);
+    newState = _updateTreasure(state: newState, treasure: treasure);
 
     state = _updateEncounterHistory(
       newState,
@@ -88,7 +89,7 @@ class GameService extends _$GameService {
     GameState newState = _nextFrame(state);
 
     if (treasure != null) {
-      newState = _updateTreasure(newState, treasure);
+      newState = _updateTreasure(state: newState, treasure: treasure);
     }
 
     state = _updateEncounterHistory(
@@ -126,7 +127,7 @@ class GameService extends _$GameService {
     required Treasure treasure,
   }) {
     GameState newState = _nextFrame(state);
-    newState = _updateTreasure(newState, treasure);
+    newState = _updateTreasure(state: newState, treasure: treasure);
 
     state = _updateEncounterHistory(
       newState,
@@ -158,7 +159,22 @@ class GameService extends _$GameService {
   }
 
   void awardTreasure(Treasure treasure) {
-    state = _updateTreasure(state, treasure);
+    state = _updateTreasure(state: state, treasure: treasure);
+  }
+
+  void removeTreasure(Treasure treasure) {
+    state = _updateTreasure(state: state, treasure: treasure, shouldRemove: true);
+  }
+
+  List<Treasure> checkInventory({
+    required Encounter encounter,
+    required TreasureEffectTiming timing,
+  }) {
+    return state.character.inventory
+        .where(
+          (item) => item.effect.timing == timing && (!item.hasTargetType || item.targetType == encounter.type),
+        )
+        .toList();
   }
 
   GameState _nextFrame(GameState state) {
@@ -170,9 +186,13 @@ class GameService extends _$GameService {
     );
   }
 
-  GameState _updateTreasure(GameState state, Treasure treasure) {
+  GameState _updateTreasure({
+    required GameState state,
+    required Treasure treasure,
+    bool shouldRemove = false,
+  }) {
     return state.copyWith(
-      character: state.character.addTreasure(treasure),
+      character: !shouldRemove ? state.character.addItem(treasure) : state.character.useItem(treasure),
     );
   }
 
@@ -230,15 +250,12 @@ class GameService extends _$GameService {
       if (frame.isStrike) {
         final nextTwoThrows = frame.throws.skip(1).whereNotNull();
         score = 10 + nextTwoThrows.sum();
-      }
-      else if (frame.isSpare) {
+      } else if (frame.isSpare) {
         score = 10 + (frame.thirdThrow ?? 0);
-      }
-      else {
+      } else {
         score = frame.throws.whereNotNull().sum();
       }
-    }
-    else {
+    } else {
       final nextTwoThrows = [
         if (frames.length >= frameIndex + 2) ...frames[frameIndex + 1].throws,
         if (frames.length >= frameIndex + 3) ...frames[frameIndex + 2].throws,
@@ -248,13 +265,11 @@ class GameService extends _$GameService {
         if (nextTwoThrows.length == 2) {
           score = 10 + nextTwoThrows.sum();
         }
-      }
-      else if (frame.isSpare) {
+      } else if (frame.isSpare) {
         if (nextTwoThrows.isNotEmpty) {
           score = 10 + nextTwoThrows.first;
         }
-      }
-      else {
+      } else {
         score = frame.throws.whereNotNull().sum();
       }
     }
@@ -277,8 +292,11 @@ class GameReport {
   });
 
   int get encountersWon => encounterResults.count((value) => value.isSuccess);
+
   int get totalEncounters => encounterResults.length;
+
   int get lairsWon => lairEncounterResults.count((value) => value.isSuccess);
+
   int get totalLairs => lairEncounterResults.length;
 
   int get percentEncountersWon {

@@ -200,18 +200,44 @@ class _StringInputDialogState extends State<StringInputDialog> {
   }
 }
 
+Future<void> showUseItemDialog({
+  required BuildContext context,
+  required Treasure item,
+}) {
+  final styles = context.textStyles;
+
+  return SmartDialog.show(
+    clickMaskDismiss: false,
+    builder: (_) {
+      return FantasyDialog(
+        title: Text(item.toString(), style: styles.displayMedium),
+        content: Text(item.narrative, style: styles.displaySmall),
+        borderColor: Colors.blue,
+        actions: [
+          TextButton(
+            onPressed: SmartDialog.dismiss,
+            child: Text("Use Item"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class FantasyDialog extends StatelessWidget {
   static const maxWidth = 350.0;
 
   final Widget title;
   final Widget content;
   final List<Widget> actions;
+  final Color borderColor;
 
   const FantasyDialog({
     super.key,
     required this.title,
     required this.content,
     required this.actions,
+    this.borderColor = Colors.grey,
   });
 
   @override
@@ -225,7 +251,7 @@ class FantasyDialog extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         border: Border.all(
-          color: Colors.grey,
+          color: borderColor,
           width: 2,
         ),
         borderRadius: const BorderRadius.all(

@@ -38,5 +38,12 @@ class RoomCtrl extends _$RoomCtrl {
     return initialState;
   }
 
-  Treasure success() => Treasure.random();
+  Treasure success([TreasureEffect? effect]) {
+    final mod = switch (effect) {
+      TreasureEffect.rewardMod || TreasureEffect.maxReward => effect!.value!,
+      _ => 0,
+    };
+
+    return Treasure.random(mod: mod);
+  }
 }

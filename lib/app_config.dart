@@ -4,7 +4,7 @@ import 'features/app/services/logger_service.dart';
 
 // app info
 const appName = "dungeon_bowl";
-const version = "0.0.14";
+const version = "0.0.15";
 const debugMode = !kReleaseMode;
 
 // create logger
